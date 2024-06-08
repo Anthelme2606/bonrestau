@@ -1,0 +1,34 @@
+name: Deploy Laravel to FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4' # Change to the PHP version you're using
+        extensions: mbstring, exif, pcntl
+        coverage: none
+
+    - name: Install Composer dependencies
+      run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --no-dev
+
+    - name: Deploy to FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ftp://ftp.yourdomain.com
+        username: anthelme
+        password: Anthelme@2606
+        local-dir: .
+        server-dir: /public_html
+        log-level: verbose
