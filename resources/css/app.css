@@ -1,0 +1,21 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'material-icons/iconfont/material-icons.css';
+@import 'boxicons/css/boxicons.min.css';
+
+
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+.custom-button {
+    background-color: #3490dc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #2779bd;
+    }
+}

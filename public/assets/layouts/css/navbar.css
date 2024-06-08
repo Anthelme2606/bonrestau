@@ -1,0 +1,94 @@
+ 
+ .bgd-green {
+     background-color: #033500;
+     color:white;
+     transition: background-color 0.3s ease;
+     border: 1px solid #025200; 
+     border-radius: 4px; 
+     padding: 8px 16px; 
+ }
+ 
+ .bgd-green:hover {
+     background-color: #025200;
+     border-color: #033500; 
+ }
+ 
+ .frame {
+     position: absolute;
+     background-color: whitesmoke;
+     margin-top: 50px;
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+     z-index: 1000;
+     width: 200px;
+     opacity: 1;
+     transition: opacity 0.3s ease;
+     
+ }
+ 
+ .hover-effect:hover {
+     background-color: gainsboro; 
+     color: #222;
+ 
+ }    
+ 
+ .nav-link {
+     background-color: #222;
+     color: white;
+ }
+ .current-user{
+     background-color: rgb(0, 160, 101,0.2);
+ }
+ 
+ .active {
+     background-color: rgb(0, 160, 101);
+     color: #fff;
+     border-radius: 0.25rem;
+     transition: background-color 0.3s ease, color 0.3s ease;
+ }
+ 
+ .bg-nav {
+     background-color: #AAB7AB;
+ }
+ 
+ @media (max-width: 576px) {
+ 
+     .frame {
+         max-height: calc(100vh - 56px);
+         overflow-y: auto;
+         z-index: 9999;
+     }
+ 
+     .frame {
+         position: absolute;
+ 
+         right: 0;
+         transition: bottom 0.3s ease;
+         display: block;
+       
+     }
+ }
+ #menuButton{
+     background-color: rgb(4, 160, 101,0.2);
+     color: white;
+     box-sizing: content-box;
+     box-shadow: 0 0 0 black;
+     text-align: center;
+     text-wrap: stable;
+     font-size: small;
+     font-style: normal;
+ }
+ 
+ 
+ .frame a {
+     padding: 5px;
+     color: black;
+     text-decoration: none;
+     
+ }
+ 
+ .frame a:hover {
+     background-color: #f8f9fa;
+ }
+ 
+ 
+ 
