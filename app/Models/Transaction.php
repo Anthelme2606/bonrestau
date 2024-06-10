@@ -17,6 +17,14 @@ class Transaction extends Model
     ];
     public function bons(){
         
-        return $this->hasMany(Coupon::class, 'id','coupon_id');
+        return $this->hasMany(Coupon::class, 'id');
+    }
+    public function bon(){
+        
+        return $this->belongsTo(Coupon::class, 'coupon_id','id');
+    }
+    public function user(){
+        
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }

@@ -30,4 +30,5 @@ Route::post('/login', [AuthController::class,'post_login'])->name('post_login');
 Route::post('/sign-up', [AuthController::class,'post_sign_up'])->name('post_sign_up');
 Route::post('/bons', [BonController::class,'store'])->name('bon-store');
 Route::post('/trans-store', [TransactionController::class,'store'])->name('trans-store');
+Route::post('/bon-update', [BonController::class,'update'])->name('bon-update');
 

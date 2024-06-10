@@ -33,6 +33,7 @@
         }
 
         .dashboard {
+            
             padding: 10px;
             background: var(--body-color);
             color: var(--text-color);
@@ -61,12 +62,26 @@
         .card-icon {
             color: blue;
         }
+        .dashboard-header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #0056b3;
+            margin-bottom: 10px;
+            
+            top:0;
+        }
     </style>
     <div class="container">
         <div class="dashboard">
-            <div class="row">
+            <div class="dashboard-header">
+                <h1>Bienvenue dans le dashboard</h1>
+                <p class="dashboard-subtitle">Surveillez et gérez efficacement vos commandes de restauration.</p>
+            </div>
+            <div class="row row-cols-md-3">
                 @if (Auth::user()->user_type == 'admin')
-                    <div class="col-md-4">
+                    <div class="col">
                         <div class="card card-blink">
                             <div class="card-body text-center">
                                 <i class="bx bx-user card-icon"></i>
@@ -85,7 +100,7 @@
                 @endif
                 <!-- Card card-blink2 -->
 
-                <div class="col-md-4">
+                <div class="col">
                     <div class="card card-blink">
                         <div class="card-body text-center">
                             <i class="bx bx-group card-icon"></i>
@@ -97,7 +112,7 @@
                     </div>
                 </div>
                 <!-- Card card-blink3 -->
-                <div class="col-md-4">
+                <div class="col">
                     <div class="card card-blink">
                         <div class="card-body text-center">
                             <i class="bx bx-bar-chart card-icon"></i>

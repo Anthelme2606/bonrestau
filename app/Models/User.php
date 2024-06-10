@@ -67,11 +67,12 @@ class User extends Authenticatable
     public function updateDailyPercent($newPercent)
     {
         $today = Carbon::today();
-
-        if (!$this->daily_percent_updated_at || $this->daily_percent_updated_at->lt($today)) {
+    
+        if (!$this->daily_percent_updated_at || Carbon::parse($this->daily_percent_updated_at)->lt($today)) {
             $this->daily_percent = 0;
             $this->daily_percent_updated_at = $today;
         }
+    
         $this->daily_percent += $newPercent;
         $this->save();
     }

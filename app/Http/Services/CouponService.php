@@ -25,6 +25,17 @@ class CouponService
         return redirect()->back()->with('success','Bon created with success');
 
     }
+    public function update(array $data)
+    {
+        $coupon=  $this->couponRepository->update($data['id'],$data);
+        if(isset($coupon)){
+
+            return redirect()->back()->with("success","Bon updated with success");
+        }else{
+            
+          return redirect()->back()->with("error","An error occur when updating bon..");
+        }
+    }
     public function list()
     {
         return  $this->couponRepository->all();

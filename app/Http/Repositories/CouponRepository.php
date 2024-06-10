@@ -20,6 +20,7 @@ class CouponRepository {
     public function update($id, array $data) {
         $coupon = Coupon::find($id);
         if ($coupon) {
+            
             $coupon->update($data);
             return $coupon;
         }

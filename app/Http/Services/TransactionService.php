@@ -29,7 +29,7 @@ protected $user;
 
     public function all() {
         
-        
+        return $this->trans->all();
     }
     function distributeGains($user, $amount, $xp) {
         $referrers = [];
