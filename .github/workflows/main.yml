@@ -1,8 +1,8 @@
-name: Deploy Laravel to SFTP
+name: Deploy Laravel to FTP
 
 on:
   push:
-    branches:
+    branches: [main]
       - main  # Adjust branch to trigger workflow (if needed)
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up PHP (adjust based on your Laravel version)
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 'your_php_version'
+          php-version: '8.1.2'
           extensions: mbstring, exif, pcntl  # Adjust extensions based on your Laravel requirements
 
       - name: Install Composer dependencies
@@ -30,12 +30,12 @@ jobs:
       - name: Clear Laravel Config Cache (optional)
         run: php artisan config:cache  # Uncomment to clear config cache before deployment
 
-      - name: Deploy to SFTP (securely using GitHub Secrets)
-        uses: gr2m/github-actions-sftp-deploy@v1.4.0
+      - name: Deploy to FTP (securely using GitHub Secrets)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           host: ${{ secrets.SFTP_HOST }}  # Use hostname for SFTP (might be same as FTP)
-          username: ${{ secrets.SFTP_USERNAME }}  # Reference username from GitHub Secrets
-          password: ${{ secrets.SFTP_PASSWORD }}  # Reference password from GitHub Secrets
+          username: ${{ secrets.FTP_USERNAME }}  # Reference username from GitHub Secrets
+          password: ${{ secrets.FTP_PASSWORD }}  # Reference password from GitHub Secrets
           local-dir: public  # Assuming your Laravel public directory contains deployable files
           remote-dir: /public_html  # Replace with desired directory on the server (adjust for SFTP)
           log-level: verbose  # Adjust logging level as needed
