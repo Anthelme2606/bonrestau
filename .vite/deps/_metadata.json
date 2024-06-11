@@ -1,0 +1,49 @@
+{
+  "hash": "f6d4d7ff",
+  "configHash": "1ae64bca",
+  "lockfileHash": "61900bd8",
+  "browserHash": "7d1a4e90",
+  "optimized": {
+    "bootstrap": {
+      "src": "../../node_modules/bootstrap/dist/js/bootstrap.esm.js",
+      "file": "bootstrap.js",
+      "fileHash": "5729dac1",
+      "needsInterop": false
+    },
+    "jquery": {
+      "src": "../../node_modules/jquery/dist/jquery.js",
+      "file": "jquery.js",
+      "fileHash": "503e70d0",
+      "needsInterop": true
+    },
+    "@popperjs/core": {
+      "src": "../../node_modules/@popperjs/core/lib/index.js",
+      "file": "@popperjs_core.js",
+      "fileHash": "3ee3047a",
+      "needsInterop": false
+    },
+    "toastr": {
+      "src": "../../node_modules/toastr/toastr.js",
+      "file": "toastr.js",
+      "fileHash": "07119ae2",
+      "needsInterop": true
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "01662044",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-IF7GFXCB": {
+      "file": "chunk-IF7GFXCB.js"
+    },
+    "chunk-3FQ7NEYV": {
+      "file": "chunk-3FQ7NEYV.js"
+    },
+    "chunk-P2LSHJDD": {
+      "file": "chunk-P2LSHJDD.js"
+    }
+  }
+}

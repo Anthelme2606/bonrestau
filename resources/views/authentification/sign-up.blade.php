@@ -8,11 +8,19 @@
 @endsection
 @section('content')
     <!--Place the css and js here for loadind correctly the file-->
+    <style>
+      form .bottom_border_error{
+            border:none;
+            outline: none;
+            border-bottom-style:solid;
+            border-bottom-color:red; 
+        }
+    </style>
     <link rel="stylesheet" href="{{ asset('assets/auth/css/auth.css') }}">
     <script src="{{ asset('assets/auth/js/auth.js') }}"></script>
     <div class="container">
         <div class="form-container">
-            <form class="form" id="ajaxForm" method="post" action="{{ route('post_sign_up') }}">
+            <form class="form signup-form" id="ajaxForm" method="post" action="{{ route('post_sign_up') }}">
                 @csrf
                 @method('POST')
                 <div class="mb-1">
