@@ -26,3 +26,4 @@ jobs:
           server: node46-eu.n0c.com
           username: bon@bon.pressingelegance.com
           password: Anthelmebon@12
+          server_dir: /public_html/bons
