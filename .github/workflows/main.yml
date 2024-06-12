@@ -25,4 +25,4 @@ jobs:
         with:
           server: node46-eu.n0c.com
           username: bon@bon.pressingelegance.com
-          password: ${{ secrets.FTP_PASSWORD }}  # Use secrets for password
+          password: Bonspark@1010
