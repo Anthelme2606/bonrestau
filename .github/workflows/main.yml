@@ -40,6 +40,6 @@ jobs:
       - name:  Deploy to cPanel with FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: node46-eu.n0c.com
+          username: bon@bon.pressingelegance.com
+          password: Bonspark@1010
