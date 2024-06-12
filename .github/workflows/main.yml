@@ -1,0 +1,45 @@
+name: Deploy to Production (pressingelegance.com)
+
+# Trigger the workflow on push or pull request events to main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  # Allow manual triggering from Actions tab
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name:  Deploy Production
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Get Latest Code
+        uses: actions/checkout@v2
+
+      - name:  Setup Node.js (v18)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name:  Install npm Dependencies
+        run: npm install
+
+      - name: ️ Build Assets with Vite
+        run: npm run build
+
+      - name:  Copy .env File (if needed)
+        run: php -r "file_exists('.env') || copy('.env.example','.env');"
+
+      - name:  Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name:  Deploy to cPanel with FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.2.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
