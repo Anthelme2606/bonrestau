@@ -1,19 +1,27 @@
-name: Deploy Laravel to FTP
+name: Deploy on production mode (pressingelegance.com)
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches:
-      - main  # Only trigger on pushes to the main branch
+      - main
+  pull_request:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 
 jobs:
-  web-deploy:  # Name of the job
-    name: deploy  # Descriptive name for the job
-    runs-on: ubuntu-latest  # Run the job on Ubuntu machines
-
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
     steps:
-      - name: Get the latest code  # Clear step description
-        uses: actions/checkout@v2.3.2  # Use the checkout action
-
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+   
       - name: Setup Node.js  # Descriptive step description
         uses: actions/setup-node@v3  # Use the setup-node action with a specific version
         with:
@@ -31,20 +39,10 @@ jobs:
       - name: Install dependencies
         run: composer install --no-dev --optimize-autoloader  # Install composer dependencies
 
-      - name: Generate key
-        run: php artisan key:generate  # Generate application key
-
-      - name: Set directory permissions (caution, adjust if needed)
-        run: chmod -R 755 storage bootstrap/cache  # Set permissions (consider 755 for security)
-
       - name: Deploy to cPanel with FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.0.0  # Use the FTP deploy action
+        uses: SamKirkland/FTP-Deploy-Action@v4.2.3  # Use the FTP deploy action
         with:
           server: ${{ secrets.FTP_SERVER }}  # Use secrets for server address
           username: ${{ secrets.FTP_USERNAME }}  # Use secrets for username
           password: ${{ secrets.FTP_PASSWORD }}  # Use secrets for password
-          server-dir: /public_html/bons/  # Deploy to root directory on the server
-
-      - name: Print npm debug log if npm install or build fails
-        if: failure()
-        run: cat /home/runner/.npm/_logs/*-debug-*.log
+       
