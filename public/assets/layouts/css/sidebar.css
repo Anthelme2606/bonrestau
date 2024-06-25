@@ -136,25 +136,9 @@ header .image-text .app-description{
     margin-top: 40px;
 }
 
-.sidebar li.search-box{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
-}
 
-.sidebar li.search-box input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
-    transition: var(--tran-05);
-}
+
+
 
 .sidebar li a{
     list-style: none;
@@ -168,9 +152,32 @@ header .image-text .app-description{
     text-decoration: none;
     transition: var(--tran-03);
 }
+.active-sidebar{
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+}
+.active-sidebar li {
+    color: var(--sidebar-color);
+}
+.active-sidebar a {
+    color: var(--sidebar-color);
+}
+.active-sidebar .icon {
+    color: var(--sidebar-color);
+}
+.active-sidebar .text {
+    color: var(--sidebar-color);
+}
 
 .sidebar li a:hover{
     background-color: var(--primary-color);
+}
+.sidebar .active-sidebar li a {
+    background-color: var(--primary-color);
+}
+.sidebar .active-sidebar li a .icon,
+.sidebar .active-sidebar li a .text{
+    color: var(--sidebar-color);
 }
 
 .sidebar li a:hover .icon,
@@ -262,21 +269,14 @@ body.dark .switch::before{
 
 
 .sidebar.close ~ .home{
-    left: 88px;
+    left: 60px;
     height: 100vh;
-    width: calc(100% - 88px);
+    width: calc(100% - 60px);
 }
 
 body.dark .home .text{
     color: var(--text-color);
 }
 
-.active {
-    background-color: rgb(0, 160, 101);
-    color: var(--sidebar-color);
-    border-radius: 0.25rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-li a .active  .text{
-    color: var(--sidebar-color);
-}
+
+  

@@ -19,17 +19,39 @@ protected $user;
 
     public function create(array $data) {
        $user= $this->user->getByReferralCode($data['user_code']);
-       $coupon=$this->coupon->getByCode($data['coupon_code']);
+       $coupon=$this->coupon->getByPrice($data['coupon_price']);
+       
+       if(!$user){
+        return redirect()->back()->with('error','Aucun utilisateur avec ce code:'.$data['user_code']);
+       }
        $data['user_id']=$user->id;
        $data['coupon_id']=$coupon->id;
+       if($coupon && $coupon->quantite>=$data['quantite'])
+       {
+        $coupon->quantite-=$data['quantite'];
+        $coupon->save();
+       }else {
+        return redirect()->back()->with('error','la quantité voulue est superieure a la quantite disponible');
+       }
+       
+       $data['amount']=$coupon->price;
+       
        $this->distributeGains($user,$data['amount'],$data['percent']);
        $this->trans->create($data);
-       return redirect()->back()->with('success','Bon is validated with sucess');
+       return redirect()->back()->with('success','Bon validé avec succes');
     }
 
     public function all() {
         
         return $this->trans->all();
+    }
+    public function qteV() {
+        
+        return $this->trans->qteV();
+    }
+    public function ventes() {
+        
+        return $this->trans->ventes();
     }
     function distributeGains($user, $amount, $xp) {
         $referrers = [];
@@ -52,6 +74,10 @@ protected $user;
                 }
             }
         }
+    }
+    public function BonsMoisCourant()
+    {
+        return  $this->trans->BonsMoisCourant();
     }
     
 }

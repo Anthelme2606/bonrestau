@@ -45,8 +45,14 @@
         </div>
 
         <hr />
-        @include('footer')
+        @include('layouts.footer')
     </div>
 
 
 @endsection
+ <!--  @if (Auth::check() && Auth::user()->user_type == 'admin')-->
+ <hr />
+ @include('coupons.list',['coupons'=>$coupons])
+
+@endif-->
+<hr />

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Coupon;
+use carbon\Carbon;
 class Transaction extends Model
 {
     use HasFactory;
@@ -13,6 +14,7 @@ class Transaction extends Model
         'user_id',
         'coupon_id',
         'amount',
+        'quantite',
         'percent',
     ];
     public function bons(){
@@ -26,5 +28,25 @@ class Transaction extends Model
     public function user(){
         
         return $this->belongsTo(User::class, 'user_id','id');
+    }
+    
+    public static function qteV()
+    {
+       
+        return self::sum('quantite');
+       
+    }
+    public static function ventesMoisCourant()
+    {
+        $ventes= self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+                   ->sum('amount');
+        // dd($ventes);
+        return $ventes;
+    }
+    public static function BonsMoisCourant()
+    {
+       return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+                   ->sum('quantite');
+        
     }
 }

@@ -13,14 +13,28 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
               $table->id();
-                $table->string('name');
-                $table->string('phone');
+                $table->string('nom');
+                $table->string('prenom');
+                $table->string('date_naissance');
+                $table->string('numero_reseau');
+                $table->string('numwhats');
                 $table->string('email')->unique();
+                $table->string('pseudo')->unique();
                 $table->string('password');
-                $table->string('referral_code')->unique();//code de parrainage
+                $table->string('region');
+                $table->string('ville');
+                $table->string('inscription_1')->default(0);
+                $table->string('perte_info')->default(0);
+                $table->string('reseau1')->nullable();
+                $table->string('reseau2')->nullable();
+                $table->string('info_exact')->default(0);
+                $table->string('accept_condition')->default(0);
+                $table->string('commune');
+                $table->string('quartier');
+                $table->string('referral_code')->unique();
                 $table->decimal('daily_percent',10,2)->default(0);
-                $table->string('referrer_code')->nullable(); // Référence au parrain
-                $table->decimal('balance', 10, 2)->default(0); // Solde initial
+                $table->string('invitant')->nullable(); 
+                $table->decimal('balance', 10, 2)->default(0); 
                 $table->enum('user_type', ['admin', 'client'])->default('client');
                 $table->rememberToken();
                 $table->timestamps();

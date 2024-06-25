@@ -15,7 +15,11 @@ class UserRepository {
     public function find($id) {
         return User::find($id);
     }
-
+    public function usersRegisteredCurrentMonth()
+    {
+        $users = User::getUsersRegisteredCurrentMonth();
+        return $users;
+    }
 
     public function getByEmail($eamil) {
         return User::where('email',$eamil)->first();

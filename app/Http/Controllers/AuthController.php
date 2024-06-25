@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\AuthService; 
 use App\Http\Services\CouponService; 
+use App\Http\Services\TransactionService; 
 class AuthController extends Controller
 { 
     protected $authService;
+    protected $transactionService;
+    public $clients;
     protected $couponService;
-    public function __construct(AuthService $authService,CouponService $couponService)
+    public function __construct(AuthService $authService,
+    CouponService $couponService,TransactionService $transactionService)
     {
         $this->authService=$authService;
         $this->couponService=$couponService;
+        $this->transactionService=$transactionService;
+       
     }
     public function index()
     {
@@ -21,12 +27,24 @@ class AuthController extends Controller
     public function dashboard()
     {
       $coupons= $this->couponService->list();
+      $qteT= $this->couponService->qteT();
+      $bmsc= $this->transactionService->BonsMoisCourant();
+      $qteV= $this->transactionService->qteV();
+      $trans= $this->transactionService->all();
+      $ventes= $this->transactionService->ventes();
       $clients=$this->authService->all();
-      return view('dashboard',compact('coupons','clients'));
+      $coupons_up=$this->couponService->countUps();
+      $counts=$this->authService->usersCurrentMonthCount();
+    
+      return view('layouts.dashboard',compact('trans','coupons','clients','counts','coupons_up','qteV','qteT','ventes','bmsc'));
     }
     public function settings()
     {
-      return view('settings');
+      return view('layouts.settings');
+    }
+    public function gen_code()
+    {
+      return view('layouts.generer');
     }
     public function login()
     {
@@ -39,14 +57,32 @@ class AuthController extends Controller
     }
     public function post_sign_up(Request $request)
     {
+   
         $request->validate([
-            'name' => 'string|required',
-            'phone' => 'string|required',
+            'nom' => 'string|required',
+            'prenom' => 'string|required',
+            'pseudo' => 'string|required',
+            'date_naissance' => 'string|required',
+            'numwhats' => 'string|required',
+            'numero_reseau' => 'string|required',
+            'region' => 'string|required',
+            'commune' => 'string|required',
+            'ville' => 'string|required',
+            'quartier' => 'string|required',
             'email' => 'string|required|email',
             'password' => 'string|required|min:8',
             'confirm' => 'string|required|same:password',
-            'referrer_code' => 'string|nullable',
+            'invitant' => 'string|nullable',
+            
+            'reseau1' => 'string',
+            'reseau2' => 'string',
+            'perte_info' => 'string',
+            'info_exact' => 'string',
+            'accept_condition' => 'string',
+            'inscription_1' => 'string',
+            
         ]);
+        //dd($request);
 
         return $this->authService->post_sign_up($request->all());
     }

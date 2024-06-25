@@ -21,4 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const frame = document.querySelector('.frame');
         frame.style.display = frame.style.display === 'block' ? 'none' : 'block';
     });
+
+
+   // Fonction pour vérifier la taille de l'écran
+
+  
+  
 });

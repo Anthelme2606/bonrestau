@@ -20,10 +20,15 @@ class BonController extends Controller
         $transactions=$this->transService->all();
          return view('coupons.create',compact('transactions','coupons'));
     }
+    public function ravitailler(){
+        $coupons= $this->couponService->list();
+         return view('coupons.ravitailler',compact('coupons'));
+    }
     public function store(Request $request){
         $request->validate([
             'price' => 'required|integer',
             'date' => 'required|date',
+            'quantite'=>'required|integer'
         ]);
         
        return $this->couponService->create($request->all());
@@ -35,8 +40,19 @@ class BonController extends Controller
         'price' => 'required|string',
         'date' => 'required|string',
     ]);
-    //dd($request);
+  
    return $this->couponService->update($request->all());
+}
+public function ravita(Request $request){
+   
+    $request->validate([
+        'coupon_price' =>'required|string',
+        'quantite' => 'required|integer',
+       
+    ]);
+    //dd("--",$request);
+  
+   return $this->couponService->ravita($request->all());
 }
    public function getAll()
    {

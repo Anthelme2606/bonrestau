@@ -255,7 +255,7 @@
 
         </div>
         <hr />
-        @include('footer')
+        @include('layouts.footer')
     </div>
 
 @endsection

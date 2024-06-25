@@ -7,9 +7,9 @@
     .card {
         background: #ffffff;
         border:none;
-        border-top-color:rgb(220,10,10);
+        border-top-color:orange;
         border-top-style:  solid ;
-        border-right-color:blue;
+        border-right-color:green;
         border-right-style:  solid ;
        
         border-radius: 10px;
@@ -40,7 +40,7 @@
 
    
     .bg-span {
-    background: linear-gradient(to right, #007bff, rgb(255,50,80));
+    background: linear-gradient(to right, orange, green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

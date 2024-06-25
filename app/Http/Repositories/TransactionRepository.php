@@ -15,4 +15,16 @@ class TransactionRepository {
         
         return Transaction::all();
     }
+    public function qteV(){
+        return Transaction::qteV();
+        
+    }
+    public function ventes(){
+        return Transaction::ventesMoisCourant();
+        
+    }
+    public function BonsMoisCourant(){
+        return Transaction::BonsMoisCourant();
+        
+    }
 }

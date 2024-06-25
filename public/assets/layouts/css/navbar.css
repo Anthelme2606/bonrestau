@@ -90,5 +90,10 @@
      background-color: #f8f9fa;
  }
  
+ @media screen and (min-width:767px){
+    .svg-sidebar{
+        display:none;
+    }
+}
  
  

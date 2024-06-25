@@ -9,9 +9,9 @@ font-family: 'Poppins', sans-serif;
 }
 
 :root{
---body-color: #E4E9F7;
+--body-color: rgb(252, 253, 255);
 --sidebar-color: #FFF;
---primary-color: #695CFE;
+--primary-color: rgb(0,160,101);
 --primary-color-light: #F6F5FF;
 --toggle-color: #DDD;
 --text-color: #707070;
@@ -32,20 +32,46 @@ body.dark .sidebar li a:hover .text,
 .form,nav{
     color: var(--text-color);
 }
-/* Style for the home container */
+
 .home {
-    position: absolute; /* Position the home container absolutely to control its placement */
-    top: 0; /* Align to the top of the page */
-    left: 62px; /* Start positioning after the sidebar */
-    padding-top: 60px; /* Add padding to the top to create space from the top of the page */
-    display: flex; /* Use flexbox for easy alignment of child elements */
-    justify-content: center; /* Center elements horizontally */
-    align-items: center; /* Center elements vertically */
-    width: calc(100% - 62px); /* Make the home container take the full width minus the sidebar width */
-    min-height: 100vh; /* Make the home container take the full height of the viewport */
-    background-color: var(--body-color); /* Set the background color using a CSS variable */
-    transition: var(--tran-05); /* Add a transition effect for smooth changes */
+    position: absolute; 
+    top: 0; 
+    padding-top: 60px; 
+    display: flex;
+    width:100%;
+    min-height: 100vh; 
+    background-color: var(--body-color);
+    transition: var(--tran-05); 
 }
+@media screen and (min-width:767px){
+   
+    .sidebar{
+        display:block;
+    }
+    
+    .small-screen{
+        left: 52px;
+        width: calc(100% - 52px);
+      }
+}
+@media screen and (max-width:767px){
+   
+    .sidebar{
+        display:none;
+    }
+    .isOpen {
+        display:block;
+    }
+    .isClose{
+        display:none;
+    }
+    
+  
+}
+
+
+  
+
 
 /* Style for the text inside the home container */
 .home .text {
@@ -57,7 +83,7 @@ body.dark .sidebar li a:hover .text,
 .container {
     position: relative; 
     background: var(--body-color);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
     max-width: 1200px;

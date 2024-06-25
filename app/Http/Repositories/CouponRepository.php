@@ -32,5 +32,14 @@ class CouponRepository {
     public function getByPrice($price){
         return Coupon::where('price',$price)->first();
     }
+    public function couponUps(){
+        $bons_up=Coupon::recenserBonsMisAJour();
+        return $bons_up->count();
+    }
+    public function qteT(){
+        return Coupon::totalQuantite();
+        
+    }
+   
 
 }
