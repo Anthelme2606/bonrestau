@@ -1,51 +1,84 @@
-
-    <style>
-        form {
-            border:none;
-            outline:none;
+@extends('layouts.page')
+@section('tittle', 'Bon-Creation')
+@section('navbar')
+    @include('layouts.navbar')
+@endsection
+@section('sidebar')
+    @include('layouts.sidebar')
+@endsection
+@section('content')
+<link rel="stylesheet" href="{{asset('assets/auth/css/auth.css')}}">
+<style>
+    
+    
+</style>
+<style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width:500px;
+            height: 100vh;
         }
-        form input {
+        .form-box {
             border:none;
             outline:none;
+            width:100%;
+            
+            padding: 20px;
+            background-color: white;
+        }
+      
+        .form-label {
+            margin-top: 10px;
+        }
+        .btn-primary {
+            background-color: gold;
+            border-color: gold;
+            margin-top: 20px;
+        }
+        .btn-primary:hover {
+            background-color: #d4af37;
+            border-color: #d4af37;
         }
     </style>
-<div class="container mt-5">
-    <h1>Transactions</h1>
-    <!-- Modal -->
-    <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="transactionModalLabel">Create Transaction</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="transactionForm" action="{{route('trans-store')}}" method="POST">
-                        @csrf
-                        @method("POST")
-                        <div class="mb-3">
-                            <label for="user_code" class="form-label">User code</label>
-                            <input type="text" class="form-control" id="user_code" name="user_code" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="coupon_code" class="form-label">Coupon code</label>
-                            <input type="text" class="form-control" id="coupon_code" name="coupon_code" readonly required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Amount</label>
-                            <input type="number" step="0.01" class="form-control" id="amount" name="amount"readonly required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="percent" class="form-label">Gain percent(%)</label>
-                            <input type="number" step="0.01" class="form-control" id="percent" value="5" name="percent" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" form="transactionForm">Save</button>
-                </div>
-            </div>
+   
+    <div class="container form-container">
+        <div class="form-box">
+            <form id="myForm" action="{{route('trans-store')}}" method="POST">
+                @csrf
+                @method("POST")
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <h4>Créer une transaction ici</h4>
+               </div>
+               
+                    <label for="user_code" class="form-label">Code d'utilisateur</label>
+                    <input type="text" class="" id="user_code" name="user_code" required>
+                
+               
+                    <label for="coupon_code" class="form-label">Code du Coupon</label>
+                    <select class="form-control" id="coupon_code" name="coupon_price" required>
+                        <option value="" disabled selected>Selectionnez coupon par son prix..</option>
+                       @if(isset($coupons))
+                       @foreach($coupons as $coupon)
+                       <option value="{{$coupon->price}}">{{$coupon->price}}</option>
+                     
+                       @endforeach
+                       @endif
+                    </select>
+                
+               
+                    <label for="qte" class="form-label">quantité</label>
+                    <input type="number" step="0.01" class="" id="qte" name="quantite" value="1"  required>
+                
+               
+                    <label for="percent" class="form-label">Gain pourcent(%)</label>
+                    <input type="number" step="0.01" class="" id="percent" value="5" name="percent" required>
+                
+                <button type="submit" class="px-2 px-md-5 bg-valider rounded">Lancer la transaction</button>
+            </form>
         </div>
     </div>
-</div>
+   
+
+@endsection

@@ -12,6 +12,23 @@ class CouponService
         $this->couponRepository = $couponRepository;
         
     }
+    public function countUps(){
+        return $this->couponRepository->couponUps();
+    }
+    public function qteT(){
+        return $this->couponRepository->qteT();
+    }
+    public function ravita(array $data){
+        $price=$data['coupon_price'];
+        $coupon= $this->couponRepository->getByPrice($price);
+        $coupon->quantite+=$data['quantite'];
+      
+        $coupon->save();
+        
+       return redirect()->back()->with('success','Bon ravitaillé avec succes');
+       
+
+    }
     public function create(array $data)
     {
        
@@ -19,10 +36,10 @@ class CouponService
         $coupon=$this->couponRepository->getByPrice($data['price']);
         if(isset($coupon))
         {
-            return redirect()->back()->with('error','Bon with this price is set yet..');  
+            return redirect()->back()->with('error','Bon avec ce prix est déja defini..');  
         }
         $this->couponRepository->create($data);
-        return redirect()->back()->with('success','Bon created with success');
+        return redirect()->back()->with('success','Bon crée avec  succes');
 
     }
     public function update(array $data)
@@ -30,7 +47,7 @@ class CouponService
         $coupon=  $this->couponRepository->update($data['id'],$data);
         if(isset($coupon)){
 
-            return redirect()->back()->with("success","Bon updated with success");
+            return redirect()->back()->with("success","Bon mis à jour avec success");
         }else{
             
           return redirect()->back()->with("error","An error occur when updating bon..");
@@ -40,6 +57,7 @@ class CouponService
     {
         return  $this->couponRepository->all();
     }
+    
 
     public function generateCode()
     {

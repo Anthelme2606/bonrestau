@@ -12,7 +12,8 @@ class Coupon extends Model
         'id',
         'code',
         'price',
-        'date'
+        'date',
+        'quantite',
     ];
     public function transactions(){
         return $this->hasMany(Transaction::class,'coupon_id','id');
@@ -32,5 +33,18 @@ class Coupon extends Model
         }
        
     }
+    public static function recenserBonsMisAJour()
+    {
+       
+        return self::whereColumn('updated_at', '!=', 'created_at')->get();
+    }
+    public static function totalQuantite()
+{
+    $qte = self::sum('quantite');
+
+    return $qte;
+}
+
+
     
 }

@@ -6,27 +6,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Sanctum\HasApiTokens;
 use carbon\Carbon;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'password',
-        'referral_code',
-        'referrer_code',
-        'balance',
-        'daily_percent',
-        'daily_percent_updated_at'
+    use HasFactory;
+        protected $fillable = [
+            'nom',
+            'prenom',
+            'date_naissance',
+            'region',
+            'pseudo',
+            'invitant',
+            'ville',
+            'commune',
+            'quartier',
+            'numwhats',
+            'reseau1',
+            'reseau2',
+            'numero_reseau', 
+            'email',
+            'password',
+            'referral_code',
+           'balance',
+           'daily_percent',
+           'daily_percent_updated_at'
     ];
 
     /**
@@ -50,13 +57,13 @@ class User extends Authenticatable
     ];
     public function referrer()
     {
-        return $this->belongsTo(User::class, 'referrer_code', 'referral_code');
+        return $this->belongsTo(User::class, 'invitant', 'referral_code');
     }
 
     // Relationship to get all users referred by the current user
     public function referrals()
     {
-        return $this->hasMany(User::class, 'referrer_code', 'referral_code');
+        return $this->hasMany(User::class, 'invitant', 'referral_code');
     }
     public function transactions()
     {
@@ -76,4 +83,13 @@ class User extends Authenticatable
         $this->daily_percent += $newPercent;
         $this->save();
     }
+  
+   
+        public static function getUsersRegisteredCurrentMonth()
+    {
+        return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
+    }
+    
+    
+
 }

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('assets/layouts/css/sidebar.css') }}">
-<aside class="sidebar close">
+<aside class="sidebar close isClose">
     <header>
         <div class="image-text">
             <span class="image">
@@ -36,12 +36,13 @@
                         @endforeach
                     @endforeach
                 @endif
+                <!--
                 <li class="side-link">
                     <a href="{{route('parrains')}}">
                         <i class='bx bx-user icon'></i>
                         <span class="text nav-text">parrains</span>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </div>
 

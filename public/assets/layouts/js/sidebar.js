@@ -19,7 +19,7 @@ modeText = body.querySelector(".mode-text");
     
         if (link.href === url) {
            // link.classList.add('active');
-            link.parentElement.classList.add('active'); 
+            link.parentElement.classList.add('active-sidebar'); 
         }
     });
     
@@ -28,11 +28,7 @@ modeText = body.querySelector(".mode-text");
 toggle.addEventListener("click" , () =>{
 sidebar.classList.toggle("close");
 })
-/*
-searchBtn.addEventListener("click" , () =>{
-sidebar.classList.remove("close");
-})
-*/
+
 
 modeSwitch.addEventListener("click" , () =>{
 body.classList.toggle("dark");

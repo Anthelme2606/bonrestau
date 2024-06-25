@@ -2,6 +2,25 @@
 <link rel="stylesheet" href="{{ asset('assets/layouts/css/navbar.css') }}">
 <nav class="navbar navbar-expand-lg navbar-dark bg-nav fixed-top">
     <div class="container-fluid">
+        <button class="btn svg-sidebar text-white">
+        <svg
+   
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 11v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3" />
+      <path d="M12 19H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.83" />
+      <path d="m3 11 7.77-6.04a2 2 0 0 1 2.46 0L21 11H3Z" />
+      <path d="M12.97 19.77 7 15h12.5l-3.75 4.5a2 2 0 0 1-2.78.27Z" />
+    </svg>
+</button>
         <a class="navbar-brand px-2 mx-2 " href="{{ route('home') }}">BON</a>
         
          
@@ -25,7 +44,7 @@
                     @if (Auth::check())
                         <button id="menuButton" class="btn text-capitalize  btn-sm  dropdown-toggle mx-1 px-1 py-1 my-1"
                             type="button">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->pseudo }}
 
                         </button>
                     @else
@@ -50,8 +69,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-center position-relative">
             <div class="d-flex align-items-center">
 
-                <img src="{{ asset('assets/images/logo.jpg') }}" class=" rounded-circle " alt=""
-                    style="width: 60px; height:60px;">
+                <img src="{{ asset('assets/images/logo.jpg') }}" class="" alt="" style="width: 60px; height:60px; border-radius:50%;"/>
                 @if (Auth::check())
                     <span
                         class="d-flex text-capitalize justify-content-between align-items-center list-group-item list-group-item-action border-0"

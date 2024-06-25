@@ -28,7 +28,7 @@ class AuthService
                 } else {
                    $user= $this->userRepository->create($data);
                    $datar=array();
-                   $referrer=$this->userRepository->getByReferralCode($user->referrer_code);
+                   $referrer=$this->userRepository->getByReferralCode($user->invitant);
                    if(isset($referrer))
                    {
             
@@ -52,7 +52,9 @@ class AuthService
 
         }
     }
-
+public function usersCurrentMonthCount(){
+return $this->userRepository->usersRegisteredCurrentMonth()->count();
+}
     public function post_login(array $data)
     {
        

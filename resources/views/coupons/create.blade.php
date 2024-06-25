@@ -14,45 +14,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div class="alert alert-info">
-                    <h4 class="alert-heading">Create Your Restaurant Voucher</h4>
-                    <p>
-                        Welcome! You are just a few steps away from creating a voucher for your restaurant. 
-                        Please fill in the required details to generate a personalized voucher that your customers can use to enjoy discounts and special offers.
-                    </p>
-                    <hr>
-                    <p class="mb-0">
-                        <strong>Instructions:</strong>
-                        <ul>
-                            <li>Enter the voucher value (price) that customers can redeem.</li>
-                            <li>Specify the expiration date for the voucher.</li>
-                            <li>Once completed, click on the 'Create Voucher' button to finalize.</li>
-                        </ul>
-                    </p>
-                    <p>
-                        Need help? Contact our support team at <a href="mailto:christianedorh@gmail.com">support</a>.
-                    </p>
-                </div>
+               <div class="image-container">
+                <img class="w-100 h-100" src="{{asset('assets/images/bon.png')}}"/>
+               </div>
             </div>
             <div class="col-md-6">
             <div class=" form-container">
             <form class="form" id="ajaxForm" method="post" action="{{ route('bon-store') }}">
                  @csrf
                 @method('POST')
-                <div class="mb-1">
-                    <h2 class="">Bon</h2>
+                <div class="mb-1 d-flex justify-content-center align-items-center">
+                    <h2 class="" style="color:orange">Bon</h2>
                 </div>
 
-                <div class="mb-1">
-                    <label for="valeur">Value</label>
+                
+                    <label for="valeur">Valeur</label>
                     <input type="number" id="valeur" name="price" placeholder="2000">
-                </div>
-                <div class="mb-1  ">
-                    <label for="date">Expiration Date</label>
+                    <label for="qte">Quantité</label>
+                    <input type="number" id="qte" name="quantite" placeholder="4">
+                    <label for="date">Date Expiration </label>
                     <input type="date" id="date" name="date">
-                </div>
+               
                 <div class="mb-1 form-footer ">
-                    <button type="submit" class="login-btn" id="button">Create Voucher</button>
+                    <button type="submit" class="rounded px-2 px-md-5 bg-valider" id="button">Créer un bon</button>
                 </div>
 
             </form>
@@ -60,7 +44,8 @@
             </div>
         </div>
         
-        <hr />
+        
+         <!--
         <div class="row">
             <div class="col-md-3">
                 <select class="price-select form-select px-2 py-2 mb-2 rounded shadow text-center">
@@ -119,6 +104,7 @@
     
                     </div>
             </div>
+           
             <div class="col-md-9">
                 @if(isset($transactions))
                 <div class="card historique-card">
@@ -169,11 +155,8 @@
                 
             </div>
         </div>
-      
+      -->
         
-
-        <hr />
-        @include('footer')
     </div>
 
 
