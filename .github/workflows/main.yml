@@ -24,6 +24,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           server: node46-eu.n0c.com
-          username: bon@35plus-sante.com
-          password: Bon35plus@35
+          username: ${{secrets.FTP_USERNAME}}
+          password: ${{secrets.FTP_PASSWORD}}
           server_dir: /public_html/
