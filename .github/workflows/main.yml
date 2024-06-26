@@ -23,6 +23,6 @@ jobs:
       - name: Deploy to Production Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ftp.pagetogo.tg
+          server: https://page-tg.monworld:2083/
           username: pagetgmonworld@page-tg.mon.world
           password: pagetgmonworld@20
