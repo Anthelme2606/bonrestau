@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="{{asset('assets/layouts/css/style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @vite(['resources/css/app.css','resources/js/app.js'])
-     <!-- CSRF Token -->
+    <link rel="stylesheet" href="{{ asset('build/assets/app-B35vxE7q.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-D8Jz5B4_.css') }}">
+     
+    <!-- CSRF Token -->
      <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -34,7 +37,8 @@
             toastr.success("{{ session('success') }}");
         @endif
 
-        <script src="{{asset('assets/layouts/js/script.js')}}"></script>  
+        <script src="{{asset('assets/layouts/js/script.js')}}"></script> 
+        <script src="{{ asset('build/assets/app-CGTGA1v5.js') }}" defer></script> 
 </body>
 
 </html>
