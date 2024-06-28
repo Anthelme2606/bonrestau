@@ -7,14 +7,8 @@
 @include('layouts.sidebar')
 @endsection
 @section('content')
-<style>
-    .content{
-        
-        width:100%;
-        height:100%;
-    }
-</style>
 
+<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
 <div class="container">
     <div class="content">
         <h1 class="bg-span">BIENVENUE DANS VOTRE GESTION DES BONS DE RESTAURANT</h1>
@@ -80,5 +74,4 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
 @endsection
