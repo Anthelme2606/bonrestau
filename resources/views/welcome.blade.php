@@ -18,8 +18,8 @@
 <div class="container">
     <div class="content">
         <h1 class="bg-span">BIENVENUE DANS VOTRE GESTION DES BONS DE RESTAURANT</h1>
-        <div class="row grid-content">
-            <div class="col-md-4">
+        <div class="row row-cols-md-3">
+            <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="step">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="step">
@@ -41,7 +41,7 @@
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="step">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="step">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             
-            <div class="col-md-4">
+            <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="step">
