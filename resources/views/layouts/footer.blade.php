@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-between align-items-center">
             <div>
               <i>2023-2024</i>
-              <p>Spark Corporation,Tout droit reservés</p>
+              <p>Spark Corporation,Tout droit reservés <a class="text-decoration-none" href="https://sparkcorporation.org/">spark</a></a></p>
 
             </div>
         <div class="social-media">

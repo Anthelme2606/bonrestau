@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/home.css')}}?v=<?php echo time(); ?>">
 <div class="container">
     <div class="content">
-        <h1 class="bg-span">BIENVENUE DANS VOTRE GESTION DES BONS DE RESTAURANT</h1>
+        <h1 class="bg-span">BIENVENUE DANS VOTRE APLLICATION DE GESTION DES BONS DE RESTAURANT</h1>
         <div class="row row-cols-1 row-cols-md-3 g-1">
             <div class="col">
                 <div class="card">
@@ -69,6 +69,7 @@
             </div>
 
         </div>
+        <x-list-scroll/>
         <hr />
         @include('layouts.footer')
     </div>
