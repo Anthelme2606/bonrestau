@@ -1,6 +1,4 @@
 @extends('layouts.html')
-<link rel="stylesheet" href="{{ asset('build/assets/app-B35vxE7q.css') }}">
- <link rel="stylesheet" href="{{ asset('build/assets/app-D8Jz5B4_.css') }}">
 @section('title','Home')
 @section('body-container')
 <link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
