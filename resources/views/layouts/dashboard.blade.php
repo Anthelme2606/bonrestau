@@ -1,4 +1,4 @@
-@extends('layouts.page')
+{{-- @extends('layouts.page')
 @section('tittle', 'Dashboard')
 @section('navbar')
     @include('layouts.navbar')
@@ -41,4 +41,15 @@
 
 
 
+@endsection --}}
+@extends('layouts.index')
+@section('title','Dashboard')
+@section('sidebar')
+<x-sidebar/>
+@endsection
+@section('navbar')
+<x-navbar/>
+@endsection
+@section('sidebar-container')
+<x-dashboard-container/>
 @endsection

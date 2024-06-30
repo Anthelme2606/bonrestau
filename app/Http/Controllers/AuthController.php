@@ -22,7 +22,7 @@ class AuthController extends Controller
     }
     public function index()
     {
-      return view('welcome');
+      return view('layouts.home');
     }
     public function dashboard()
     {
@@ -88,6 +88,7 @@ class AuthController extends Controller
     }
     public function post_login(Request $request)
     {
+     
       $request->validate(([
         'email' => 'required|string',
         'password' => 'string|required',

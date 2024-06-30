@@ -16,7 +16,7 @@
     });
 </script>
 <div class="rotating-cards">
-    <img src="{{ asset('assets/images/rotate.jpg') }}" class="center-image " alt="Center Image">
+    <img src="{{ asset('assets/images/rotate.png') }}" class="center-image " alt="Center Image">
     <div class="card carde card-tilted" style="--rotation: 0deg;">Connexion</div>
     <div class="card carde card-tilted" style="--rotation: 90deg;">Parrainé</div>
     <div class="card carde card-tilted" style="--rotation: 180deg;">Achat de ticket</div>
@@ -29,7 +29,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10;
+            
             width:100%;
             height:100%;
         }

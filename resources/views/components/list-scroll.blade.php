@@ -19,7 +19,7 @@ $cardData = [
     <div class="row row-cols-1 row-cols-md-4">
         @foreach($cardData as $index => $data)
         <div class="col rounded-0">
-            <div class="card rounded-0 shadow-none border-0">
+            <div class="card rounded-0 shadow-none border-0"style="background:rgba(245,251,252,1);" >
                 <div class="card-header w-100 h-100  px-1 py-1 rounded">
                     <img class="w-100 h-100" src="{{ asset('assets/images/vecteur' . ($index + 1) . '.jpg') }}" alt="vecteur">
                 </div>
