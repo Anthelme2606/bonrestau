@@ -16,6 +16,6 @@
 <body style="background:rgba(245,251,252,1)">
 @yield('body-container')
 <x-toastr/>
-<script src="{{ asset('build/assets/app-CGTGA1v5.js') }}"></script>
+<script src="{{ asset('build/assets/app-CGTGA1v5.js') }}" defer></script>
 </body>
 </html>    
