@@ -10,7 +10,7 @@
     @if (!Route::is('dashboard'))
         @include('layouts.head')
     @endif
-    @if (!Route::is('home'))
+    @if (Route::is('dashboard'))
         @include('layouts.dash-head')
     @endif
     <!--CSRF Token -->

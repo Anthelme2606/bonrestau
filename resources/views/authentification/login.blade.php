@@ -1,9 +1,8 @@
 @extends('layouts.html')
 @section('body-container')
-<link href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v=<?php echo time(); ?> ">
-<link rel="stylesheet"
+<link 
+rel="stylesheet" 
 href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v=<?php echo time(); ?> ">
-<link rel="stylesheet" href="{{ asset('assets/vendor/vendors/css/vendor.bundle.base.css') }}?v=<?php echo time(); ?>">
 
 <style>
   body, html {
@@ -70,7 +69,10 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
     height: 100px;
     animation: rotate 5s linear infinite;
 }
-
+input{
+    background:white;
+    color:black;
+}
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -94,11 +96,11 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
           <div class="form-group">
               <i class="mdi mdi-account text-primary"></i>
               <input type="text" class="form-control" name="email" id="email"
-              placeholder="Email">
+              placeholder="Email" required>
           </div>
           <div class="form-group">
               <i class="mdi mdi-lock text-primary"></i>
-              <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+              <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
           </div>
           <button type="submit" class="btn btn-primary btn-block w-100">Se connecter</button>
       </form>
