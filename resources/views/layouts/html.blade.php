@@ -18,10 +18,11 @@
 </head>
 
 <body style="background:rgba(245,251,252,1)">
-    <x-spinner/>
+    
     <div class="content-global">
         @yield('body-container')
     </div>
+    <x-spinner/>
     
     
     <x-toastr />
