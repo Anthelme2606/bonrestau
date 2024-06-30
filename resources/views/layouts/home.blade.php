@@ -1,7 +1,11 @@
 @extends('layouts.html')
+<link rel="stylesheet" href="{{ asset('build/assets/app-B35vxE7q.css') }}">
+ <link rel="stylesheet" href="{{ asset('build/assets/app-D8Jz5B4_.css') }}">
 @section('title','Home')
 @section('body-container')
-<link rel="stylesheet" href="{{asset('assets/css/home.css')}}?v=<?php echo time();?>">
+<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
+
+
 <x-hero/>
 <div class="product-section">
     <div class="container">
@@ -13,9 +17,7 @@
                 <p class="mb-4">Nous vous aiderons à suivre avec éfficacité les bons de restaurations payés chez nous </p>
                 <p><a href="{{route('dashboard')}}" class="btn btn-primary px-4  rounded shadow">Suivie</a></p>
             </div> 
-            <!-- End Column 1 -->
-
-            <!-- Start Column 2 -->
+            
             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                 <a class="product-item" href="cart.html">
                     <img src="{{asset('assets/images/dollar.jpg')}}"  class="img-fluid product-thumbnail">
@@ -27,9 +29,7 @@
                     </span>
                 </a>
             </div> 
-            <!-- End Column 2 -->
-
-            <!-- Start Column 3 -->
+          
             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                 <a class="product-item" href="cart.html">
                     <img src="{{asset('assets/images/dollar.jpg')}}"  class="img-fluid product-thumbnail">
@@ -41,9 +41,7 @@
                     </span>
                 </a>
             </div>
-            <!-- End Column 3 -->
-
-            <!-- Start Column 4 -->
+            
             <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                 <a class="product-item" href="cart.html">
                     <img src="{{asset('assets/images/dollar.jpg')}}"  class="img-fluid product-thumbnail">
