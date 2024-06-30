@@ -10,8 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('build/assets/app-CGTGA1v5.js') }}" defer></script> 
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-B35vxE7q.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-D8Jz5B4_.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-B35vxE7q.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-D8Jz5B4_.css') }}"> 
+    <script src="{{asset('assets/layouts/js/script.js')}}"></script> 
      
     <!-- CSRF Token -->
      <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,7 +39,7 @@
             toastr.success("{{ session('success') }}");
         @endif
 
-        <script src="{{asset('assets/layouts/js/script.js')}}"></script> 
+        
         
 </body>
 

@@ -93,12 +93,12 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
         @method('POST')
           <div class="form-group">
               <i class="mdi mdi-account text-primary"></i>
-              <input type="text" class="form-control" name="email"
+              <input type="text" class="form-control" name="email" id="email"
               placeholder="Email">
           </div>
           <div class="form-group">
               <i class="mdi mdi-lock text-primary"></i>
-              <input type="password" class="form-control" placeholder="Password" name="password">
+              <input type="password" class="form-control" id="password" placeholder="Password" name="password">
           </div>
           <button type="submit" class="btn btn-primary btn-block w-100">Se connecter</button>
       </form>

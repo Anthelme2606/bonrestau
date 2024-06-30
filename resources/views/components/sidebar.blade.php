@@ -151,9 +151,9 @@
    
     document.querySelectorAll('.nav-link').forEach(function(link) {
         const url = window.location.href;
-         console.log(url)
+         
         if (link.href === url) {
-          console.log(link.parentElement);
+         
             link.parentElement.classList.add('active'); 
         }
     });

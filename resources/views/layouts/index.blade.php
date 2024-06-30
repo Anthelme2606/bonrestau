@@ -36,7 +36,7 @@ href="{{ asset('assets/vendor/vendors/owl-carousel-2/owl.theme.default.min.css')
     <script src="{{ asset('assets/vendor/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/misc.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendor/js/misc.js') }}"></script> --}}
     <script src="{{ asset('assets/vendor/js/settings.js') }}"></script>
     
     <script src="{{ asset('assets/vendor/js/dashboard.js') }}"></script>
