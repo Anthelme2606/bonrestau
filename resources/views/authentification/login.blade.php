@@ -22,7 +22,7 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
       max-width: 400px;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      background: #18170b;
+      background: rgb(245, 248, 250);
       border-radius: 8px;
   }
   .login-header {
@@ -104,7 +104,7 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
       </form>
       <div class="login-footer">
           <a href="#">Mot de passe oublié ?</a><br>
-          <span class="text-white">Vous n'aviez pas de compte? <a href="{{route('sign-up')}}">S'inscrire</a></span>
+          <span class="text-black">Vous n'aviez pas de compte? <a href="{{route('sign-up')}}">S'inscrire</a></span>
       </div>
   </div>
 </div>

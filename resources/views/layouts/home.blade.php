@@ -1,9 +1,6 @@
 @extends('layouts.html')
 @section('title','Home')
 @section('body-container')
-<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
-
-
 <x-hero/>
 <div class="product-section">
     <div class="container">
