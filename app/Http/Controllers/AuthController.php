@@ -52,12 +52,12 @@ class AuthController extends Controller
     }
     public function sign_up()
     {
-        
-      return view('authentification.sign-up');
+      $clients=$this->authService->all();
+      return view('authentification.sign-up',compact('clients'));
     }
     public function post_sign_up(Request $request)
     {
-   
+//dd($request);
         $request->validate([
             'nom' => 'string|required',
             'prenom' => 'string|required',
@@ -74,15 +74,15 @@ class AuthController extends Controller
             'confirm' => 'string|required|same:password',
             'invitant' => 'string|nullable',
             
-            'reseau1' => 'string',
+              'reseau1' => 'string',
             'reseau2' => 'string',
             'perte_info' => 'string',
             'info_exact' => 'string',
-            'accept_condition' => 'string',
+           'accept_condition' => 'string',
             'inscription_1' => 'string',
             
         ]);
-        //dd($request);
+      //  dd($request);
 
         return $this->authService->post_sign_up($request->all());
     }

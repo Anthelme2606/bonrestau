@@ -1,4 +1,5 @@
 @extends('layouts.html')
+@section('title','Connexion')
 @section('body-container')
 <link 
 rel="stylesheet" 
@@ -101,7 +102,7 @@ input{
               <i class="mdi mdi-lock text-primary"></i>
               <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
           </div>
-          <button type="submit" class="btn btn-primary btn-block w-100">Se connecter</button>
+          <button type="submit" class="btn btn-primary btn-block submiting w-100">Se connecter</button>
       </form>
       <div class="login-footer">
           <a href="#">Mot de passe oublié ?</a><br>
