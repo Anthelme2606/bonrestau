@@ -1,174 +1,290 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const myForm = document.querySelector('#myForm');
-    const steps = document.querySelectorAll('.step-s');
-    steps.forEach((step)=>{
-        const computedStyle = window.getComputedStyle(step);
-    });
-  
 
-    if (myForm) {
-        resetForm(myForm);
-    } else {
-        console.error('Form with ID "myForm" not found.');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const users=form.dataset.users;
+    json_users=JSON.parse(users);
+    const inputs = form.querySelectorAll('input[required], select[required]');
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    const email = document.getElementById('email');
+    const pseudo = document.getElementById('pseudo');
+    const password = document.getElementById('password');
+    const confirm_password = document.getElementById('confirmation');
+    const numwhats = document.getElementById('numwhats');
+    const numero_reseau = document.getElementById('numero_reseau');
+    const one_acc = document.getElementById('one_acc');
+    const info_exact = document.getElementById('info_exact');
+    const perte_rev = document.getElementById('perte_rev');
+    const accept_condition = document.getElementById('terms'); 
+  
+    const tmoney = document.getElementById('tmoney');
+    const flooz = document.getElementById('flooz');
+    const reseau1 = document.getElementById('reseau1');
+    const reseau2 = document.getElementById('reseau2');
+
+    tmoney.addEventListener('change', (event) => {
+        if (event.target.checked) {
+         
+            reseau1.value = 'tmoney';
+            reseau2.value = 'null';
+        } 
+    });
+
+    flooz.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            reseau1.value = 'null';
+            reseau2.value = 'flooz';
+        } 
+    });
+
+
+
+   pseudo.addEventListener('input',(ev)=>{
+   
+    validatePseudo();
+   })
+    function createPseudoVariable(usersArray) {
+        return usersArray.reduce((acc, user) => {
+            acc[user.pseudo] = user;
+            return acc;
+        }, {});
+    }
+    function createEmailVariable(usersArray) {
+        return usersArray.reduce((acc, user) => {
+            acc[user.email] = user;
+            return acc;
+        }, {});
+    }
+     const variable = createPseudoVariable(json_users);
+     const emailVariable=createEmailVariable(json_users);
+
+     function isPseudoInVariable(pseudo, obj) {
+         
+         return obj.hasOwnProperty(pseudo);
+     }
+     function isEmailInVariable(email, obj) {
+         
+        return obj.hasOwnProperty(email);
     }
 
-    function validatePassword(pass) {
-        const password = document.querySelector(`#${pass}`);
-        const validate = document.querySelector('.submit');
-        const passwordRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/; ///^[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*-])(?=.{8,})$/;
-          console.log(passwordRegex.test("Anth@gmail.com"));
-        if (passwordRegex.test(password.value)) {
-            password.classList.remove('invalid');
-            password.classList.add('valid');
-            validate.type = 'submit';
-        } else {
-            password.classList.remove('valid');
-            password.classList.add('invalid');
-            validate.type = 'button';
+
+    //const pseudoExists = ["user1", "user2", "user3"]; // Tableau des pseudos existants
+    const reseauInputs = document.querySelectorAll('input[name="reseau"]');
+
+    form.addEventListener('submit', function (event) {
+        let isValid = true;
+        inputs.forEach(function (input) {
+            if (!input.value.trim()) {
+                isValid = false;
+                markAsInvalid(input);
+            }
+        });
+        if (!validateEmail()) isValid = false;
+        if (!validatePseudo()) isValid = false;
+        if (!validatePassword()) isValid = false;
+        if (!validateConfirmPassword()) isValid = false;
+        if (!validateNumWhats()) isValid = false;
+        if (!validateNumeroReseau()) isValid = false;
+        if (!validateConditions()) isValid = false;
+
+        if (!isValid) {
+            event.preventDefault();
         }
+    });
+    inputs.forEach((element) => {
+        if (element.type === 'checkbox' || element.type === 'radio') {
+            element.addEventListener('change', (ev) => {
+                validInput(element);
+            });
+        } else {
+            element.addEventListener('input', (ev) => {
+                validInput(element);
+            });
+        }
+    });
+    function validInput(element) {
+        const value = element.value.trim();
+        if (value === '' && element.required) {
+            markAsInvalid(element);
+            return false;
+        }
+        markAsValid(element);
+        return true;
+    }
+   
+
+   
+
+    email.addEventListener('input', validateEmail);
+    pseudo.addEventListener('input', validatePseudo);
+    password.addEventListener('input', validatePassword);
+    confirm_password.addEventListener('input', validateConfirmPassword);
+    numwhats.addEventListener('input', validateNumWhats);
+    numero_reseau.addEventListener('input', validateNumeroReseau);
+    one_acc.addEventListener('change', validateConditions);
+    info_exact.addEventListener('change', validateConditions);
+    perte_rev.addEventListener('change', validateConditions);
+
+    function validateEmail() {
+        const value = email.value.trim();
+        if (value === '') {
+            markAsInvalid(email);
+            document.getElementById('email-error').textContent = 'Email requis';
+            return false;
+        }
+        const exists = isEmailInVariable(value, emailVariable);
+        if(exists)
+            {
+                document.getElementById('email-error').textContent = 'Email déja pris';
+                return false; 
+            }
+        if (!isValidEmail(value)) {
+            markAsInvalid(email);
+            document.getElementById('email-error').textContent = 'Email invalide';
+            return false;
+        }
+        markAsValid(email);
+        document.getElementById('email-error').textContent = '';
+        return true;
+    }
+
+    function validatePseudo() {
+        const value = pseudo.value.trim();
+        if (value === '') {
+            markAsInvalid(pseudo);
+            document.getElementById('pseudo-error').textContent = 'Pseudo requis';
+            return false;
+        }
+        const exists = isPseudoInVariable(value, variable);
+        
+        if (exists) {
+            markAsInvalid(pseudo);
+            document.getElementById('pseudo-error').textContent = 'Pseudo déjà pris';
+            return false;
+        }
+        markAsValid(pseudo);
+        document.getElementById('pseudo-error').textContent = '';
+        return true;
+    }
+
+    function validatePassword() {
+        const value = password.value.trim();
+        if (value === '') {
+            markAsInvalid(password);
+            document.getElementById('password-error').textContent = 'Mot de passe requis';
+            return false;
+        }
+        if (value.length < 8) {
+            markAsInvalid(password);
+            document.getElementById('password-error').textContent = 'Le mot de passe doit contenir au moins 8 caractères';
+            return false;
+        }
+        markAsValid(password);
+        document.getElementById('password-error').textContent = '';
+        return true;
+    }
+
+    function validateConfirmPassword() {
+        const value = confirm_password.value.trim();
+        if (value === '') {
+            markAsInvalid(confirm_password);
+            document.getElementById('confirm_password-error').textContent = 'Confirmation du mot de passe requise';
+            return false;
+        }
+        if (value !== password.value.trim()) {
+            markAsInvalid(confirm_password);
+            document.getElementById('confirm_password-error').textContent = 'Les mots de passe ne correspondent pas';
+            return false;
+        }
+        markAsValid(confirm_password);
+        document.getElementById('confirm_password-error').textContent = '';
+        return true;
+    }
+
+    function validateNumeroReseau() {
+        const selectedReseau = document.querySelector('input[name="reseau"]:checked');
+        if (!selectedReseau) {
+            document.getElementById('numero_reseau-error').textContent = 'Veuillez sélectionner un réseau';
+            return false;
+        }
+
+        const value = numero_reseau.value.trim();
+        const tmoneyPrefixes = ["71", "72", "70", "91", "92", "93", "90"];
+        const floozPrefixes = ["79", "78", "99", "98", "97", "96"];
+        let validPrefixes = selectedReseau.value === 'tmoney' ? tmoneyPrefixes : floozPrefixes;
+
+        if (value === '') {
+            markAsInvalid(numero_reseau);
+            document.getElementById('numero_reseau-error').textContent = 'Numéro requis pour les transactions';
+            return false;
+        }
+        if (!validPrefixes.some(prefix => value.startsWith(prefix))) {
+            markAsInvalid(numero_reseau);
+            document.getElementById('numero_reseau-error').textContent = 'Numéro de réseau invalide';
+            return false;
+        }
+        markAsValid(numero_reseau);
+        document.getElementById('numero_reseau-error').textContent = '';
+        return true;
+    }
+
+    function validateNumWhats() {
+        const value = numwhats.value.trim();
+        const regexNumWhats = /^(90|91|92|93|70|71|72|96|97|98|99|78|79)\d{6}$/;
+        if (value === '') {
+            markAsInvalid(numwhats);
+            document.getElementById('numwhats-error').textContent = 'Numéro WhatsApp requis';
+            return false;
+        }
+        if (!regexNumWhats.test(value)) {
+            markAsInvalid(numwhats);
+            document.getElementById('numwhats-error').textContent = 'Numéro WhatsApp invalide';
+            return false;
+        }
+        markAsValid(numwhats);
+        document.getElementById('numwhats-error').textContent = '';
+        return true;
     }
     
-function validateEmail(mail) {
-    const email = document.querySelector(`#${mail}`);
-    const validate=document.querySelector('#validate');
-    console.log(validate.value);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (emailRegex.test(email.value)) {
-       
-        email.style.borderBottomColor = 'green';
-        validate.type="submit";
-    } else {
-       
-        email.style.borderBottomColor = 'red';
-        validate.type="button";
-    }
-}
-const checkboxes = document.querySelectorAll('.checkbox');
-
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-            checkboxes.forEach(box => {
-                if (box !== checkbox) {
-                    box.checked = false;
-                }
-            });
+    const submiting = document.querySelector('.submiting');
+    console.log(submiting);
+    submiting.classList.remove('btn-primary', 'readonly');
+    submiting.classList.add('btn-danger', 'readonly');
+    
+    accept_condition.addEventListener("change", (ev) => {
+        if (accept_condition.checked) {
+            console.log("message");
+            submiting.classList.remove('btn-danger', 'readonly');
+            submiting.classList.add('btn-primary');
+            
+        } else {
+            submiting.classList.remove('btn-primary');
+            submiting.classList.add('btn-danger', 'readonly');
+           
         }
     });
-});
+    
 
-function resetForm(form) {
-    const elements = form.elements;
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        switch (element.type) {
-            case 'text':
-                element.value='';
-                break;
-            case 'email':  
-                element.value ='';
-            element.addEventListener('input',()=>{
-                
-                validateEmail(element.id);
-            });
-                
-                break;
-             case 'password':  
-                element.value ='0';
-               
-                element.addEventListener('input',()=>{
-                
-                  //  validatePassword(element.id);
-                });
-                break;
-            case 'textarea':
-            case 'number':
-            case 'date':
-                element.value='';
-                break;
-            case 'tel':
-                element.value = element.defaultValue;
-                break;
-            case 'checkbox':
-            case 'radio':
-                element.checked = element.defaultChecked;
-                break;
-            case 'select-one':
-            case 'select-multiple':
-                const options = element.options;
-                for (let j = 0; j < options.length; j++) {
-                    options[j].selected = options[j].defaultSelected;
-                }
-                break;
-            default:
-                break;
+     
+    function validateConditions() {
+        const conditionsChecked = one_acc.checked && info_exact.checked && perte_rev.checked ;
+        if (!conditionsChecked) {
+            document.getElementById('conditions-error').textContent = 'Vous devez accepter toutes les conditions';
+            return false;
         }
+        document.getElementById('conditions-error').textContent = '';
+        return true;
     }
-}
 
-            function updateNext(step) {
+    function markAsInvalid(input) {
+        input.classList.add('is-invalid');
+    }
 
-                let next_step = document.querySelector(`.step-${step+1}`);
-                let custep = document.querySelector(`.step-${step}`);
-                let btn = document.querySelector(`.next-${step}`);
-                btn.addEventListener('click', () => {
+    function markAsValid(input) {
+        input.classList.remove('is-invalid');
+    }
 
-
-                    let step_r = document.querySelectorAll('.step-round');
-                    for (let q = 0; q < step_r.length; q++) {
-                        if (q + 1 == step) {
-                            step_r[q].classList.remove('active-step');
-                            step_r[q + 1].classList.add('active-step');
-
-                        }
-                    }
-
-                    custep.classList.add('d-none');
-                    next_step.classList.remove('d-none');
-                })
-
-
-            }
-
-            function updatePrev(step) {
-
-                let prev_step = document.querySelector(`.step-${step-1}`);
-                let custep = document.querySelector(`.step-${step}`);
-                let btn = document.querySelector(`.prev-${step}`);
-                //console.log(btn);
-                btn.addEventListener('click', () => {
-
-                    let step_r = document.querySelectorAll('.step-round');
-                    for (let q = 0; q < step_r.length; q++) {
-                        if (q + 1 == step) {
-                            step_r[q].classList.remove('active-step');
-                            step_r[q - 1].classList.add('active-step');
-
-                        }
-                    }
-                    custep.classList.add('d-none');
-                    prev_step.classList.remove('d-none');
-                })
-
-
-            }
-            //let steps = document.querySelectorAll('.step-s');
-            let currentStep = 1;
-
-            for (let i = 1; i <= steps.length; i++) {
-
-                if (!steps[i - 1].classList.contains('d-none') && currentStep >= 1) {
-                    currentStep = i;
-                    updateNext(currentStep);
-                    updatePrev(currentStep);
-
-
-                } else {
-                    currentStep = i;
-                    updateNext(currentStep);
-                    updatePrev(currentStep);
-                }
-
-            }
-        }); 
+    function isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+});

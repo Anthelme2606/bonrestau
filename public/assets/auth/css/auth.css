@@ -1,225 +1,77 @@
-
-        
-body {
-font-family: Arial, sans-serif;
-background-color: #f4f4f4;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
+.form-section {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    min-width: 280px;
+}
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+.form-group .mdi {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+}
+.readonly {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.form-container{
-
-background-color: #fff;
-padding: 20px;
-border-radius: 5px;
-box-shadow: 0 0 10px rgba(0,0,0,0.1);
-text-align: center;
-width: 100%;
-max-width: 400px;
-}
-
-h1 {
-color: #333;
-}
-
-form {
-margin: 20px 0;
-}
-
-label {
-display: block;
-margin-bottom: 5px;
-text-align: left;
-}
-select{
-border:none;
-outline:none;
-margin:6px;
-}
-input[type="password"].valid {
-    border-bottom-color: green;
-}
-input[type="password"].invalid {
-    border-bottom-color: red;
-}
-input[type="text"],
-input[type="date"],
-input[type="tel"],
-input[type="number"],
-input[type="email"],
-input[type="password"] {
-width: 100%;
-padding: 10px;
-margin-bottom: 10px;
-border: none;
-border-bottom: 2px solid #ccc;
-border-radius: 0;
-transition: border-bottom-color 0.3s;
-}
-input[type="date"]:focus,
-input[type="number"]:focus,
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="password"]:focus {
-border-bottom-color: orange;
-outline: none;
-}
-
-.checkbox-container {
-display: flex;
-align-items: center;
-margin-bottom: 20px;
-}
-
-.checkbox-container input[type="checkbox"] {
-margin-right: 10px;
-}
-
-button{
-border:none;
-outline:none;
-}
-
-button.social-login {
-background-color: #db4437;
-margin: 5px 0;
-}
-
-button.social-login.facebook {
-background-color: #4267B2;
-}
-
-a {
-color: #007bff;
-text-decoration: none;
-}
-form .bottom_border_error {
+.form-control {
+    padding-left: 40px;
     border: none;
+    border-bottom: 2px solid rgb(108, 108, 114);
+    border-radius: 0;
+    transition: border-color 0.3s;
     outline: none;
-    border-bottom-style: solid;
-    border-bottom-color: red;
 }
-.signup{
-    width:100%;
-    height:100%;
+.form-control:focus {
+    border-color: green;
+    box-shadow: none;
 }
-
-.step-bg {
-    background-color: rgba(195, 221, 230, 0.5);
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.is-invalid {
+    border-color: red;
 }
-
-
-
-.div-form-step {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
+.error-message {
+    color: red;
+    font-size: 0.9em;
 }
-
-.div-form {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
+body {
+    background: rgba(245, 251, 252, 1);
 }
-
-
-.d-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
+@media(max-width:768px){
+    .form-section {
+        display: block;
+        margin-bottom: 0;
+    }
 }
-
-.d-content .d-between {
-    width: 100%;
+.checkbox-container {
+    margin-bottom: 15px;
 }
-
-.d-between {
-    width: 100%;
+.image{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
-.step-s{
+.image img {
    
+    width: 100px;
+    height: 100px;
+    animation: rotate 5s linear infinite;
 }
-
-.btn-orange {
-    color: white;
-    background: orange;
-}
-
-.step.active-step {
-    background: orange;
-    color: white;
-}
-img{
-    min-width: 100%;
-    min-height: 100%;
-}
-.image-container{
-   width:100%;
-   max-height: 400px;
-}
-body{
+input{
     background:white;
+    color:black;
 }
-.checkbox-container small {
-    display: block;
-    margin-bottom: 5px;
-}
-select {
-border: none;
-outline: none;
-margin: 6px;
-padding: 8px 12px; /* Ajoute du padding pour l'espacement interne */
-background-color: #f1f1f1; /* Change la couleur de fond */
-border-radius: 4px; /* Ajoute des coins arrondis */
-font-size: 16px; /* Ajuste la taille de la police */
-appearance: none; /* Supprime les styles par défaut spécifiques au navigateur */
--webkit-appearance: none; /* Supprime les styles par défaut spécifiques à WebKit */
--moz-appearance: none; /* Supprime les styles par défaut spécifiques à Mozilla */
-}
-
-select:focus {
-background-color: #e0e0e0; /* Change la couleur de fond quand le select est focus */
-outline: 2px solid #007bff; /* Ajoute une outline personnalisée quand le select est focus */
-}
-
-.select-container {
-position: relative;
-display: inline-block;
-}
-
-.select-container::after {
-content: '';
-position: absolute;
-top: 50%;
-right: 12px;
-width: 0;
-height: 0;
-border-left: 5px solid transparent;
-border-right: 5px solid transparent;
-border-top: 5px solid #000;
-transform: translateY(-50%);
-pointer-events: none;
-}
-.bg-valider{
-background: rgb(0,160,101);
-color:white;
-
-}
-.bg-valider:hover{
-background: #000;
-color:white;
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
