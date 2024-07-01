@@ -5,18 +5,17 @@ rel="stylesheet"
 href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v=<?php echo time(); ?> ">
 
 <style>
-  body, html {
-      height: 100%;
-    
-     
-  }
-  .login-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-  }
+        
+   
+  
+        .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
   .login-card {
+    
       width: 100%;
       max-width: 400px;
       padding: 20px;
@@ -83,7 +82,7 @@ input{
 }
 
 </style>
-<div class="login-container">
+<div class="login-container d-flex justify-center justify-content-center align-content-center align-items-center">
   <div class="login-card">
       
       <div class="image">

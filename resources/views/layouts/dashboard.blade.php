@@ -50,6 +50,8 @@
 @section('navbar')
 <x-navbar/>
 @endsection
+@if(Auth::check() && Auth::user()->user_type === "admin" && isset($clients))
 @section('sidebar-container')
-<x-dashboard-container/>
+<x-dashboard-container :clients="$clients" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
 @endsection
+@endif
