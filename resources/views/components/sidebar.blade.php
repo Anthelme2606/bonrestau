@@ -7,7 +7,7 @@
             <img height="20" width="20"  src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
         </a>
         <a class="sidebar-brand brand-logo-mini" href="{{route('home')}}">
-           <img src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" width="100" height="100" />
+           <img src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" width="50" height="50" />
           
         </a>
     </div>
