@@ -101,6 +101,7 @@
                       </div>
                     </div>
                   </div>
+                  
                   <div class="col-sm-4 grid-margin">
                     <div class="card bg-dark">
                       <div class="card-body">
@@ -165,6 +166,7 @@
                                   <th> Reseau de payment </th>
                                   <th> Numero du reseau </th>
                                   <th> Numero whatsapp </th>
+                                  <th> Quantité de bons validés </th>
                                   <th> Status </th>
                                 </tr>
                               </thead>
@@ -199,7 +201,8 @@
                                   </td>
                                   
                                  <td> {{$trans->user['numero_reseau']}}</td>
-                              </td> <td> {{$trans->user['numwhats']}}</td>
+                             <td> {{$trans->user['numwhats']}}</td>
+                             <td> {{$trans['quantite']}}</td>
                                   <td>
                                     <div class="badge badge-outline-success">Payé</div>
                                   </td>
