@@ -24,6 +24,10 @@ class AuthController extends Controller
     {
       return view('layouts.home');
     }
+    public function coming()
+    {
+      return view('layouts.coming-soon');
+    }
     public function dashboard()
     {
       $coupons= $this->couponService->list();
@@ -52,9 +56,11 @@ class AuthController extends Controller
     }
     public function sign_up()
     {
-      $clients=$this->authService->all();
-      return view('authentification.sign-up',compact('clients'));
+       
+    
+        return view('authentification.sign-up');
     }
+    
     public function post_sign_up(Request $request)
     {
 //dd($request);

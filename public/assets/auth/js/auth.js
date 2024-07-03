@@ -1,8 +1,25 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
-    const users=form.dataset.users;
-    json_users=JSON.parse(users);
+    const json_users = [
+        {
+            nom: "Dupont",
+            pseudo: "dupond007",
+            email: "dupont@example.com"
+        },
+        {
+            nom: "Martin",
+            pseudo: "martin34",
+            email: "martin@example.com"
+        },
+        {
+            nom: "Durand",
+            pseudo: "durandpro",
+            email: "durand@example.com"
+        }
+    ];
+    
+    //json_users=JSON.parse(users);
     const inputs = form.querySelectorAll('input[required], select[required]');
     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
     const email = document.getElementById('email');

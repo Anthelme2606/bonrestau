@@ -1,4 +1,4 @@
-    @props(['clients'=>null,'qteV'=>0,"ventes"=>0,"bmsc"=>0])
+    @props(['clients'=>null,'qteV'=>0,"ventes"=>0,"counts"=>0,'qteT'=>0,'coupons'=>null])
     <div class="row">
                   <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                     <div class="card bg-dark">
@@ -26,8 +26,8 @@
                         <div class="row">
                           <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
-                              <h3 class="mb-0">$17.34</h3>
-                              <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
+                              <h3 class="mb-0">{{$counts}}</h3>
+                              <p class="text-success ml-2 mb-0 font-weight-medium">++</p>
                             </div>
                           </div>
                           <div class="col-3">
@@ -36,7 +36,7 @@
                             </div>
                           </div>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Revenue courant</h6>
+                        <h6 class="text-muted font-weight-normal">Nouveaux clients</h6>
                       </div>
                     </div>
                   </div>
@@ -85,7 +85,7 @@
                   <div class="col-sm-4 grid-margin">
                     <div class="card bg-dark">
                       <div class="card-body bg-dark">
-                        <h5>Quantité vendue</h5>
+                        <h5>Quantité de bons vendus</h5>
                         <div class="row">
                           <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -127,7 +127,7 @@
                         <div class="row ">
                           <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">{{$bmsc}}</h2>
+                              <h2 class="mb-0">{{$qteT}}</h2>
                               <p class="text-danger ml-2 mb-0 font-weight-medium">-0 </p>
                             </div>
                             <h6 class="text-muted font-weight-normal"></h6>
@@ -140,11 +140,13 @@
                     </div>
                   </div>
                 </div>
+                
+                <x-coupon-list :coupons="$coupons" class="bg-dark"/>
                 <div class="row bg-dark">
                     <div class="col-12 grid-margin bg-dark">
                       <div class="card bg-dark">
                         <div class="card-body bg-dark">
-                          <h4 class="card-title">Order Status</h4>
+                          <h4 class="card-title"> Status des clients </h4>
                           <div class="table-responsive bg-dark">
                             <table class="table bg-dark">
                               <thead>
@@ -156,121 +158,56 @@
                                       </label>
                                     </div>
                                   </th>
-                                  <th> Client Name </th>
-                                  <th> Order No </th>
-                                  <th> Product Cost </th>
-                                  <th> Project </th>
-                                  <th> Payment Mode </th>
-                                  <th> Start Date </th>
-                                  <th> Payment Status </th>
+                                  <th> Nom </th>
+                                  <th> Ville </th>
+                                  <th> Quartier </th>
+                                  <th> email </th>
+                                  <th> Reseau de payment </th>
+                                  <th> Numero du reseau </th>
+                                  <th> Numero whatsapp </th>
+                                  <th> Status </th>
                                 </tr>
                               </thead>
                               <tbody>
+                                @if(isset($coupons))
+                                @foreach($coupons as $coupon)
+                                @if(isset($coupon->transactions))
+                                @foreach($coupon->transactions as $trans)
                                 <tr>
                                   <td>
                                     <div class="form-check form-check-muted m-0">
                                       <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
+                                        <input type="checkbox" class="form-check-input bg-white text-white">
                                       </label>
                                     </div>
                                   </td>
                                   <td>
                                     <img src="{{asset('assets/images/logo.jpg')}}" alt="image" />
-                                    <span class="pl-2">Henry Klein</span>
+                                    <span class="pl-2">{{$trans->user['nom']}}</span>
                                   </td>
-                                  <td> 02312 </td>
-                                  <td> $14,500 </td>
-                                  <td> Dashboard </td>
-                                  <td> Credit card </td>
-                                  <td> 04 Dec 2019 </td>
+                                  <td> {{$trans->user['ville']}} </td>
+                                  <td> {{$trans->user['quartier']}}</td>
+                                  <td> {{$trans->user['email']}} </td>
+                                  
+                                    <td>
+                                     
+                                      @if ($trans->user['reseau1'])
+                                          {{ $trans->user['reseau1'] }}
+                                      @else
+                                          {{ $trans->user['reseau2'] }}
+                                      @endif
+                                  </td>
+                                  
+                                 <td> {{$trans->user['numero_reseau']}}</td>
+                              </td> <td> {{$trans->user['numwhats']}}</td>
                                   <td>
-                                    <div class="badge badge-outline-success">Approved</div>
+                                    <div class="badge badge-outline-success">Payé</div>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check form-check-muted m-0">
-                                      <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <img src="{{asset('assets/images/logo.jpg')}}" alt="image" />
-                                    <span class="pl-2">Estella Bryan</span>
-                                  </td>
-                                  <td> 02312 </td>
-                                  <td> $14,500 </td>
-                                  <td> Website </td>
-                                  <td> Cash on delivered </td>
-                                  <td> 04 Dec 2019 </td>
-                                  <td>
-                                    <div class="badge badge-outline-warning">Pending</div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check form-check-muted m-0">
-                                      <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <img src="{{asset('assets/images/logo.jpg')}}" alt="image" />
-                                    <span class="pl-2">Lucy Abbott</span>
-                                  </td>
-                                  <td> 02312 </td>
-                                  <td> $14,500 </td>
-                                  <td> App design </td>
-                                  <td> Credit card </td>
-                                  <td> 04 Dec 2019 </td>
-                                  <td>
-                                    <div class="badge badge-outline-danger">Rejected</div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check form-check-muted m-0">
-                                      <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <img src="{{asset('assets/images/logo.jpg')}}" alt="image" />
-                                    <span class="pl-2">Peter Gill</span>
-                                  </td>
-                                  <td> 02312 </td>
-                                  <td> $14,500 </td>
-                                  <td> Development </td>
-                                  <td> Online Payment </td>
-                                  <td> 04 Dec 2019 </td>
-                                  <td>
-                                    <div class="badge badge-outline-success">Approved</div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check form-check-muted m-0">
-                                      <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <img src="{{asset('assets/images/logo.jpg')}}" alt="image" />
-                                    <span class="pl-2">Sallie Reyes</span>
-                                  </td>
-                                  <td> 02312 </td>
-                                  <td> $14,500 </td>
-                                  <td> Website </td>
-                                  <td> Credit card </td>
-                                  <td> 04 Dec 2019 </td>
-                                  <td>
-                                    <div class="badge badge-outline-success">Approved</div>
-                                  </td>
-                                </tr>
+                                @endforeach
+                                @endif
+                                @endforeach
+                                @endif
                               </tbody>
                             </table>
                           </div>
@@ -278,144 +215,7 @@
                       </div>
                     </div>
                   </div>
-                {{-- <div class="row ">
-                  <div class="col-12 grid-margin">
-                    <div class="card bg-dark">
-                      <div class="card-body bg-dakr">
-                        <h4 class="card-title">Order Status</h4>
-                        <div class="table-responsive bg-dark">
-                          <table class="table bg-dark">
-                            <thead>
-                              <tr>
-                                <th>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </th>
-                                <th> Client Name </th>
-                                <th> Order No </th>
-                                <th> Product Cost </th>
-                                <th> Project </th>
-                                <th> Payment Mode </th>
-                                <th> Start Date </th>
-                                <th> Payment Status </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img src="{{asset('assets/vendor/images/faces/face1.jpg')}}" alt="image" />
-                                  <span class="pl-2">Henry Klein</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Dashboard </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                  <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img src="{{asset('assets/vendor/images/faces/face2.jpg')}}" alt="image" />
-                                  <span class="pl-2">Estella Bryan</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Website </td>
-                                <td> Cash on delivered </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                  <div class="badge badge-outline-warning">Pending</div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img src="{{asset('assets/vendor/images/faces/face5.jpg')}}" alt="image" />
-                                  <span class="pl-2">Lucy Abbott</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> App design </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                  <div class="badge badge-outline-danger">Rejected</div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img src="{{asset('assets/vendor/images/faces/face3.jpg')}}" alt="image" />
-                                  <span class="pl-2">Peter Gill</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Development </td>
-                                <td> Online Payment </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                  <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <div class="form-check form-check-muted m-0">
-                                    <label class="form-check-label">
-                                      <input type="checkbox" class="form-check-input">
-                                    </label>
-                                  </div>
-                                </td>
-                                <td>
-                                  <img src="{{asset('assets/vendor/images/faces/face4.jpg')}}" alt="image" />
-                                  <span class="pl-2">Sallie Reyes</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Website </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                  <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>  --}}
+                
 
                 <style>
                     .table{

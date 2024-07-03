@@ -1,4 +1,12 @@
 @extends('layouts.html')
+<style>
+    :root{
+        --side-bg:bg-dark;
+    }
+    .side-container-bg{
+        background:var(--side-bg);
+    }
+</style>
 @section('body-container')
 
     <div class="container-scroller" style="background:rgb(208,225,231);">
@@ -9,8 +17,8 @@
             @yield('navbar')
             
 
-             <div class="main-panel bg-dark">
-                <div class="content-wrapper bg-dark">
+             <div class="main-panel side-container-bg">
+                <div class="content-wrapper side-container-bg">
                   @yield('sidebar-container')
                 
                 </div>

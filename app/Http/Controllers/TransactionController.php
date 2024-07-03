@@ -24,7 +24,7 @@ class TransactionController extends Controller
         $request->validate([
             'user_code' => 'required|string',
             'coupon_price' => 'required|string',
-            'quantite' => 'required|integer',
+            'quantite' => 'required|string',
             'percent' => 'required|string',
 
         ]);

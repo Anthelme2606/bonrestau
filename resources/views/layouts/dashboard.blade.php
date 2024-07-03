@@ -52,6 +52,6 @@
 @endsection
 @if(Auth::check() && Auth::user()->user_type === "admin" && isset($clients))
 @section('sidebar-container')
-<x-dashboard-container :clients="$clients" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
+<x-dashboard-container :clients="$clients" :qteT="$qteT" :coupons="$coupons" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
 @endsection
 @endif

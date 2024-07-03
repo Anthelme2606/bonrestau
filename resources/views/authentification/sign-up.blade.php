@@ -1,20 +1,18 @@
-@extends('layouts.html')
+@extends("layouts.html")
 @section('title','Inscription')
 @section('body-container')
 <link 
 rel="stylesheet" 
-href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v=<?php echo time(); ?> ">
-
-  
-  
-    <link rel="stylesheet" href="{{ asset('assets/auth/css/auth.css') }}?<?php echo time();?>">
+href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v=<?php echo time(); ?>">
+<link rel="stylesheet"
+    href="{{ asset('assets/auth/css/auth.css') }}?<?php echo time();?>">
     <script src="{{ asset('assets/auth/js/auth.js') }}?<?php echo time(); ?>"></script>
     <div class="container shadow rounded mt-2">
         <div class="image">
             <img src="{{asset('assets/images/logo-bonr.png')}}" alt="bon">
           </div>
         <h2 class="text-center text-primary mb-4">Créez votre compte</h2>
-        <form data-users="{{$clients}}" class="form-container row row-cols-1 row-cols-md-3 g-0" action="{{ route('post_sign_up') }}" method="post">
+        <form class="form-container row row-cols-1 row-cols-md-3 g-0" action="{{ route('post_sign_up') }}" method="post">
                @csrf
                 @method('POST')
             <div class="col form-section bg-1 mb-0">

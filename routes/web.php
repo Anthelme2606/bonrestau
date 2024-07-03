@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function(){
 
 });
 Route::get('/', [AuthController::class,'index'])->name('home');
+Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon');
 Route::get('/settings', [AuthController::class,'settings'])->name('settings');
 Route::get('/generer', [AuthController::class,'gen_code'])->name('generate');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');

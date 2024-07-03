@@ -1,163 +1,255 @@
-@extends('layouts.page')
-@section('tittle', 'Bon-Creation')
+ @extends('layouts.index')
+ @include('layouts.dash-head')
+@section('title','Création de bon')
+ @section('sidebar')
+<x-sidebar/>
+
+@endsection
 @section('navbar')
-    @include('layouts.navbar')
-@endsection
-@section('sidebar')
-    @include('layouts.sidebar')
-@endsection
-@section('content')
-    <link rel="stylesheet" href="{{ asset('assets/auth/css/auth.css') }}">
-    <script src="{{ asset('assets/auth/js/auth.js') }}"></script>
-   <link rel="stylesheet" href="{{asset('assets/css/bon.css')}}">
-<script src="{{asset('assets/js/bon.js')}}"></script>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-               <div class="image-container">
-                <img class="w-100 h-100" src="{{asset('assets/images/bon.png')}}"/>
-               </div>
-            </div>
-            <div class="col-md-6">
-            <div class=" form-container">
-            <form class="form" id="ajaxForm" method="post" action="{{ route('bon-store') }}">
-                 @csrf
-                @method('POST')
-                <div class="mb-1 d-flex justify-content-center align-items-center">
-                    <h2 class="" style="color:orange">Bon</h2>
-                </div>
+<x-navbar/>
+@endsection 
+@section('sidebar-container') 
+<style>
+        .side-container-bg {
+            background: rgba(245, 251, 252, 1);
+        }
 
-                
-                    <label for="valeur">Valeur</label>
-                    <input type="number" id="valeur" name="price" placeholder="2000">
-                    <label for="qte">Quantité</label>
-                    <input type="number" id="qte" name="quantite" placeholder="4">
-                    <label for="date">Date Expiration </label>
-                    <input type="date" id="date" name="date">
-               
-                <div class="mb-1 form-footer ">
-                    <button type="submit" class="rounded px-2 px-md-5 bg-valider" id="button">Créer un bon</button>
-                </div>
+        .container {
+            max-width: 600px;
+        }
 
-            </form>
-        </div>
-            </div>
-        </div>
-        
-        
-         <!--
-        <div class="row">
-            <div class="col-md-3">
-                <select class="price-select form-select px-2 py-2 mb-2 rounded shadow text-center">
-                    <option selected>Filter Bon per price</option>
-                    @if(isset($coupons))
-                    @foreach($coupons as $coupon)
-                    <option class="option-price" id="{{$coupon->id}}" value="{{$coupon->price}}" data-price="{{$coupon->price}}">{{$coupon->price}}</option>
-                    
-                    @endforeach
-                    @endif
-                </select>
-                <select class=" date-select form-select px-2 py-2 mb-2  rounded shadow text-center">
-                    <option selected>Filter Bon per date</option>
-                    @if(isset($coupons))
-                                    @foreach($coupons as $coupon)
-                                    <option class=" option-date"value="{{$coupon->date}}">{{$coupon->date}}</option>
-                                    
-                                    @endforeach
-                                    @endif
-                </select>
-                <div class="form-container">
-                        <form class="form" action="{{route('bon-update')}}" method="post">
-                           @csrf
-                           @method('POST')
-                           <div class="mb-1">
-                            Update Bon
-                        </div>
-                            <div class="mb-1 w-100">
-                                <select class="form-up-select form-select text-center rounded px-2 py-2 w-100">
-                                    <option selected @readonly(true)>Price</option>
-                                    @if(isset($coupons))
-                                    @foreach($coupons as $coupon)
-                                    <option id="{{$coupon->id}}" class="selection" value="{{$coupon->price}}" data-price="{{$coupon->price}}" data-date="{{$coupon->date}}" data-id="{{$coupon->id}}">{{$coupon->price}}</option>
-                                    
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            
-                            <div class="mb-1">
-                                
-                                <input type="number" id="up-id" value="" placeholder=" price" name="id" hidden readonly  required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="price">Valeur</label>
-                                <input type="number" id="up-price" name="price" placeholder=" price" readonly  required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="up-date">Expiration Date</label>
-                                <input type="date" id="up-date" name="date" required >
-                            </div>
-                            <div class="mb-1 form-footer ">
-                                <button type="submit" class="login-btn" id="button">Update</button>
-                            </div>
-                        </form>
-    
-                    </div>
-            </div>
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .bon-mdi {
+            margin-right: 10px;
+        }
+
+        .form-group .mdi {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
+
+        .form-control {
+            padding-left: 40px;
+            border: none;
+            border-bottom: 2px solid rgb(108, 108, 114);
+            border-radius: 0;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .input-group-text {
+            border: none;
+            background: none;
+        }
+
+        .form-check-input {
+            margin-top: 0.3rem;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875rem;
+        }
+
+        .valid {
+            border-bottom: 2px solid green;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-control {
+                padding-left: 35px;
+            }
+        }
+        .is-invalid {
+        border-bottom: 2px solid red !important;
+    }
+
+    .is-valid {
+        border-bottom: 2px solid green !important;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .readonly {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center text-primary mb-4">Création de bon de restauration</h2>
+        <form class="form-container" action="{{ route('bon-store') }}" method="post" onsubmit="return validateForm()">
            
-            <div class="col-md-9">
-                @if(isset($transactions))
-                <div class="card historique-card">
-                    <div class="card-header">
-                        Historique
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Bon-coode</th>
-                                        <th>Bon-price</th>
-                                        <th>Bon-Date</th>
-                                        <th>Bon-percent</th>
-                                        <th>User-code</th>
-                                        <th>Date-validation</th>
-                                        <th>status</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($transactions as $trans)
-                                    <tr class="line-transaction opacity_1 " data-price="{{$trans->bon->price}}" data-bondate="{{$trans->bon->date}}" >
-                                        <td>{{$trans->bon->code}}</td>
-                                        <td>{{$trans->bon->price}}</td>
-                                        <td>{{$trans->bon->date}}</td>
-                                        <td class="text-center">{{$trans->percent}}%</td>
-                                        <td title="{{$trans->user->name}}">{{$trans->user->referral_code}}</td>
-                                        <td>{{$trans->created_at}}</td>
-                                        <td class="status">{{$trans->bon->status($trans)}}</td>
-                                    </tr>
-                                    @endforeach
-                                    
-                                    
-                                </tbody>
-                            </table>
-                            
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="card-footer">
-                        <a href="#" class="btn button-green"><i class="material-icons">cloud_download</i> Download Historique</a>
-                    </div>
-                </div> 
-                @endif
-                
+           @csrf
+           @method('POST')
+            <div class="form-group">
+                <label for="price">Valeur</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class=" bon-mdi mdi mdi-cash"></i></span>
+                    <input type="number" class="form-control" id="price" placeholder="2000" name="price" required>
+                </div>
             </div>
-        </div>
-      -->
-        
+            <div class="form-group">
+                <label for="quantite">Quantité</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class=" bon-mdi mdi mdi-counter"></i></span>
+                    <input type="number" class="form-control" id="quantite" name="quantite" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date d'expiration</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bon-mdi mdi mdi-calendar"></i></span>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary rounded shadow px-4">Créer <i class="mdi mdi-pencil"></i></button>
+            </div>
+        </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const price = document.getElementById('price');
+    const quantite = document.getElementById('quantite');
+    const date = document.getElementById('date');
+    const submitButton = document.querySelector('button[type="submit"]');
 
+    const errorMessages = {
+        price: 'Valeur requise',
+        quantite: 'champ requis et doit être un entier',
+        date: 'Date d\'expiration requise'
+    };
 
-@endsection
+    const errorElements = {
+        price: createErrorElement(price),
+        quantite: createErrorElement(quantite),
+        date: createErrorElement(date)
+    };
+
+    price.addEventListener('input', validateField);
+    quantite.addEventListener('input', validateField);
+    date.addEventListener('input', validateField);
+    form.addEventListener('submit', validateForm);
+
+    function validateField(event) {
+        const field = event.target;
+        const value = field.value.trim();
+        let isValid = true;
+
+        if (field === quantite || field === price) {
+            isValid = value !== '' && Number.isInteger(Number(value));
+        } else {
+            isValid = value !== '';
+        }
+
+        if (isValid) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            errorElements[field.id].textContent = '';
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            errorElements[field.id].textContent = errorMessages[field.id];
+        }
+
+        validateButtonState();
+    }
+
+    function validateForm(event) {
+        let isValid = true;
+
+        if (!validateFieldAndReturn(price)) isValid = false;
+        if (!validateFieldAndReturn(quantite)) isValid = false;
+        if (!validateFieldAndReturn(date)) isValid = false;
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    }
+
+    function validateFieldAndReturn(field) {
+        const value = field.value.trim();
+        let isValid = true;
+
+        if (field === quantite) {
+            isValid = value !== '' && Number.isInteger(Number(value));
+        } else {
+            isValid = value !== '';
+        }
+
+        if (isValid) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            errorElements[field.id].textContent = '';
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            errorElements[field.id].textContent = errorMessages[field.id];
+        }
+
+        return isValid;
+    }
+
+    function validateButtonState() {
+        const isFormValid = price.classList.contains('is-valid') &&
+                            quantite.classList.contains('is-valid') &&
+                            date.classList.contains('is-valid');
+
+        if (isFormValid) {
+            submitButton.classList.remove('readonly');
+            submitButton.classList.remove('btn-danger');
+            submitButton.classList.add('btn-primary');
+            submitButton.disabled = false;
+        } else {
+            submitButton.classList.add('readonly');
+            submitButton.classList.add('btn-danger');
+            submitButton.classList.remove('btn-primary');
+            submitButton.disabled = true;
+        }
+    }
+
+    function createErrorElement(field) {
+        const errorElement = document.createElement('div');
+        errorElement.className = 'error';
+        field.parentNode.appendChild(errorElement);
+        return errorElement;
+    }
+});
+
+    </script>
+   @endsection
