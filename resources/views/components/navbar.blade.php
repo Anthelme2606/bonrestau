@@ -23,6 +23,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
                     <h6 class="p-3 mb-0">Administration</h6>
+                    @if(Auth::user()->user_type==='admin')
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item" href="{{route('dashboard')}}">
                         <div class="preview-thumbnail">
@@ -34,6 +35,7 @@
                             <p class="preview-subject ellipsis mb-1">Bon de restauration</p>
                         </div>
                     </a>
+                    @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item" href="{{route('sign-up')}}">
                         <div class="preview-thumbnail">
@@ -154,7 +156,7 @@
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                     <h6 class="p-3 mb-0">Profile</h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item"href="{{route('coming-soon')}}">
+                    <a class="dropdown-item preview-item" href="{{route('coming-soon')}}">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-settings text-success"></i>

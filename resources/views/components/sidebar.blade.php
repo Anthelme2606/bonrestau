@@ -65,6 +65,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        @if(Auth::check() && Auth::user()->user_type==="admin")
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('bon-create')}}">
                 <span class="menu-icon">
@@ -103,6 +104,7 @@
                 <span class="menu-title">Validation</span>
             </a>
         </li>
+        @endif
         <li class="nav-item menu-items">
             <a class="nav-link" >
                 <span class="menu-icon">
@@ -135,6 +137,7 @@
                 <span class="menu-title">Contacts</span>
             </a>
         </li>
+        @if(Auth::check() && Auth::user()->user_type==="admin")
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('coming-soon')}}">
                 <span class="menu-icon">
@@ -145,6 +148,7 @@
             </a>
            
         </li>
+        @endif
         
     </ul>
 </nav>
