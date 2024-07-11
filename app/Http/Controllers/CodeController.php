@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class CodeController extends Controller
 {
-    //index
+    
 
     public function index()
     {
