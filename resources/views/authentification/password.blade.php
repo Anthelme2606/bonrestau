@@ -109,7 +109,7 @@ input{
                 $email=session('email');
               }
               @endphp
-              <input type="text" class="form-control" value="{{old($email)}}" name="email" id="email" hidden readonly>
+              <input type="text" class="form-control" value="{{old('email')}}" name="email" id="email" hidden readonly>
               <input type="text" class="form-control" name="password" id="password"
               placeholder="password" required>
           </div>
