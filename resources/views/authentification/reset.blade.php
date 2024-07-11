@@ -1,5 +1,5 @@
 @extends('layouts.html')
-@section('title','Connexion')
+@section('title','Envoyer le code')
 @section('body-container')
 <link 
 rel="stylesheet" 
@@ -81,6 +81,13 @@ input{
         transform: rotate(360deg);
     }
 }
+.invalid{
+    border:1px solid red;
+}
+.valid{
+    border:1px solid green;
+}
+
 
 </style>
 <div class="login-container d-flex justify-center justify-content-center align-content-center align-items-center">
@@ -89,8 +96,8 @@ input{
       <div class="image">
         <img src="{{asset('assets/images/logo-bonr.png')}}" alt="bon">
       </div>
-      <h3 class="login-header">Connexion</h3>
-      <form  method="post" action="{{ route('post_login') }}">
+      <h3 class="login-header">Mot de passse oublié</h3>
+      <form  method="post" action="{{ route('password.email') }}">
         @csrf
         @method('POST')
           <div class="form-group">
@@ -98,18 +105,31 @@ input{
               <input type="text" class="form-control" name="email" id="email"
               placeholder="Email" required>
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
               <i class="mdi mdi-lock text-primary"></i>
               <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block submiting w-100">Se connecter</button>
+          </div> --}}
+          <button type="submit" class="btn btn-primary btn-block submiting w-100">Renvoyer le code</button>
       </form>
-      <div class="login-footer">
-          <a href="{{route('reset-password')}}">Mot de passe oublié ?</a><br>
-          <span class="text-black">Vous n'aviez pas de compte? <a href="{{route('sign-up')}}">S'inscrire</a></span>
-      </div>
+   
   </div>
 </div>
 
+    <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        let email = document.querySelector('input[name="email"]').value;
+        if (!email.match(/^\S+@\S+\.\S+$/)) {
+            event.preventDefault();
+            document.querySelector('#email').classList.remove('valid');
+            document.querySelector('#email').classList.add('invalid');
+            
+        }else{
+            document.querySelector('#email').classList.remove('invalid');
+            document.querySelector('#email').classList.add('valid');
+        }
+    });
+
+
+</script>
 
   @endsection

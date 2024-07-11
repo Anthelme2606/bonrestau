@@ -105,8 +105,8 @@
             </a>
         </li>
         @endif
-        <li class="nav-item menu-items">
-            <a class="nav-link" >
+        <li class="nav-item menu-items" >
+            <a class="nav-link"href="{{route('generate')}}" >
                 <span class="menu-icon">
                     <i class="mdi mdi-key-variant"></i>
                 </span>

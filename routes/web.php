@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BonController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CodeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,16 +22,23 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/bons-ravitaillement', [BonController::class,'ravitailler'])->name('bon-ravitailler')->middleware('admin');
 
 });
+//reset
+Route::get('/reset-password',[AuthController::class,'reset'])->name('reset-password');
+Route::get('/password', [AuthController::class,'password'])->name('password-reset');
+Route::get('/code/verification', [AuthController::class,'code'])->name('code-reset');
+Route::get('/generate',[CodeController::class,'index'])->name('generate');
 Route::get('/', [AuthController::class,'index'])->name('home');
 Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon');
 Route::get('/settings', [AuthController::class,'settings'])->name('settings');
-Route::get('/generer', [AuthController::class,'gen_code'])->name('generate');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 Route::get('/parrains', [AuthController::class,'all'])->name('parrains');
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
 Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up')->middleware('guest');
 //POST
+Route::post('/code/envoyer', [AuthController::class,'emailCode'])->name('email.code');
+Route::post('/password', [AuthController::class,'postPassword'])->name('password.reset');
+Route::post('/password-reset', [AuthController::class,'email'])->name('password.email');
 Route::post('/login', [AuthController::class,'post_login'])->name('post_login');
 Route::post('/sign-up', [AuthController::class,'post_sign_up'])->name('post_sign_up');
 Route::post('/bons', [BonController::class,'store'])->name('bon-store');
