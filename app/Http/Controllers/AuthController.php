@@ -73,6 +73,7 @@ class AuthController extends Controller
      return view('authentification.password');
     }
     public function postPassword(Request $request){
+      dd($request);
       $request->validate([
         "email"=>"string|email|required",
         "password"=>"string|required",
