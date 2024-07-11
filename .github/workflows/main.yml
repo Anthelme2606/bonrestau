@@ -1,4 +1,4 @@
-name: Deploy to Production (bon.pressingelegance.com)
+name: Deploy to Production 
 
 on:
   # Trigger on push or pull request events to main branch
@@ -23,6 +23,6 @@ jobs:
       - name: Deploy to Production Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: node46-eu.n0c.com
-          username: bon@bon.pressingelegance.com
-          password: Bonresto@10
+          server: node213-eu.n0c.com
+          username: bon@greendetox.senousolutions.com
+          password: Bonrestau@1010
