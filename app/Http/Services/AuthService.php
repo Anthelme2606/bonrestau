@@ -6,6 +6,10 @@ use App\Http\Repositories\UserRepository;
 use App\Http\Repositories\ReferralRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 class AuthService
 {
     protected $userRepository;
@@ -51,6 +55,55 @@ class AuthService
             return redirect()->back()->with('error', 'min password 8');
 
         }
+    }
+    public function email(array $data) {
+        $email = $data['email'];
+    
+        // Check if the email exists in the repository
+        if (!$this->userRepository->verifyEmail($email)) {
+            return redirect()->back()->with('warning', 'Aucun compte associé à cet email');
+        }
+    
+        // Generate the reset code
+        $code = $this->Attribute();
+        $data['token'] = $code;
+    
+        // Store the reset token in the repository
+        $this->userRepository->reset($data);
+    
+        // Send the reset code via email
+        try {
+            Mail::to($email)->send(new \App\Mail\SendResetCode($code));
+        } catch (\Exception $e) {
+            // Handle mail sending failure
+            return redirect()->back()->with('error', 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.');
+        }
+    
+        // Redirect to the route with the email in session
+        return redirect()->route('code-reset')->with('email', $email);
+    }
+    
+    public function codeVerification(array $data){
+      $email=$data['email'];
+      $token=$data['code'];
+   if($this->userRepository->isToken($token)){
+    return redirect()->route('password-reset')->with('email',$email);
+   }
+   return redirect()->route('reset-password')->with('warning','Code expiré, regénérez un autre.');
+    }
+    public function reset(array $data){
+        $email=$data['email'];
+        $user=$this->userRepository->getByEmail($email);
+        if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {
+            $data['password'] = $this->hashAndVerifyPassword($data['password']);
+            $user->password=$data['password'];
+            $user->save();
+            return redirect()->route('login')->with('success','Réinitialisation éffectuée avec success');
+        }
+        else{
+            return redirect()->back()->with('error','les mots de passe ne correspondent pas..');
+        }
+
     }
 public function usersCurrentMonthCount(){
 return $this->userRepository->usersRegisteredCurrentMonth()->count();
@@ -131,6 +184,19 @@ return $this->userRepository->usersRegisteredCurrentMonth()->count();
         } while ($existingUser);
 
         return $referralCode;
+    }
+    public function Attribute(){
+        $code=null;
+        do {
+            $code = $this->geneResetCode();
+            $existingCode = $this->userRepository->getToken($code);
+        } while ($existingCode);
+
+        return $code;
+
+    }
+    public function geneResetCode(){
+        return  rand(100000, 999999);
     }
 
 }

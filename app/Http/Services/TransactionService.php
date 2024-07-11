@@ -36,7 +36,7 @@ protected $user;
        
        $data['amount']=$coupon->price;
        
-       $this->distributeGains($user,$data['amount'],$data['percent']);
+       $this->distributeGains($user,$data['amount'],$data['percent'],$data['quantite']);
        $this->trans->create($data);
        return redirect()->back()->with('success','Bon validé avec succes');
     }
@@ -53,7 +53,7 @@ protected $user;
         
         return $this->trans->ventes();
     }
-    function distributeGains($user, $amount, $xp) {
+    function distributeGains($user, $amount, $xp, $quantity=1) {
         $referrers = [];
         $currentReferrer = $user->referrer; 
     
@@ -64,8 +64,9 @@ protected $user;
         }
     
         $n = count($referrers);
+       
         if ($n > 0) {
-            $gainPerReferrer = ($xp / $n) * $amount / 100;
+            $gainPerReferrer = ($xp / $n) * $amount * $quantity / 100;
     
             foreach ($referrers as $referrer) {
                 if ($referrer) { 

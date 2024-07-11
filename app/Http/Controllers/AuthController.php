@@ -60,6 +60,36 @@ class AuthController extends Controller
     
         return view('authentification.sign-up');
     }
+    public function reset(){
+      return view('authentification.reset');
+    }
+    public function email(Request $request){
+      $request->validate([
+        'email'=>'string|required|',
+      ]);
+      return $this->authService->email($request->all());
+    }
+    public function password(){
+     return view('authentification.password');
+    }
+    public function postPassword(Request $request){
+      $request->validate([
+        "email"=>"string|email|required",
+        "password"=>"string|required",
+        "confirm"=>"string|required",
+      ]);
+      return $this->authService->reset($request->all());
+    }
+    public function code(){
+      return view('authentification.code');
+    }
+    public function emailCode(Request $request){
+      $request->validate([
+        "email"=>"string|required|email",
+        "code"=>"string|required",
+      ]);
+      return $this->authService->codeVerification($request->all());
+    }
     
     public function post_sign_up(Request $request)
     {
