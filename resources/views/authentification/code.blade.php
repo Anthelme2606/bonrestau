@@ -108,7 +108,7 @@ input{
             }
             @endphp
               <i class="mdi mdi-account-key text-primary"></i>
-              <input type="text" class="form-control" value="{{$email}}" name="email" id="email" required hidden readonly>
+              <input type="text" class="form-control" value="{{old($email)}}" name="email" id="email" required hidden readonly>
               <input type="text" class="form-control" name="code" id="code"
               placeholder="Code de verification" required>
           </div>
