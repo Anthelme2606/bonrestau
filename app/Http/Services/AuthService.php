@@ -89,26 +89,24 @@ class AuthService
    if($this->userRepository->isToken($token)){
     return redirect()->route('password-reset')->with('email',$email);
    }
-   return redirect()->route('reset-password')->with('warning','Code expiré, regénérez un autre.');
+   return redirect()->route('reset-password')
+   ->with('warning','Code expiré, regénérez un autre.')
+    ->with('email',$email);
     }
-    public function reset(array $data)
-{
-    $email = $data['email'];
-    $user = $this->userRepository->getByEmail($email);
-
-    if (!$user) {
-        return redirect()->back()->with('error', 'Utilisateur non trouvé.');
-    }
-
-    if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {
-        $data['password'] = $this->hashAndVerifyPassword($data['password']);
-        $user->password = $data['password'];
-        $user->save();
-        return redirect()->route('login')->with('success', 'Réinitialisation effectuée avec succès.');
-    } else {
-        return redirect()->back()->with('error', 'Les mots de passe ne correspondent pas.');
-    }
-}
+    public function reset(array $data){
+        $email=$data['email'];
+        $user=$this->userRepository->getByEmail($email);
+        if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {
+            $data['password'] = $this->hashAndVerifyPassword($data['password']);
+            $user->password=$data['password'];
+            $user->save();
+            return redirect()->route('login')->with('success','Réinitialisation éffectuée avec success');
+        }
+        else{
+            return redirect()->back()
+            ->with('error','les mots de passe ne correspondent pas..')
+            ->with('email',$email);
+        }
 
 public function usersCurrentMonthCount(){
 return $this->userRepository->usersRegisteredCurrentMonth()->count();
