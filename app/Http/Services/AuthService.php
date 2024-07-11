@@ -107,7 +107,7 @@ class AuthService
             ->with('error','les mots de passe ne correspondent pas..')
             ->with('email',$email);
         }
-
+    }
 public function usersCurrentMonthCount(){
 return $this->userRepository->usersRegisteredCurrentMonth()->count();
 }
