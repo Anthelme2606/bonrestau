@@ -89,7 +89,9 @@ class AuthService
    if($this->userRepository->isToken($token)){
     return redirect()->route('password-reset')->with('email',$email);
    }
-   return redirect()->route('reset-password')->with('warning','Code expiré, regénérez un autre.');
+   return redirect()->route('reset-password')
+   ->with('warning','Code expiré, regénérez un autre.')
+    ->with('email',$email);
     }
     public function reset(array $data){
         $email=$data['email'];
@@ -101,7 +103,9 @@ class AuthService
             return redirect()->route('login')->with('success','Réinitialisation éffectuée avec success');
         }
         else{
-            return redirect()->back()->with('error','les mots de passe ne correspondent pas..');
+            return redirect()->back()
+            ->with('error','les mots de passe ne correspondent pas..')
+            ->with('email',$email);
         }
 
     }

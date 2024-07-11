@@ -103,13 +103,10 @@ input{
           <div class="form-group">
               <i class="mdi mdi-lock text-primary"></i>
               @php
-              $email=null;
-              if(session('email'))
-              {
-                $email=session('email');
-              }
-              @endphp
-              <input type="text" class="form-control" value="{{$email}}" name="email" id="email" hidden readonly>
+               $email = session('email');
+               @endphp
+
+              <input type="text" class="form-control" value="{{$email ?? old('email')}}" name="email" id="email" hidden readonly>
               <input type="text" class="form-control" name="password" id="password"
               placeholder="password" required>
           </div>
