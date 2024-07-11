@@ -79,7 +79,7 @@ class AuthService
             return redirect()->back()->with('error', 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.');
         }
     
-        // Redirect to the route with the email in session
+       
         return redirect()->route('code-reset')->with('email', $email);
     }
     
