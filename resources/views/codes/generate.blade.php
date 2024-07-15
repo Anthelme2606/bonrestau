@@ -125,7 +125,7 @@
 
     </style>
  
-  <div class="top-0 w-100 side-container-bg position-relative">
+  <div class="top-0 w-100 side-container-bg position-relative ">
     @if(session('link'))
     <div class="copy-link-container">
       <input type="text" class="readonly-input" value="{{session('link')}}" readonly>
@@ -160,8 +160,8 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 d-flex justify-content-center align-items-center">
-    <div class="row row-cols-1 row-cols-md-4 g-2">
+    <div class="mt-5 d-flex justify-content-center align-items-center w-100">
+    <div class="row row-cols-1 row-cols-md-4 g-2 w-100">
  <div class="col">
     <div class="card">
         <div class="icon text-center">
