@@ -62,7 +62,7 @@
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 220px;
+    /* max-width: 220px; */
     padding: 30px;
     text-align: center;
     border:none;
@@ -160,7 +160,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 d-flex justify-content-center align-items-center mx-1">
+    <div class="mt-5 d-flex justify-content-center align-items-center">
     <div class="row row-cols-1 row-cols-md-4 g-2">
  <div class="col">
     <div class="card">
