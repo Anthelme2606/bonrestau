@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Schema;
 use App\Observers\BonObserver;
 use App\Models\Transaction;
 use App\Observers\TransactionObserver;
+use App\Models\Link;
+use App\Observers\LinkObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Coupon::observe(BonObserver::class);
+    
+         Link::observe(LinkObserver::class);
+
         Transaction::observe(TransactionObserver::class);
         Schema::defaultStringLength(191);
         

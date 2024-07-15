@@ -117,9 +117,6 @@
             outline: none;
         }
         </style>
-</head>
-
-<body>
     <div class="container form-container">
         <div class="form-box">
             <form id="myForm" action="{{ route('trans-store') }}" method="POST">

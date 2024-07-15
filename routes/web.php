@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BonController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\LinkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,7 @@ Route::get('/login', [AuthController::class,'login'])->name('login')->middleware
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
 Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up')->middleware('guest');
 //POST
+Route::post('/generate-link', [LinkController::class,'createLink'])->name('generate-link');
 Route::post('/code/envoyer', [AuthController::class,'emailCode'])->name('email.code');
 Route::post('/password/envoyer', [AuthController::class,'postPassword'])->name('password.reset');
 Route::post('/password-reset', [AuthController::class,'email'])->name('password.email');

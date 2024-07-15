@@ -99,6 +99,20 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
                     </div>
                     <div id="pseudo-error" class="error-message"></div>
                 </div>
+                @if (request()->has('code'))
+    @php
+        $code = request()->get('code');
+    @endphp
+    <div class="form-group">
+        <label for="parrainage">ID invitant</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="mdi mdi-account"></i></span>
+            <input type="text" class="form-control" id="invitant" name="invitant" value="{{ $code }}" readonly>
+        </div>
+        <div id="parrainage-error" class="error-message"></div>
+    </div>
+@endif
+
                 <div class="form-group">
                     <label for="parrainage">ID invitant</label>
                     <div class="input-group">
