@@ -44,7 +44,8 @@ class AuthController extends Controller
     }
     public function settings()
     {
-      return view('layouts.settings');
+      $clients=$this->authService->all();
+      return view('layouts.settings',compact('clients'));
     }
     public function gen_code()
     {

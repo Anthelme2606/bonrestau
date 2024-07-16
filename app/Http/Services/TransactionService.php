@@ -53,7 +53,7 @@ protected $user;
         
         return $this->trans->ventes();
     }
-    function distributeGains($user, $amount, $xp, $quantity=1) {
+    function distributeGains($user, $amount, $xp, $quantity) {
         $referrers = [];
         $currentReferrer = $user->referrer; 
     

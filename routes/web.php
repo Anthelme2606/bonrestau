@@ -30,7 +30,7 @@ Route::get('/code/verification', [AuthController::class,'code'])->name('code-res
 Route::get('/generate',[CodeController::class,'index'])->name('generate')->middleware('auth');
 Route::get('/', [AuthController::class,'index'])->name('home');
 Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon');
-Route::get('/settings', [AuthController::class,'settings'])->name('settings');
+Route::get('/settings', [AuthController::class,'settings'])->name('settings')->middleware('auth');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 Route::get('/parrains', [AuthController::class,'all'])->name('parrains');
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
