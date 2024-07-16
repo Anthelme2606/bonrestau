@@ -122,10 +122,12 @@
     font-size: 14px;
     color: #777;
 }
-
+.margin-top{
+  margin-top:65;
+}
     </style>
  
-  <div class="top-0 w-100 side-container-bg position-relative ">
+  <div class="w-100 side-container-bg position-relative  margin-top ">
     @if(session('link'))
     <div class="copy-link-container">
       <input type="text" class="readonly-input" value="{{session('link')}}" readonly>
