@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function(){
 
 });
 //reset
+Route::get('/modify-password-get',[AuthController::class,'get_update'])->name('get_update');
 Route::get('/reset-password',[AuthController::class,'reset'])->name('reset-password');
 Route::get('/password/verification', [AuthController::class,'password'])->name('password-reset');
 Route::get('/code/verification', [AuthController::class,'code'])->name('code-reset');
@@ -37,6 +38,7 @@ Route::get('/login', [AuthController::class,'login'])->name('login')->middleware
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
 Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up')->middleware('guest');
 //POST
+Route::post('/modify-password',[AuthController::class,'post_update'])->name('post_update');
 Route::post('/generate-link', [LinkController::class,'createLink'])->name('generate-link');
 Route::post('/code/envoyer', [AuthController::class,'emailCode'])->name('email.code');
 Route::post('/password/envoyer', [AuthController::class,'postPassword'])->name('password.reset');

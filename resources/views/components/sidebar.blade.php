@@ -39,7 +39,7 @@
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a  class="dropdown-item preview-item" href="{{route('coming-soon')}}">
+                    <a  class="dropdown-item preview-item" href="{{route('get_update')}}">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-onepassword text-info"></i>

@@ -19,6 +19,20 @@ class AuthService
         $this->userRepository = $userRepository;
         $this->referralRepository = $referralRepository;
     }
+    public function post_update(array $data){
+        $email=$data['email'];
+        if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {
+            $data['password'] = $this->hashAndVerifyPassword($data['password']);
+            $user=$this->userRepository->getByEmail($email);
+            if($user){
+                $user->password=$data['password'];
+                $user->save();
+                return redirect()->redirect()->route('dashboard')->with('success','Mot de passe modifi" avec success.');
+            }
+        }else{
+            redirect()->back()->with('error','les mots de passe ne correspondent pas.');
+        }
+    }
     public function post_sign_up(array $data)
     {
         $data['referral_code'] = $this->AttributeCode();

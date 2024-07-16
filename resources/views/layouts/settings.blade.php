@@ -340,7 +340,7 @@
                     <div class="card-body">
                         <form class="d-flex">
                             <input type="number" class="w-100 text-center" name="">
-                            <button type="submit" class="btn btn-green">Créditer</button>
+                            <button type="button" class="btn btn-green">Créditer</button>
                         </form>
                     </div>
                 </div>

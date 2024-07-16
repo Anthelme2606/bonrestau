@@ -61,6 +61,17 @@ class AuthController extends Controller
     
         return view('authentification.sign-up');
     }
+    public function get_update(){
+      return view('authentification.update_password');
+    }
+    public function post_update(Request $request){
+   $request->validate([
+    'email'=>'required|string',
+    'password'=>'string|required',
+    'confirm'=>'string|required',
+   ]);
+   return $this->authService->post_update($request->all());
+    }
     public function reset(){
       return view('authentification.reset');
     }
