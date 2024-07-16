@@ -111,16 +111,16 @@ if(Auth::check())
                 @csrf
                 @method('POST')
                 <div class="form-group">
-                    <i class="mdi mdi-lock text-primary"></i>
-                    <input type="email" class="form-control" value="{{$user['email']}}" name="email" id="email" required readonly>
-                </div>
-                <div class="form-group">
                     <i class="mdi mdi-account text-primary"></i>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="nouveau mot de passe" required>
+                    <input type="email" class="form-control text-center" value="{{$user['email']}}" name="email" id="email" required readonly>
                 </div>
                 <div class="form-group">
                     <i class="mdi mdi-lock text-primary"></i>
-                    <input type="password" class="form-control" id="confirm" placeholder="confirmation du mot de passe" name="confirm" required>
+                    <input type="password" class="form-control text-center" name="password" id="password" placeholder="nouveau mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <i class="mdi mdi-lock text-primary"></i>
+                    <input type="password" class="form-control text-center" id="confirm" placeholder="confirmation du mot de passe" name="confirm" required>
                 </div>
                 <div id="error-message" class="error"></div>
                 <button type="submit" class="btn btn-primary btn-block submiting w-100">Modifier</button>

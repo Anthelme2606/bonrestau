@@ -24,7 +24,8 @@ Route::middleware(['auth'])->group(function(){
 
 });
 //reset
-Route::get('/modify-password-get',[AuthController::class,'get_update'])->name('get_update');
+Route::get('/modify-password-get',[AuthController::class,'get_update'])->name('get_update')
+->middleware('auth');
 Route::get('/reset-password',[AuthController::class,'reset'])->name('reset-password');
 Route::get('/password/verification', [AuthController::class,'password'])->name('password-reset');
 Route::get('/code/verification', [AuthController::class,'code'])->name('code-reset');
