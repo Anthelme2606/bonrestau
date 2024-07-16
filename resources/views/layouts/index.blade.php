@@ -17,8 +17,8 @@
             @yield('navbar')
             
 
-             <div class="main-panel side-container-bg">
-                <div class="content-wrapper side-container-bg">
+             <div class="main-panel side-container-bg p-0">
+                <div class="content-wrapper side-container-bg  w-100 p-0">
                   @yield('sidebar-container')
                 
                 </div>

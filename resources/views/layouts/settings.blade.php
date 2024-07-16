@@ -172,7 +172,7 @@
         }
     </style>
 
-    <div class="setting  d-flex flex-column side-container-bg">
+    <div class="setting  d-flex flex-column side-container-bg w-100">
         <div class="row g-1">
             <div class="col-md-9">
                 <div class="card border-0 shadow">
