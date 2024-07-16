@@ -6,6 +6,9 @@
     .side-container-bg{
         background:var(--side-bg);
     }
+    .margin-top{
+        margin-top:90px;
+    }
 </style>
 @section('body-container')
 
@@ -18,7 +21,7 @@
             
 
              <div class="main-panel side-container-bg p-0">
-                <div class="content-wrapper side-container-bg  w-100 p-0">
+                <div class="content-wrapper side-container-bg  w-100 p-0 margin-top">
                   @yield('sidebar-container')
                 
                 </div>
