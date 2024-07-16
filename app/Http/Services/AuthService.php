@@ -27,7 +27,7 @@ class AuthService
             if($user){
                 $user->password=$data['password'];
                 $user->save();
-                return redirect()->redirect()->route('dashboard')->with('success','Mot de passe modifi" avec success.');
+                return redirect()->route('dashboard')->with('success','Mot de passe modifi" avec success.');
             }
         }else{
             redirect()->back()->with('error','les mots de passe ne correspondent pas.');

@@ -97,7 +97,7 @@ if(Auth::check())
     $user=Auth::user();
 }
 @endphp
-<div class="w-100 margin-top side-container-bg">
+<div class="w-100  side-container-bg">
     <div class="login-container d-flex justify-center justify-content-center align-content-center align-items-center">
         <div class="login-card">
             
