@@ -31,7 +31,8 @@ Route::get('/password/verification', [AuthController::class,'password'])->name('
 Route::get('/code/verification', [AuthController::class,'code'])->name('code-reset');
 Route::get('/generate',[CodeController::class,'index'])->name('generate')->middleware('auth');
 Route::get('/', [AuthController::class,'index'])->name('home');
-Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon');
+Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon')
+->middleware('auth');
 Route::get('/settings', [AuthController::class,'settings'])->name('settings')->middleware('auth');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 Route::get('/parrains', [AuthController::class,'all'])->name('parrains');
