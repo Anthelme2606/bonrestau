@@ -1,9 +1,9 @@
 <style>
   .margin-top{
-        margin-top:90px;
+        margin-top:110px;
     }
 </style>
-<div class="margin-top">
+<div class="my-4 margin-top">
   
     <x-admin-dashboard :clients=$clients
      :coupons_up=$coupons_up
