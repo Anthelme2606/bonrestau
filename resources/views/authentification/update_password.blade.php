@@ -44,7 +44,7 @@
   }
   .form-group .mdi {
       position: absolute;
-      left: 10px;
+      left: 6px;
       top: 50%;
       transform: translateY(-50%);
       color: #007bff;
@@ -88,7 +88,9 @@ input{
         transform: rotate(360deg);
     }
 }
-
+.error {
+            color: red;
+        }
 </style>
 @section('sidebar-container')
 @php 
@@ -105,23 +107,22 @@ if(Auth::check())
               <img src="{{asset('assets/images/logo-bonr.png')}}" alt="bon">
             </div>
             <h3 class="login-header">Modification du mot de passe</h3>
-            <form  method="post" action="{{ route('post_update') }}">
-              @csrf
-              @method('POST')
-              <div class="form-group">
-                <i class="mdi mdi-account text-primary"></i>
-                <input type="email" class="form-control" value="{{$user['email']}}" name="email" id="email"
-                required readonly>
-            </div>
+            <form method="post" action="{{ route('post_update') }}" id="updateForm">
+                @csrf
+                @method('POST')
+                <div class="form-group">
+                    <i class="mdi mdi-lock text-primary"></i>
+                    <input type="email" class="form-control" value="{{$user['email']}}" name="email" id="email" required readonly>
+                </div>
                 <div class="form-group">
                     <i class="mdi mdi-account text-primary"></i>
-                    <input type="text" class="form-control" name="password" id="password"
-                    placeholder="nouveau mot de passe" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="nouveau mot de passe" required>
                 </div>
                 <div class="form-group">
                     <i class="mdi mdi-lock text-primary"></i>
-                    <input type="text" class="form-control" id="confirm" placeholder="confirmation du mot de passe" name="confirm" required>
+                    <input type="password" class="form-control" id="confirm" placeholder="confirmation du mot de passe" name="confirm" required>
                 </div>
+                <div id="error-message" class="error"></div>
                 <button type="submit" class="btn btn-primary btn-block submiting w-100">Modifier</button>
             </form>
           
@@ -129,5 +130,20 @@ if(Auth::check())
       </div>
       
 </div>
+<script>
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+        var password = document.getElementById('password').value;
+        var confirm = document.getElementById('confirm').value;
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = ''; // Clear previous error messages
 
+        if (password.length < 8) {
+            errorMessage.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+            event.preventDefault(); // Prevent form submission
+        } else if (password !== confirm) {
+            errorMessage.textContent = 'Les mots de passe ne correspondent pas.';
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+</script>
 @endsection
