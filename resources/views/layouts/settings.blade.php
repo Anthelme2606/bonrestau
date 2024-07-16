@@ -1,4 +1,55 @@
-@extends('layouts.page')
+@extends('layouts.index')
+@include('layouts.dash-head')
+@section('title','Parametre')
+@section('sidebar')
+<x-sidebar/>
+
+@endsection
+@section('navbar')
+<x-navbar/>
+@endsection 
+
+@section('sidebar-container')
+<style>
+  
+
+
+
+ </style>
+ 
+  <div class="top-0 w-100 side-container-bg position-relative ">
+    </div>
+  </div>
+  
+   @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- @extends('layouts.page')
 @section('tittle', 'Settings')
 @section('navbar')
     @include('layouts.navbar')
@@ -258,4 +309,4 @@
         @include('layouts.footer')
     </div>
 
-@endsection
+@endsection --}}

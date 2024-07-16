@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/reset-password',[AuthController::class,'reset'])->name('reset-password');
 Route::get('/password/verification', [AuthController::class,'password'])->name('password-reset');
 Route::get('/code/verification', [AuthController::class,'code'])->name('code-reset');
-Route::get('/generate',[CodeController::class,'index'])->name('generate');
+Route::get('/generate',[CodeController::class,'index'])->name('generate')->middleware('auth');
 Route::get('/', [AuthController::class,'index'])->name('home');
 Route::get('/coming-soon', [AuthController::class,'coming'])->name('coming-soon');
 Route::get('/settings', [AuthController::class,'settings'])->name('settings');

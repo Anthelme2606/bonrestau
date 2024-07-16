@@ -28,7 +28,7 @@
                     <i class="mdi mdi-dots-vertical"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-                    <a  class="dropdown-item preview-item" href="{{route('coming-soon')}}">
+                    <a  class="dropdown-item preview-item" href="{{route('settings')}}">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-settings text-primary"></i>
@@ -113,14 +113,14 @@
                 <span class="menu-title">Générer un code</span>
             </a>
         </li>
-        <li class="nav-item menu-items">
+        {{-- <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('coming-soon')}}">
                 <span class="menu-icon">
                     <i class="mdi mdi-paperclip"></i>
                 </span>
                 <span class="menu-title">Envoyer code</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('sign-up')}}">
                 <span class="menu-icon">
