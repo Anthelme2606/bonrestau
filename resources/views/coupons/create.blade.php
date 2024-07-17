@@ -105,11 +105,14 @@
         pointer-events: none;
         opacity: 0.6;
     }
+    .margin-top{
+        margin-top:60px;
+    }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 margin-top">
         <h2 class="text-center text-primary mb-4">Création de bon de restauration</h2>
         <form class="form-container" action="{{ route('bon-store') }}" method="post" onsubmit="return validateForm()">
            
