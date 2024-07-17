@@ -36,7 +36,7 @@ class AuthService
             }
         }
         
-        return $users;
+        return collect($users); 
     }
     public function getUsersWithinFiveLevels() {
         $users = [];
@@ -46,7 +46,7 @@ class AuthService
         while ($user->invitant && $depth < 5) {
             $referrer = User::where('referral_code', $user->invitant)->first();
             if ($referrer) {
-                $users[] = $referrer->id;
+                $users[] = $referrer;
                 $user = $referrer;
                 $depth++;
             } else {
@@ -54,7 +54,7 @@ class AuthService
             }
         }
 
-        return $users;
+            return collect($users); 
     }
     public function post_update(array $data){
         $email=$data['email'];
