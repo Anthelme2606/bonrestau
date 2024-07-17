@@ -11,7 +11,7 @@
                   <h3 class="mb-0">
                       @php
                           
-                          echo $profondeurs->count();
+                          echo $profondeurs;
                       @endphp
                   </h3>
                   

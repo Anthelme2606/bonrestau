@@ -20,21 +20,34 @@ class AuthService
         $this->userRepository = $userRepository;
         $this->referralRepository = $referralRepository;
     }
-    public function userDepth()
+    public function userDepth(): int
     {
-        $depth = 0;
-        $user = Auth::user();
-        $users = [];
-       //  dd($user,$user->referrer);
-       $referrals=$user->referrals;
-        while ($user->referrer && $depth < 5) {
-            $users[] = $user->referrer;
-            $user = $user->referrer;
-            $depth++;
-        }
-        // dd($users);
-        return collect($users);
+        $user=Auth::user();
+        return $this->calculateDepth($user, 0);
     }
+    
+    private function calculateDepth( $user, int $currentLevel): int
+    {
+        if ($currentLevel >= 5) {
+            return $currentLevel;
+        }
+    
+        $referrals = $user->referrals;
+        if ($referrals->isEmpty()) {
+            return $currentLevel;
+        }
+    
+        $maxDepth = $currentLevel;
+        foreach ($referrals as $referral) {
+            $depth = $this->calculateDepth($referral, $currentLevel + 1);
+            if ($depth > $maxDepth) {
+                $maxDepth = $depth;
+            }
+        }
+    
+        return $maxDepth;
+    }
+    
     public function getUsersWithinFiveLevels(): Collection
     {
         $user=Auth::user();
