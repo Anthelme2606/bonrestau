@@ -1,3 +1,5 @@
+
+@props(["profondeurs"=>null,"relationnels"=>null])
 <div class="row">
     
     <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
@@ -8,8 +10,8 @@
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0">
                       @php
-                          $count = Auth::user()->userDepth->count();
-                          echo $count;
+                          
+                          echo $profondeurs->count();
                       @endphp
                   </h3>
                   
@@ -36,8 +38,8 @@
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0">
                       @php
-                          $count = Auth::user()->getUsersWithinFiveLevels->count();
-                          echo $count;
+                          
+                          echo $relationnels->count();
                       @endphp
                   </h3>
                   

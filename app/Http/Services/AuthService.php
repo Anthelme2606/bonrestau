@@ -19,6 +19,43 @@ class AuthService
         $this->userRepository = $userRepository;
         $this->referralRepository = $referralRepository;
     }
+    public function userDepth()
+    {
+        $depth = 0;
+        $user = Auth::user();
+        $users = [];
+        
+        while ($user->invitant && $depth < 5) {
+            $referrer = User::where('referral_code', $user->invitant)->first();
+            if ($referrer) {
+                $users[] = $referrer;
+                $user = $referrer;
+                $depth++;
+            } else {
+                break;
+            }
+        }
+        
+        return $users;
+    }
+    public function getUsersWithinFiveLevels() {
+        $users = [];
+        $depth = 0;
+        $user = Auth::user();
+
+        while ($user->invitant && $depth < 5) {
+            $referrer = User::where('referral_code', $user->invitant)->first();
+            if ($referrer) {
+                $users[] = $referrer->id;
+                $user = $referrer;
+                $depth++;
+            } else {
+                break;
+            }
+        }
+
+        return $users;
+    }
     public function post_update(array $data){
         $email=$data['email'];
         if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {

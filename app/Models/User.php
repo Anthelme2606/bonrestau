@@ -89,43 +89,8 @@ class User extends Authenticatable
     {
         return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
     }
-    public function userDepth()
-    {
-        $depth = 0;
-        $user = $this;
-        $users = [];
-        
-        while ($user->invitant && $depth < 5) {
-            $referrer = User::where('referral_code', $user->invitant)->first();
-            if ($referrer) {
-                $users[] = $referrer;
-                $user = $referrer;
-                $depth++;
-            } else {
-                break;
-            }
-        }
-        
-        return $users;
-    }
-    public function getUsersWithinFiveLevels() {
-        $users = [];
-        $depth = 0;
-        $user = $this;
-
-        while ($user->invitant && $depth < 5) {
-            $referrer = User::where('referral_code', $user->invitant)->first();
-            if ($referrer) {
-                $users[] = $referrer->id;
-                $user = $referrer;
-                $depth++;
-            } else {
-                break;
-            }
-        }
-
-        return $users;
-    }
+  
+   
 
     // Function to get total referrals count
     public function getTotalReferralsAttribute() {

@@ -2,9 +2,12 @@
 <div class="">
     <x-client-dashboard />
 </div>
-{{-- <div class="">
-    <x-relationnel />
-</div> --}}
+ <div class="">
+    <x-relationnel
+    :profondeurs=$profondeurs
+    :relationnels=$relationnels
+     />
+</div>
 
 @if (Auth::user()->transactions->count())
     <div class="historique bg-dark">

@@ -56,7 +56,8 @@
 @if(Auth::check() && Auth::user()->user_type === "admin" && isset($clients))
 <x-dashboard-container :clients="$clients" :qteT="$qteT" :coupons="$coupons" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
 @else
-@include('clients.dashboard')
+@include('clients.dashboard',['profondeurs'=>$profondeurs,
+'rrelationnels'=>$relationnels])
 @endif
 @endif
 @include('layouts.auth-code')
