@@ -88,10 +88,10 @@
 </head>
 
 <body>
-    <div class="container  mt-5">
-        
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="mt-5 w-100">
             <h4 class="text-primary text-center mb-4">Ravitailler un bon ici</h4>
-            <form id="myForm" class="form-container" action="{{ route('bon-ravita') }}" method="POST">
+            <form id="myForm w-100" class="form-container" action="{{ route('bon-ravita') }}" method="POST">
                 @csrf
                 @method("POST")
                 <div class=" form-group mb-3">
@@ -113,7 +113,7 @@
 
                 <button type="submit" class="btn btn-primary px-4 rounded" id="submitBtn">Ravitailler</button>
             </form>
-        
+        </div>
     </div>
 
     <script>
