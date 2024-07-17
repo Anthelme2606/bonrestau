@@ -76,12 +76,8 @@
 
         @media (max-width: 768px) {
             .container {
-                display:flex;
-                align-content: center;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                /* padding: 0 15px; */
+                
+                padding: 0 15px; 
             }
 
             .form-container {
@@ -114,15 +110,13 @@
         margin-top:60px;
     }
     </style>
-</head>
 
-<body>
-    <div class="container mt-5 margin-top">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="mt-5 w-50">
         <h2 class="text-center text-primary mb-4">Création de bon de restauration</h2>
         <form class="form-container" action="{{ route('bon-store') }}" method="post" onsubmit="return validateForm()">
-           
-           @csrf
-           @method('POST')
+            @csrf
+            @method('POST')
             <div class="form-group">
                 <label for="price">Valeur</label>
                 <div class="input-group">
@@ -149,6 +143,8 @@
             </div>
         </form>
     </div>
+</div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
