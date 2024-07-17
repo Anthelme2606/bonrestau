@@ -1,9 +1,5 @@
-<style>
-    .margin-top{
-        padding-top:90px;
-    }
-</style>
-<div class="my-2 margin-top">
+
+<div class="">
     <x-client-dashboard />
 </div>
 

@@ -1,9 +1,5 @@
-<style>
-  .margin-top{
-        padding-top:90px;
-    }
-</style>
-<div class="my-4 margin-top">
+
+<div class="">
   
     <x-admin-dashboard :clients=$clients
      :coupons_up=$coupons_up
