@@ -89,7 +89,62 @@ class User extends Authenticatable
     {
         return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
     }
-    
+    public function getDepthAttribute() {
+        $depth = 0;
+        $user = $this;
+        $depth=0;
+        while ($user->invitant && $depth<5) {
+            $referrer = User::where('referral_code', $user->invitant)->first();
+            if ($referrer) {
+                $user = $referrer;
+                $depth++;
+            } else {
+                break;
+            }
+        }
+        return $depth;
+    }
+    public function getUsersWithinFiveLevels() {
+        $users = [];
+        $depth = 0;
+        $user = $this;
+
+        while ($user->invitant && $depth < 5) {
+            $referrer = User::where('referral_code', $user->invitant)->first();
+            if ($referrer) {
+                $users[] = $referrer->id;
+                $user = $referrer;
+                $depth++;
+            } else {
+                break;
+            }
+        }
+
+        return $users;
+    }
+
+    // Function to get total referrals count
+    public function getTotalReferralsAttribute() {
+        return $this->calculateReferralCount($this->id);
+    }
+
+    // Recursive function to calculate referral count
+    private function calculateReferralCount($user_id) {
+        $count = 0;
+
+        // Get all direct referrals
+        $directReferrals = Referral::where('referrer_id', $user_id)->pluck('user_id')->toArray();
+
+        // Count direct referrals
+        $count += count($directReferrals);
+
+        // Recursively count all referrals for each direct referral
+        foreach ($directReferrals as $referralId) {
+            $count += $this->calculateReferralCount($referralId);
+        }
+
+        return $count;
+    }
     
 
 }

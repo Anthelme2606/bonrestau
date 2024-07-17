@@ -2,6 +2,9 @@
 <div class="">
     <x-client-dashboard />
 </div>
+<div class="">
+    <x-relationnel />
+</div>
 
 @if (Auth::user()->transactions->count())
     <div class="historique bg-dark">
