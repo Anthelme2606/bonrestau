@@ -1,16 +1,15 @@
 
 <div class="">
-  
-    <x-admin-dashboard :clients=$clients
+    <x-admin-dashboard 
+     :clients=$clients
      :coupons_up=$coupons_up
      :qteV=$qteV :qteT=$qteT />
   </div>
   <div class="">
     <x-relationnel
     :profondeurs=$profondeurs
-    :relationnels=$relationnels
-    />
-  </div>
+    :relationnels=$relationnels />
+</div>
   <div class="my-4">
    
     <x-admin-element 
