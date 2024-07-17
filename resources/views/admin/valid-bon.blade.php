@@ -117,9 +117,9 @@
             outline: none;
         }
         </style>
-    <div class="container form-container">
-        <div class="form-box">
-            <form id="myForm" action="{{ route('trans-store') }}" method="POST">
+   <div class="container form-container d-flex justify-content-center align-items-center vh-100">
+        <div class="form-box w-100">
+            <form id="myForm w-100" action="{{ route('trans-store') }}" method="POST">
                 @csrf
                 @method("POST")
                 <div class="mb-3 d-flex justify-content-center align-items-center">
