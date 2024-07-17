@@ -87,7 +87,9 @@ input{
 .valid{
     border:1px solid green;
 }
-
+.error {
+            color: red;
+        }
 
 </style>
 <div class="login-container d-flex justify-center justify-content-center align-content-center align-items-center">
@@ -97,7 +99,7 @@ input{
         <img src="{{asset('assets/images/logo-bonr.png')}}" alt="bon">
       </div>
       <h3 class="login-header">Réinitialiser le mot de passe</h3>
-      <form  method="post" action="{{ route('password.reset') }}">
+      <form  method="post" action="{{ route('password.reset') }}" id="passwordForm">
         @csrf
         @method('POST')
           <div class="form-group">
@@ -115,27 +117,30 @@ input{
             <input type="text" class="form-control" name="confirm" id="confirm"
             placeholder="confirmation" required>
         </div>
+        <div class="form-group">
+            <div id="error-message" class="error"></div>
+        </div>
           <button type="submit" class="btn btn-primary btn-block submiting w-100">Réinitialiser</button>
       </form>
    
   </div>
 </div>
 
-    {{-- <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        let email = document.querySelector('input[name="email"]').value;
-        if (!email.match(/^\S+@\S+\.\S+$/)) {
-            event.preventDefault();
-            document.querySelector('#email').classList.remove('valid');
-            document.querySelector('#email').classList.add('invalid');
-            
-        }else{
-            document.querySelector('#email').classList.remove('invalid');
-            document.querySelector('#email').classList.add('valid');
+<script>
+    document.getElementById('passwordForm').addEventListener('submit', function(event) {
+        var password = document.getElementById('password').value;
+        var confirm = document.getElementById('confirm').value;
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = ''; // Clear previous error messages
+
+        if (password.length < 8) {
+            errorMessage.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+            event.preventDefault(); // Prevent form submission
+        } else if (password !== confirm) {
+            errorMessage.textContent = 'Les mots de passe ne correspondent pas.';
+            event.preventDefault(); // Prevent form submission
         }
     });
-
-
-</script> --}}
+</script>
 
   @endsection
