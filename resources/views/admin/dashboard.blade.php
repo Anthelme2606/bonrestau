@@ -6,11 +6,6 @@
      :qteV=$qteV 
      :qteT=$qteT />
   </div>
-  <div class="my-2">
-    <x-relationnel
-    :profondeurs=$profondeurs
-    :relationnels=$relationnels />
-</div>
   <div class="my-4">
    
     <x-admin-element 

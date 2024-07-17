@@ -1,5 +1,6 @@
     @props(['clients'=>null,'qteV'=>0,"ventes"=>0,"counts"=>0,'qteT'=>0,'coupons'=>null,
     'profondeurs'=>null,'relationnels'=>null])
+
     <div class="row">
                   <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                     <div class="card bg-dark">
@@ -82,6 +83,11 @@
                     </div>
                   </div>
                 </div>
+                <div class="my-2">
+                  <x-relationnel
+                  :profondeurs=$profondeurs
+                  :relationnels=$relationnels />
+              </div>
                 <div class="row ">
                   <div class="col-sm-4 grid-margin">
                     <div class="card bg-dark">
