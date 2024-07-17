@@ -24,27 +24,23 @@ class AuthService
         $depth = 0;
         $user = Auth::user();
         $users = [];
-        
-        while ($user->invitant && $depth < 5) {
-            $referrer = User::where('referral_code', $user->invitant)->first();
-            if ($referrer) {
-                $users[] = $referrer;
-                $user = $referrer;
-                $depth++;
-            } else {
-                break;
-            }
+       //  dd($user,$user->referrer);
+        while ($user->referrer && $depth < 5) {
+            $users[] = $user->referrer;
+            $user = $user->referrer;
+            $depth++;
         }
-        
-        return collect($users); 
+        // dd($users);
+        return collect($users);
     }
     public function getUsersWithinFiveLevels() {
         $users = [];
         $depth = 0;
         $user = Auth::user();
-
+        // dd($user);
         while ($user->invitant && $depth < 5) {
             $referrer = User::where('referral_code', $user->invitant)->first();
+          
             if ($referrer) {
                 $users[] = $referrer;
                 $user = $referrer;
@@ -53,9 +49,36 @@ class AuthService
                 break;
             }
         }
+        // $user=Auth::user();
+        // return $this->getTotalReferrals($user->id);
 
-            return collect($users); 
+           return collect($users); 
     }
+     // Function to get total referrals count
+     public function getTotalReferrals($user_id)
+     {
+         return $this->calculateReferralCount($user_id);
+     }
+ 
+     // Recursive function to calculate referral count
+     private function calculateReferralCount($user_id)
+     {
+         $count = 0;
+ 
+         // Get all direct referrals
+         $directReferrals = User::where('invitant', $user_id)->pluck('id')->toArray();
+ 
+         // Count direct referrals
+         $count += count($directReferrals);
+ 
+         // Recursively count all referrals for each direct referral
+         foreach ($directReferrals as $referralId) {
+             $count += $this->calculateReferralCount($referralId);
+         }
+ 
+         return $count;
+     }
+    
     public function post_update(array $data){
         $email=$data['email'];
         if ($this->verifyPasswordAndConfirmPassword($data['password'], $data['confirm'])) {

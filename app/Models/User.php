@@ -92,28 +92,7 @@ class User extends Authenticatable
   
    
 
-    // Function to get total referrals count
-    public function getTotalReferralsAttribute() {
-        return $this->calculateReferralCount($this->id);
-    }
-
-    // Recursive function to calculate referral count
-    private function calculateReferralCount($user_id) {
-        $count = 0;
-
-        // Get all direct referrals
-        $directReferrals = Referral::where('referrer_id', $user_id)->pluck('user_id')->toArray();
-
-        // Count direct referrals
-        $count += count($directReferrals);
-
-        // Recursively count all referrals for each direct referral
-        foreach ($directReferrals as $referralId) {
-            $count += $this->calculateReferralCount($referralId);
-        }
-
-        return $count;
-    }
+    
     
 
 }
