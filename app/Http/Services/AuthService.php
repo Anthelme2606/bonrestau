@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 class AuthService
@@ -25,6 +26,7 @@ class AuthService
         $user = Auth::user();
         $users = [];
        //  dd($user,$user->referrer);
+       $referrals=$user->referrals;
         while ($user->referrer && $depth < 5) {
             $users[] = $user->referrer;
             $user = $user->referrer;
@@ -33,51 +35,71 @@ class AuthService
         // dd($users);
         return collect($users);
     }
-    public function getUsersWithinFiveLevels() {
-        $users = [];
-        $depth = 0;
-        $user = Auth::user();
-        // dd($user);
-        while ($user->invitant && $depth < 5) {
-            $referrer = User::where('referral_code', $user->invitant)->first();
-          
-            if ($referrer) {
-                $users[] = $referrer;
-                $user = $referrer;
-                $depth++;
-            } else {
-                break;
-            }
-        }
-        // $user=Auth::user();
-        // return $this->getTotalReferrals($user->id);
-
-           return collect($users); 
+    public function getUsersWithinFiveLevels(): Collection
+    {
+        $user=Auth::user();
+        $users = new Collection();
+        $this->addUsersWithinLevels($user, 0, $users);
+        return $users;
     }
+
+    private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+    {
+        if ($currentLevel >= 5) {
+            return;
+        }
+
+        $referrals = $user->referrals;
+        foreach ($referrals as $referral) {
+            $users->push($referral);
+            $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+        }
+    }
+
+    public function getTotalReferrals(User $user): int
+    {
+        return $this->calculateReferralCount($user->id);
+    }
+
+    public function calculateReferralCount($user_id): int
+    {
+        $count = 0;
+
+        $directReferrals = User::where('referrer_id', $user_id)->pluck('id')->toArray();
+        $count += count($directReferrals);
+
+        foreach ($directReferrals as $referralId) {
+            $count += $this->calculateReferralCount($referralId);
+        }
+
+        return $count;
+    }
+    // public function getUsersWithinFiveLevels() {
+    //     $users = [];
+    //     $depth = 0;
+    //     $user = Auth::user();
+    //     // dd($user);
+    //     while ($user->invitant && $depth < 5) {
+    //         $referrer = User::where('referral_code', $user->invitant)->first();
+          
+    //         if ($referrer) {
+    //             $users[] = $referrer;
+    //             $user = $referrer;
+    //             $depth++;
+    //         } else {
+    //             break;
+    //         }
+    //     }
+    //     // $user=Auth::user();
+    //     // return $this->getTotalReferrals($user->id);
+
+    //        return collect($users); 
+    // }
      // Function to get total referrals count
-     public function getTotalReferrals($user_id)
-     {
-         return $this->calculateReferralCount($user_id);
-     }
+    
  
      // Recursive function to calculate referral count
-     private function calculateReferralCount($user_id)
-     {
-         $count = 0;
- 
-         // Get all direct referrals
-         $directReferrals = User::where('invitant', $user_id)->pluck('id')->toArray();
- 
-         // Count direct referrals
-         $count += count($directReferrals);
- 
-         // Recursively count all referrals for each direct referral
-         foreach ($directReferrals as $referralId) {
-             $count += $this->calculateReferralCount($referralId);
-         }
- 
-         return $count;
-     }
+     
     
     public function post_update(array $data){
         $email=$data['email'];
