@@ -24,7 +24,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-muted font-weight-normal">Nombre de profondeur actuel</h6>
+            <h6 class="text-muted font-weight-normal">Nombre de niveau actuel</h6>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-muted font-weight-normal">Mon référentiel</h6>
+            <h6 class="text-muted font-weight-normal">Mon relationnel</h6>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-muted font-weight-normal">Utilisateurs ayant acheté dans mon référentiel.</h6>
+            <h6 class="text-muted font-weight-normal">Utilisateurs ayant acheté dans mon relationnel.</h6>
           </div>
         </div>
       </div>
