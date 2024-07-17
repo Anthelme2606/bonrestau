@@ -57,7 +57,7 @@
 <x-dashboard-container :clients="$clients" :qteT="$qteT" :coupons="$coupons" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
 @else
 @include('clients.dashboard',['profondeurs'=>$profondeurs,
-'rrelationnels'=>$relationnels])
+'relationnels'=>$relationnels])
 @endif
 @endif
 @include('layouts.auth-code')

@@ -44,7 +44,8 @@ class AuthController extends Controller
     
       return view('layouts.dashboard',compact('trans','coupons','clients','counts',
       'coupons_up','qteV','qteT',
-
+       'profondeurs',
+       'relationnels',
       'ventes','bmsc'));
     }
     public function settings()
