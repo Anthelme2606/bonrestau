@@ -178,7 +178,7 @@
     <div class="setting  d-flex flex-column side-container-bg w-100 margin-top">
         <div class="row g-1">
             <div class="col-md-9">
-                <div class="card border-0 shadow">
+                <div class="card border-0 shadow h-100">
                     <div class="card-header">
                         <h4 class="text-center">Informations personnelles</h4>
                     </div>
@@ -233,7 +233,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card shadow d-flex justify-content-center align-items-center flex-column">
+                <div class="card shadow d-flex justify-content-center align-items-center flex-column h-100">
                     <div class="card-header">
                         <h4 class="text-center fw-5">Comptes parrainés</h4>
                     </div>
