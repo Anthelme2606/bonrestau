@@ -63,7 +63,7 @@
 <script>
   const sides=document.querySelectorAll('.side-container-bg');
 sides.forEach((side)=>{
-  side.classList.remove('.p-0');
+  side.classList.remove('p-0');
 })
 </script>
 @endsection
