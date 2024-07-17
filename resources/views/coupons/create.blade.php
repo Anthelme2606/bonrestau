@@ -76,7 +76,12 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 15px;
+                display:flex;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                /* padding: 0 15px; */
             }
 
             .form-container {
