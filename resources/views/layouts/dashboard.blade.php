@@ -54,7 +54,12 @@
 @section('sidebar-container')
 @if(Auth::check())
 @if(Auth::check() && Auth::user()->user_type === "admin" && isset($clients))
-<x-dashboard-container :clients="$clients" :qteT="$qteT" :coupons="$coupons" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" :ventes="$ventes"/>
+<x-dashboard-container :clients="$clients" 
+:profondeurs="$profondeurs"
+:relationnels="$relationnels"
+:qteT="$qteT" 
+:coupons="$coupons" :bmsc="$bmsc" :counts="$counts" :qteV="$qteV" 
+:ventes="$ventes"/>
 @else
 @include('clients.dashboard',['profondeurs'=>$profondeurs,
 'relationnels'=>$relationnels])
