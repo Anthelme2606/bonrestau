@@ -8,7 +8,7 @@
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0">
                       @php
-                          $count = Auth::user()->getDepthAttribute;
+                          $count = Auth::user()->userDepth;
                           echo $count;
                       @endphp
                   </h3>

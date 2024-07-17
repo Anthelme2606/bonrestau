@@ -89,7 +89,7 @@ class User extends Authenticatable
     {
         return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
     }
-    public function getDepthAttribute() {
+    public function userDepth() {
         $depth = 0;
         $user = $this;
         $depth=0;
