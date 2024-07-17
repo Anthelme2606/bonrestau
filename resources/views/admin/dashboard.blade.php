@@ -3,9 +3,10 @@
     <x-admin-dashboard 
      :clients=$clients
      :coupons_up=$coupons_up
-     :qteV=$qteV :qteT=$qteT />
+     :qteV=$qteV 
+     :qteT=$qteT />
   </div>
-  <div class="">
+  <div class="my-2">
     <x-relationnel
     :profondeurs=$profondeurs
     :relationnels=$relationnels />
