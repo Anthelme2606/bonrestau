@@ -112,9 +112,9 @@
     </style>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="mt-5 w-50">
+    <div class="mt-5 w-100">
         <h2 class="text-center text-primary mb-4">Création de bon de restauration</h2>
-        <form class="form-container p-4 shadow-sm" action="{{ route('bon-store') }}" method="post" onsubmit="return validateForm()">
+        <form class="form-container  shadow-sm w-100" action="{{ route('bon-store') }}" method="post" onsubmit="return validateForm()">
             @csrf
             @method('POST')
             <div class="form-group">
