@@ -89,20 +89,24 @@ class User extends Authenticatable
     {
         return self::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->get();
     }
-    public function userDepth() {
+    public function userDepth()
+    {
         $depth = 0;
         $user = $this;
-        $depth=0;
-        while ($user->invitant && $depth<5) {
+        $users = [];
+        
+        while ($user->invitant && $depth < 5) {
             $referrer = User::where('referral_code', $user->invitant)->first();
             if ($referrer) {
+                $users[] = $referrer;
                 $user = $referrer;
                 $depth++;
             } else {
                 break;
             }
         }
-        return $depth;
+        
+        return $users;
     }
     public function getUsersWithinFiveLevels() {
         $users = [];
