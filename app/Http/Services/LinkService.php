@@ -40,8 +40,8 @@ class LinkService
     public function generateLink($auth)
     {
         $uniqueCode = $auth;
-        $https = 'https://greendetox.senousolutions.com/sign-up?code=' . $uniqueCode;
-       // $http=  'http://localhost:8000/sign-up?code=' . $uniqueCode; 
-        return $https;   
+       // $https = 'https://greendetox.senousolutions.com/sign-up?code=' . $uniqueCode;
+        $http=  'http://localhost:8000/sign-up?code=' . $uniqueCode; 
+        return $http;   
     }
 }

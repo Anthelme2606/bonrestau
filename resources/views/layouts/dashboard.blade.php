@@ -20,7 +20,9 @@
 :bmsc="$bmsc"
 :counts="$counts"
 :qteV="$qteV" 
+:counterbon="$counterbon"
 :ventes="$ventes"/>
+
 @else
 @include('clients.dashboard',['profondeurs'=>$profondeurs,
 'relationnels'=>$relationnels,

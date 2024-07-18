@@ -1,5 +1,5 @@
 
-@props(["profondeurs"=>null,"relationnels"=>null,"usersbuy"=>0])
+@props(["profondeurs"=>null,"relationnels"=>null,"usersbuy"=>0,"counterbon"=>0])
 <div class="row">
     
     <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
@@ -92,7 +92,7 @@
                   <h3 class="mb-0">
                       @php
                         //   $count = Auth::user()->transactions->sum('quantite');
-                          echo 0;
+                          echo $counterbon;
                       @endphp
                   </h3>
                   
@@ -105,7 +105,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-muted font-weight-normal">Pourcentages</h6>
+            <h6 class="text-muted font-weight-normal">Bons achetés dans mon relationnel</h6>
           </div>
         </div>
       </div>

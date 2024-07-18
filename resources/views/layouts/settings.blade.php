@@ -26,7 +26,7 @@
 @endphp
     <style>
         .side-container-bg {
-            background: rgba(245, 251, 252, 1);
+            background: 'table-dark-bg'
         }
 
         body {
@@ -39,7 +39,6 @@
         .setting {
             --percentage:{{$user_percent}}%;
 
-            background: rgba(245, 251, 252, 1);
 
            
         }
@@ -61,18 +60,18 @@
 
         .card {
             padding: 10px;
-            background: #fff;
+            color:white;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .card-header {
             border: none;
-            background: #fff;
+            color:white;
         }
 
         .card-footer {
             border: none;
-            background: #fff;
+            color:white;
         }
 
         .email-valid {
@@ -126,10 +125,9 @@
         }
 
         .wallet {
-            /* width: 100%; */
-            /* Ajustez la taille selon vos besoins */
+        
             height: 45px;
-            /* Ajustez la taille selon vos besoins */
+          
             display: flex;
             justify-content: center;
             align-items: center;
@@ -154,7 +152,7 @@
         .puce {
             width: 60px;
             height: 60px;
-            background: #fff;
+            color:white;
         }
 
         .carte-valeur {
@@ -173,20 +171,49 @@
         .margin-top{
             margin-top: 65px;
         }
+        table{
+            background:black;
+            color:white;
+        }
+        .wallet span{
+            color:black;
+        }
+        input{
+           
+            color:black;
+        }
+        h4{
+            font-size:13px;
+        }
+        td {
+            color:white;
+        }
+        .btn-green-mdi{
+            color:rgb(30, 96, 17);
+        }
+        .table-dark-bg th, .table-dark-bg td {
+        background-color: #07121e !important; /* table-dark-bg */
+        color: #fff !important; /* text-white */
+    }
+    .table-dark-bg {
+        background-color: #07121e !important; /* table-dark-bg */
+        !important; /* table-dark-bg */
+        color: #fff !important; /* text-white */
+    }
     </style>
 
-    <div class="setting  d-flex flex-column side-container-bg w-100 margin-top">
-        <div class="row g-1">
-            <div class="col-md-9">
-                <div class="card border-0 shadow h-100">
+    <div class="setting  d-flex flex-column table-dark-bg w-100 margin-top">
+        <div class="row g-0">
+            <div class="col-md-9 table-dark-bg">
+                <div class="card h-100 rounded-l-xl shadow-sm transition-shadow hover:shadow-lg table-dark-bg text-white border-0 shadow h-100">
                     <div class="card-header">
                         <h4 class="text-center">Informations personnelles</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body table-dark-bg">
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
+                            <table class="table table-dark-bg">
+                                <thead class="table-dark-bg">
+                                    <tr class="table-dark-bg">
                                         <th>Nom</th>
                                         <th>Prenom</th>
                                         <th>Pseudo</th>
@@ -199,8 +226,8 @@
                                         <th>N.Whatsapp</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody class="table-dark-bg">
+                                    <tr class="table-dark-bg">
                                         <td>{{Auth::user()->nom}}</td>
                                         <td>{{Auth::user()->prenom}}</td>
                                         <td>{{Auth::user()->pseudo}}</td>
@@ -226,14 +253,16 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <h5 class="email-valid text-success">
-                            email <i class="mdi mdi-check fw-2 text-success"></i>
+                        <h5 class="email-valid btn-green-mdi">
+                            email <i class="mdi mdi-check fw-2 btn-green-mdi"></i>
                         </h5>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card shadow d-flex justify-content-center align-items-center flex-column h-100">
+                <div class="card  d-flex justify-content-center
+                 align-items-center flex-column h-100 rounded-l-xl shadow-sm transition-shadow hover:shadow-lg table-dark-bg text-white
+                ">
                     <div class="card-header">
                         <h4 class="text-center fw-5">Comptes parrainés</h4>
                     </div>
@@ -249,15 +278,16 @@
         
         <div class="row row-cols-1 row-cols-md-3 g-1">
             <div class="col">
-                <div class="card ">
-                    <div class="card-header text-center">
+                <div class="card h-100 rounded-l-xl shadow-sm 
+                transition-shadow hover:shadow-lg table-dark-bg text-white">
+                    <div class="card-header text-center ">
                         <h4>Verification de votre email.</h4>
                     </div>
                     <div class="card-body">
                         <div class="form text-center">
                             <form class="d-flex text-center justify-content-center align-content-center" action=""
                                 method="post">
-                                <input type="email" class=" outline-0 w-100" value="{{$user['email']}}" readonly>
+                                <input type="email" class=" rounded outline-0 w-100" value="{{$user['email']}}" readonly>
                                 <button type="button"
                                     class=" btn btn-green">Vérifier</button>
                             </form>
@@ -266,7 +296,8 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card ">
+                <div class="card h-100 rounded-l-xl
+                 shadow-sm transition-shadow hover:shadow-lg table-dark-bg text-white">
                     <div class="card-header text-center">
                         <h4>Consommation de données</h4>
                     </div>
@@ -290,7 +321,8 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 rounded-l-xl shadow-sm transition-shadow hover:shadow-lg table-dark-bg text-white
+                ">
                     <div class="card-header text-center">
                         <h4>Balance</h4>
                     </div>
@@ -307,8 +339,9 @@
         </div>
         <div class="row row-cols-1 row-cols-md-2 g-1">
             <div class="col">
-                <div class="card carte h-100">
-                    <div class="card-header carte position-relative">
+                <div class="card carte h-100 rounded-l-xl shadow-sm
+                 transition-shadow hover:shadow-lg table-dark-bg text-white">
+                    <div class="card-header carte position-relative w-100">
                         <!-- <div class="position-absolute top-0 right-0 shadow-lg">
                     <button type="button" class="border-0">
                       <i class="mdi mdi-upload">Téléchager</i>
@@ -333,19 +366,21 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card">
+                <div class="card
+                h-100 rounded-l-xl shadow-sm transition-shadow hover:shadow-lg table-dark-bg text-white">
                     <div class="card-header">
                         <h4 class="text-center">Créditer votre balance</h4>
                     </div>
                     <div class="card-body">
                         <form class="d-flex">
-                            <input type="number" class="w-100 text-center" name="">
+                            <input type="number" class="w-100 rounded text-center" name="">
                             <button type="button" class="btn btn-green">Créditer</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 @endif
 

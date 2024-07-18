@@ -35,19 +35,21 @@ class AuthController extends Controller
       $bmsc= $this->transactionService->BonsMoisCourant();
       $qteV= $this->transactionService->qteV();
       $trans= $this->transactionService->all();
-      $usersbuy=$this->transactionService->getUsersBuy();
+      $usersbuy=$this->transactionService->UsersWhobuys();
+      $counterbon=$this->transactionService->bonBuyInRelation();
       $ventes= $this->transactionService->ventes();
       $profondeurs=$this->authService->userDepth();
       $relationnels=$this->authService->getUsersWithinFiveLevels();
       $clients=$this->authService->all();
       $coupons_up=$this->couponService->countUps();
       $counts=$this->authService->usersCurrentMonthCount();
-    
+     
       return view('layouts.dashboard',compact('trans','coupons','clients','counts',
       'coupons_up','qteV','qteT',
        'profondeurs',
        'relationnels',
        'usersbuy',
+       'counterbon',
       'ventes','bmsc'));
     }
     public function settings()

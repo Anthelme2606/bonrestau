@@ -121,20 +121,20 @@
                 <span class="menu-title">Envoyer code</span>
             </a>
         </li> --}}
-        <li class="nav-item menu-items">
+        {{-- <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('sign-up')}}">
                 <span class="menu-icon">
                     <i class="mdi mdi-border-color"></i>
                 </span>
                 <span class="menu-title">Inscription</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item menu-items">
             <a class="nav-link"  href="{{route('coming-soon')}}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-contacts"></i>
+                    <i class="mdi mdi-cart"></i>
                 </span>
-                <span class="menu-title">Contacts</span>
+                <span class="menu-title">Achat</span>
             </a>
         </li>
         @if(Auth::check() && Auth::user()->user_type==="admin")

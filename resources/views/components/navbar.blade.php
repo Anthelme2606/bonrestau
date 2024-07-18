@@ -1,6 +1,6 @@
  
 <nav class="navbar p-0 fixed-top d-flex flex-row" style="background:rgb(208, 225, 231);">
-    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center" style="background: rgb(208, 225, 231)">
+    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center navbar-brand-new" style="background: rgb(208, 225, 231)">
         <a class="navbar-brand brand-logo-mini" href="{{route('home')}}">
             <img class=" w-100 h-100 shadow-lg " src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
         </a>
@@ -12,7 +12,7 @@
         <ul class="navbar-nav w-100">
             <li class="nav-item w-100">
                 <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                    <input type="text" class="form-control text-black border-0 bg-white" placeholder="Search products">
+                    <input type="text" class="form-control text-black border-0 bg-white" placeholder="Rechercher..">
                 </form>
             </li>
         </ul>
@@ -186,3 +186,7 @@
         </button>
     </div>
 </nav>
+
+
+
+
