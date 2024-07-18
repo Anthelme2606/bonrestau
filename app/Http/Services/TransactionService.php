@@ -3,6 +3,9 @@ namespace App\Http\Services;
 use App\Http\Repositories\TransactionRepository;
 use App\Http\Repositories\UserRepository;
 use App\Http\Repositories\CouponRepository;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class TransactionService {
 protected $trans;
 protected $coupon;
@@ -52,6 +55,26 @@ protected $user;
     public function ventes() {
         
         return $this->trans->ventes();
+    }
+    public function getUsersWithinFiveLevels(): Collection
+    {
+        $user=Auth::user();
+        $users = new Collection();
+        $this->addUsersWithinLevels($user, 0, $users);
+        return $users;
+    }
+
+    private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+    {
+        if ($currentLevel >= 5) {
+            return;
+        }
+
+        $referrals = $user->referrals;
+        foreach ($referrals as $referral) {
+            $users->push($referral);
+            $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+        }
     }
     function distributeGains($user, $amount, $xp, $quantity) {
         $referrers = [];

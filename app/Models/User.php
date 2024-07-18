@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Sanctum\HasApiTokens;
 use carbon\Carbon;
+use Illuminate\Support\Collection;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -83,7 +84,30 @@ class User extends Authenticatable
         $this->daily_percent += $newPercent;
         $this->save();
     }
-  
+  // Dans le modèle User
+
+
+public function getUsersWithinFiveLevels(): Collection
+{
+    $user = $this;
+    $users = new Collection();
+    $this->addUsersWithinLevels($user, 0, $users);
+    return $users;
+}
+
+private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+{
+    if ($currentLevel >= 5) {
+        return;
+    }
+
+    $referrals = $user->referrals; // Utilisation de la relation hasMany
+    foreach ($referrals as $referral) {
+        $users->push($referral);
+        $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+    }
+}
+
    
         public static function getUsersRegisteredCurrentMonth()
     {
