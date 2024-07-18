@@ -40,7 +40,7 @@ protected $usersBuy=0;
        
        $data['amount']=$coupon->price;
        
-       $this->distributeGains($user,$data['amount'],$data['percent'],$data['quantite']);
+       $this->distributeGains($user,$data['amount'],$data['percent'],$data['quantite'],$coupon);
        $this->trans->create($data);
        return redirect()->back()->with('success','Bon validé avec succes');
     }
@@ -80,10 +80,15 @@ protected $usersBuy=0;
     public function getUsersBuy(){
         return $this->usersBuy;
     }
-    function distributeGains($user, $amount, $xp, $quantity) {
+    function distributeGains($user, $amount, $xp, $quantity,$coupon) {
         $user=Auth::user();
         $users = new Collection();
+        $usersbuy=0;
         $users=$user->referralsWithinFiveLevels;
+        // if(isset($coupon)){
+        //     dd($coupon)
+
+        // }
          if(!$users->isEmpty()){
             foreach($users as $userb)
             {

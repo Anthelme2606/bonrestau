@@ -55,8 +55,6 @@ class AuthService
     {
         $user=Auth::user();
         $users = new Collection();
-       // $users=$user->referralsWithinFiveLevels;
-      
          $this->addUsersWithinLevels($user, 0, $users);
         return $users;
     }
