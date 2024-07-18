@@ -15,6 +15,7 @@ class AuthService
 {
     protected $userRepository;
     protected $referralRepository;
+    
     public function __construct(UserRepository $userRepository,ReferralRepository $referralRepository)
     {
         $this->userRepository = $userRepository;
@@ -22,7 +23,9 @@ class AuthService
     }
     public function userDepth(): int
     {
+    
         $user=Auth::user();
+       // dd($user->referralsWithinFiveLevels()->get());
         return $this->calculateDepth($user, 0);
     }
     
@@ -52,41 +55,43 @@ class AuthService
     {
         $user=Auth::user();
         $users = new Collection();
-        $this->addUsersWithinLevels($user, 0, $users);
+        $users=$user->referralsWithinFiveLevels;
+      
+        // $this->addUsersWithinLevels($user, 0, $users);
         return $users;
     }
 
-    private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
-    {
-        if ($currentLevel >= 5) {
-            return;
-        }
+    // private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+    // {
+    //     if ($currentLevel >= 5) {
+    //         return;
+    //     }
 
-        $referrals = $user->referrals;
-        foreach ($referrals as $referral) {
-            $users->push($referral);
-            $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
-        }
-    }
+    //     $referrals = $user->referrals;
+    //     foreach ($referrals as $referral) {
+    //         $users->push($referral);
+    //         $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+    //     }
+    // }
 
-    public function getTotalReferrals(User $user): int
-    {
-        return $this->calculateReferralCount($user->id);
-    }
+    // public function getTotalReferrals(User $user): int
+    // {
+    //     return $this->calculateReferralCount($user->id);
+    // }
 
-    public function calculateReferralCount($user_id): int
-    {
-        $count = 0;
+    // public function calculateReferralCount($user_id): int
+    // {
+    //     $count = 0;
 
-        $directReferrals = User::where('referrer_id', $user_id)->pluck('id')->toArray();
-        $count += count($directReferrals);
+    //     $directReferrals = User::where('referrer_id', $user_id)->pluck('id')->toArray();
+    //     $count += count($directReferrals);
 
-        foreach ($directReferrals as $referralId) {
-            $count += $this->calculateReferralCount($referralId);
-        }
+    //     foreach ($directReferrals as $referralId) {
+    //         $count += $this->calculateReferralCount($referralId);
+    //     }
 
-        return $count;
-    }
+    //     return $count;
+    // }
     // public function getUsersWithinFiveLevels() {
     //     $users = [];
     //     $depth = 0;

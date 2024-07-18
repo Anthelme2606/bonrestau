@@ -10,6 +10,7 @@ class TransactionService {
 protected $trans;
 protected $coupon;
 protected $user;
+protected $usersBuy=0;
     public function __construct(
     TransactionRepository $trans,
     UserRepository $userRepository,
@@ -49,34 +50,48 @@ protected $user;
         return $this->trans->all();
     }
     public function qteV() {
-        
+       
         return $this->trans->qteV();
     }
     public function ventes() {
         
         return $this->trans->ventes();
     }
-    public function getUsersWithinFiveLevels(): Collection
-    {
-        $user=Auth::user();
-        $users = new Collection();
-        $this->addUsersWithinLevels($user, 0, $users);
-        return $users;
-    }
+    // public function getUsersWithinFiveLevels(): Collection
+    // {
+    //     $user=Auth::user();
+    //     $users = new Collection();
+    //     $this->addUsersWithinLevels($user, 0, $users);
+    //     return $users;
+    // }
 
-    private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
-    {
-        if ($currentLevel >= 5) {
-            return;
-        }
+    // private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+    // {
+    //     if ($currentLevel >= 5) {
+    //         return;
+    //     }
 
-        $referrals = $user->referrals;
-        foreach ($referrals as $referral) {
-            $users->push($referral);
-            $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
-        }
+    //     $referrals = $user->referrals;
+    //     foreach ($referrals as $referral) {
+    //         $users->push($referral);
+    //         $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+    //     }
+    // }
+    public function getUsersBuy(){
+        return $this->usersBuy;
     }
     function distributeGains($user, $amount, $xp, $quantity) {
+        $user=Auth::user();
+        $users = new Collection();
+        $users=$user->referralsWithinFiveLevels;
+         if(!$users->isEmpty()){
+            foreach($users as $userb)
+            {
+                if($userb->id===$user->id){
+                    $this->usersBuy+=1;
+                }
+            }
+         }
         $referrers = [];
         $currentReferrer = $user->referrer; 
     

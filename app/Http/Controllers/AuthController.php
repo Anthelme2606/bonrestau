@@ -35,6 +35,7 @@ class AuthController extends Controller
       $bmsc= $this->transactionService->BonsMoisCourant();
       $qteV= $this->transactionService->qteV();
       $trans= $this->transactionService->all();
+      $usersbuy=$this->transactionService->getUsersBuy();
       $ventes= $this->transactionService->ventes();
       $profondeurs=$this->authService->userDepth();
       $relationnels=$this->authService->getUsersWithinFiveLevels();
@@ -46,6 +47,7 @@ class AuthController extends Controller
       'coupons_up','qteV','qteT',
        'profondeurs',
        'relationnels',
+       'usersbuy',
       'ventes','bmsc'));
     }
     public function settings()

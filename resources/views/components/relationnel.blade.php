@@ -1,5 +1,5 @@
 
-@props(["profondeurs"=>null,"relationnels"=>null])
+@props(["profondeurs"=>null,"relationnels"=>null,"usersbuy"=>0])
 <div class="row">
     
     <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
@@ -66,7 +66,7 @@
                   <h3 class="mb-0">
                       @php
                         //   $count = Auth::user()->transactions->sum('quantite');
-                          echo 0;
+                          echo $usersbuy;
                       @endphp
                   </h3>
                   

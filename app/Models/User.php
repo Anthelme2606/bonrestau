@@ -34,7 +34,8 @@ class User extends Authenticatable
             'referral_code',
            'balance',
            'daily_percent',
-           'daily_percent_updated_at'
+           'daily_percent_updated_at',
+           
     ];
 
     /**
@@ -87,26 +88,33 @@ class User extends Authenticatable
   // Dans le modèle User
 
 
-public function getUsersWithinFiveLevels(): Collection
+  public function referralsWithinFiveLevels()
 {
-    $user = $this;
-    $users = new Collection();
-    $this->addUsersWithinLevels($user, 0, $users);
-    return $users;
+    return $this->referralsLevel(5);
 }
 
-private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+public function referralsLevel($level, $currentLevel = 1)
 {
-    if ($currentLevel >= 5) {
-        return;
+    if ($currentLevel > $level) {
+        return $this->referrals();
     }
 
-    $referrals = $user->referrals; // Utilisation de la relation hasMany
-    foreach ($referrals as $referral) {
-        $users->push($referral);
-        $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+    return $this->referrals()->with(['referrals' => function ($query) use ($level, $currentLevel) {
+        $query->with(['referrals' => function ($query) use ($level, $currentLevel) {
+            $this->addNestedReferrals($query, $level, $currentLevel + 1);
+        }]);
+    }]);
+}
+
+private function addNestedReferrals($query, $level, $currentLevel)
+{
+    if ($currentLevel < $level) {
+        $query->with(['referrals' => function ($query) use ($level, $currentLevel) {
+            $this->addNestedReferrals($query, $level, $currentLevel + 1);
+        }]);
     }
 }
+
 
    
         public static function getUsersRegisteredCurrentMonth()
