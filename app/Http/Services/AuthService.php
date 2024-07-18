@@ -55,24 +55,24 @@ class AuthService
     {
         $user=Auth::user();
         $users = new Collection();
-        $users=$user->referralsWithinFiveLevels;
+       // $users=$user->referralsWithinFiveLevels;
       
-        // $this->addUsersWithinLevels($user, 0, $users);
+         $this->addUsersWithinLevels($user, 0, $users);
         return $users;
     }
 
-    // private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
-    // {
-    //     if ($currentLevel >= 5) {
-    //         return;
-    //     }
+    private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
+    {
+        if ($currentLevel >= 5) {
+            return;
+        }
 
-    //     $referrals = $user->referrals;
-    //     foreach ($referrals as $referral) {
-    //         $users->push($referral);
-    //         $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
-    //     }
-    // }
+        $referrals = $user->referrals;
+        foreach ($referrals as $referral) {
+            $users->push($referral);
+            $this->addUsersWithinLevels($referral, $currentLevel + 1, $users);
+        }
+    }
 
     // public function getTotalReferrals(User $user): int
     // {
