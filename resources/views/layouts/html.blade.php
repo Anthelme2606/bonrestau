@@ -16,6 +16,7 @@
     @endif
     <!--CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+   
 </head>
 
 <body style="background:rgba(245,251,252,1)">

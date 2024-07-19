@@ -59,6 +59,7 @@ class AuthService
         return $users;
     }
     public function completeUsers():Collection{
+            $count=0;
             $user=Auth::user();
             $tableau = collect();
             $tableau->push($user);
@@ -68,6 +69,7 @@ class AuthService
                     $tableau->push($use);
                 }
             }
+            
             return $tableau;
         }
        
