@@ -101,8 +101,8 @@ class AuthService
                     ];
                 } else {
                     // Si la couleur n'est pas unique, on ajuste légèrement la teinte
-                    $i--;
-                    $hueIncrement /= 2;
+                    $i=$i-2;
+                    $hueIncrement /= 4;
                 }
             }
         
