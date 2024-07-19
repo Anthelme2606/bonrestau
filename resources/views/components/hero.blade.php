@@ -1,20 +1,13 @@
-<div class="hero">
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-lg-5">
-                <div class="intro-excerpt">
-                    <h1>Bon de restauration <span clsas="d-block">Sante plus</span></h1>
-                    <p class="mb-4 text-white">Obtenez une gestion des bons de restauration fluide et claire</p>
-                    <p>
-                        <a href="{{route('login')}}" class="btn bg-orange-500 px-4 rounded me-2">Se connecter</a>
-                        </p>
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <div class="hero-text">
-                    
-                </div>
-            </div>
+ <div class="hero-section">
+        <div class="logo top-0 left-0">
+        <div class="log-text text-center ">
+         <span class="text-center">35+Santé</span>
+        </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="display-4">Programme de coaching 35+Santé</h1>
+            <p class="lead">Créez votre bien être financier à travers notre programme.</p>
+            <a href="{{route('login')}}" class="btn btn-green btn-lg rounded shadow shadow">Se connecter</a>
         </div>
     </div>
-</div>
