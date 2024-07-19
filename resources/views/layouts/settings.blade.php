@@ -25,6 +25,7 @@
 
 @endphp
     <style>
+        
         .side-container-bg {
             background: 'table-dark-bg'
         }
@@ -200,6 +201,53 @@
         !important; /* table-dark-bg */
         color: #fff !important; /* text-white */
     }
+
+
+    /* Tree branch*/
+    .tree {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .level {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .node {
+      border: 2px solid #333;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      position: relative;
+    }
+    .node.main {
+      background-color: #FFA500; /* Couleur pour le parent principal */
+    }
+    .node::before, .node::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      background-color: #333;
+    }
+    .node::before {
+      left: -20px;
+    }
+    .node::after {
+      right: -20px;
+    }
+    .node:first-child::before, .node:last-child::after {
+      display: none;
+    }
+    .node.split {
+      background: linear-gradient(to right, #FFA500 50%, #FFFFFF 50%);
+    }
+    
     </style>
 
     <div class="setting  d-flex flex-column table-dark-bg w-100 margin-top">
@@ -380,6 +428,75 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+        <div class="col-12">
+         <div class="card shadow-lg table-dark-bg w-100 d-flex justify-content-center align-content-center flex-column">
+         <div class="card-header w-100 d-flex d-flex justify-content-center align-content-center ">
+         <h4 class="text-center">Mes 360 premiers invitants..</h4>
+         </div>
+         <div class="card-body w-100 d-flex d-flex justify-content-center align-content-center ">
+            
+
+            <div class="relation-content">
+                <div class="tree">
+                    @if(isset($colors))
+                  <div class="level">
+                    @foreach ($colors as $color)
+                        @if($color['key']===Auth::user()->id)
+                        <div class="node" style="background-color:{{$color['color']}}">A</div>
+                        @endif
+                    @endforeach
+                  </div>
+                  @endif
+                 
+                  @if(isset($users) && $users->count()<=360)
+                  @foreach($users as $user)
+                  <div class="level">
+                    @foreach($user->referrals as $referral)
+                     @php
+                     $auth=null;
+                     $own=null;
+                     foreach($colors as $color)
+                     {
+                        if($color['key']===$referral->referrer->id)
+                        {
+                            $auth=$color['color'];
+                        }elseif($color['key']===$referral->id){
+                            $own=$color['color'];
+                        }
+                     }
+                     @endphp
+                    <div class="node"
+                    style="background: linear-gradient(to right, {{$auth}} 50%, {{$own}} 50%);"
+                    >
+                        {{$referral->id}}
+                    </div>
+                    @endforeach
+                  </div>
+                  @endforeach
+                  @endif
+                  {{-- <div class="level">
+                    <div class="node B1">B1</div>
+                    <div class="node B2">B2</div>
+                    <div class="node C1">C1</div>
+                    <div class="node C2">C2</div>
+                    <div class="node D1">D1</div>
+                    <div class="node D2">D2</div>
+                    <div class="node D3">D3</div>
+                  </div>
+                  <div class="level">
+                    <div class="node">1</div>
+                    <div class="node">2</div>
+                    <div class="node">1</div>
+                    <div class="node">2</div>
+                  </div> --}}
+                </div>
+              </div>
+            </div>
+
+         </div>
+        </div>
+    </div>
         
     </div>
 @endif

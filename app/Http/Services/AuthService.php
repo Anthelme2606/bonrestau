@@ -58,6 +58,103 @@ class AuthService
          $this->addUsersWithinLevels($user, 0, $users);
         return $users;
     }
+    public function completeUsers():Collection{
+            $user=Auth::user();
+            $tableau = collect();
+            $tableau->push($user);
+            $users=$this->getUsersWithinFiveLevels();
+            foreach($users as $use){
+                if($use){
+                    $tableau->push($use);
+                }
+            }
+            return $tableau;
+        }
+       
+        public function generateColor($objects) {
+            $colors = [];
+            $numColors=$objects->count();
+            if($numColors>360)
+            {
+                $numColors=360;
+            }
+            $hueIncrement = 360 / $numColors; // Incremental step for the hue value
+        
+            for ($i = 0; $i < $numColors; $i++) {
+                $hue = ($i * $hueIncrement) % 360;
+                $colorHex = $this->hsvToHex($hue, 1, 1); // Full saturation and value
+        
+                // Assure l'unicité
+                $isUnique = true;
+                foreach ($colors as $color) {
+                    if ($color['color'] === $colorHex) {
+                        $isUnique = false;
+                        break;
+                    }
+                }
+                
+        
+                if ($isUnique) {
+                    $colors[] = [
+                        'key' => $objects[$i]->id,
+                        'color' => $colorHex
+                    ];
+                } else {
+                    // Si la couleur n'est pas unique, on ajuste légèrement la teinte
+                    $i--;
+                    $hueIncrement /= 2;
+                }
+            }
+        
+            return $colors;
+        }
+        
+        public function hsvToHex($h, $s, $v) {
+            $h = $h / 60;
+            $c = $v * $s;
+            $x = $c * (1 - abs(fmod($h, 2) - 1));
+            $m = $v - $c;
+            
+            if ($h >= 0 && $h < 1) {
+                $r = $c;
+                $g = $x;
+                $b = 0;
+            } else if ($h >= 1 && $h < 2) {
+                $r = $x;
+                $g = $c;
+                $b = 0;
+            } else if ($h >= 2 && $h < 3) {
+                $r = 0;
+                $g = $c;
+                $b = $x;
+            } else if ($h >= 3 && $h < 4) {
+                $r = 0;
+                $g = $x;
+                $b = $c;
+            } else if ($h >= 4 && $h < 5) {
+                $r = $x;
+                $g = 0;
+                $b = $c;
+            } else {
+                $r = $c;
+                $g = 0;
+                $b = $x;
+            }
+        
+            $r = dechex(($r + $m) * 255);
+            $g = dechex(($g + $m) * 255);
+            $b = dechex(($b + $m) * 255);
+        
+            return '#' . str_pad($r, 2, '0', STR_PAD_LEFT) . str_pad($g, 2, '0', STR_PAD_LEFT) . str_pad($b, 2, '0', STR_PAD_LEFT);
+        }
+        
+       
+        
+        
+        // // Exemple d'utilisation
+        // $colors = generateColor(10);
+        // print_r($colors);
+        
 
     private function addUsersWithinLevels(User $user, int $currentLevel, Collection $users)
     {
