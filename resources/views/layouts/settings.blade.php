@@ -475,21 +475,7 @@
                   </div>
                   @endforeach
                   @endif
-                  {{-- <div class="level">
-                    <div class="node B1">B1</div>
-                    <div class="node B2">B2</div>
-                    <div class="node C1">C1</div>
-                    <div class="node C2">C2</div>
-                    <div class="node D1">D1</div>
-                    <div class="node D2">D2</div>
-                    <div class="node D3">D3</div>
-                  </div>
-                  <div class="level">
-                    <div class="node">1</div>
-                    <div class="node">2</div>
-                    <div class="node">1</div>
-                    <div class="node">2</div>
-                  </div> --}}
+                 
                 </div>
               </div>
             </div>
