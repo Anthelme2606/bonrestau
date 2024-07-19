@@ -432,7 +432,8 @@
         <div class="col-12">
          <div class="card shadow-lg table-dark-bg w-100 d-flex justify-content-center align-content-center flex-column">
          <div class="card-header w-100 d-flex d-flex justify-content-center align-content-center ">
-         <h4 class="text-center">Mes 360 premiers invitants..</h4>
+         <h4 class="text-center">Mes 360 premiers invitants..
+            (6Premiers de chaque niveau)</h4>
          </div>
          <div class="card-body w-100 d-flex d-flex justify-content-center align-content-center ">
             
@@ -452,6 +453,7 @@
                   @if(isset($users) && $users->count()<=360)
                   @foreach($users as $user)
                   <div class="level">
+                    @if($user->referrals->count()<=6)
                     @foreach($user->referrals as $referral)
                      @php
                      $auth=null;
@@ -472,6 +474,7 @@
                         {{$referral->id}}
                     </div>
                     @endforeach
+                    @endif
                   </div>
                   @endforeach
                   @endif
