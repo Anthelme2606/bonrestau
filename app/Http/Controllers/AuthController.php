@@ -55,7 +55,10 @@ class AuthController extends Controller
     public function settings()
     {
       $clients=$this->authService->all();
-      return view('layouts.settings',compact('clients'));
+      $users=$this->authService->completeUsers();
+      $colors=$this->authService->generateColor($users);
+      //dd($colors);
+      return view('layouts.settings',compact('clients','users','colors'));
     }
     public function gen_code()
     {
@@ -148,10 +151,10 @@ class AuthController extends Controller
     public function post_login(Request $request)
     {
      
-      $request->validate(([
+      $request->validate([
         'email' => 'required|string',
         'password' => 'string|required',
-     ]));
+     ]);
      return $this->authService->post_login($request->all());
     }
     public function all(){
