@@ -490,7 +490,7 @@
             
                 <div class="level">
                     @if ( $user && $user->referrals->count() <= 6)
-                    {{dd($referrals,$currentLevel,$maxLevels)}}
+                    {{dd($user->referrals,$currentLevel,$maxLevels)}}
                         @foreach ($user->referrals as $referral)
                        
                             @php
