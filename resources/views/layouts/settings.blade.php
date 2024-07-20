@@ -487,11 +487,8 @@
             
             @foreach ($users as $user)
             @if ($currentLevel < $maxLevels)
-            {{dd($user)}}
-                @if($user->user_type=='admin')
-                {{dd($user,"message")}}
-                @endif
                 <div class="level">
+                    {{dd($user)}}
                     @if ( $user && $user->referrals->count() <= 6)
                     
                         @foreach ($user->referrals as $referral)
