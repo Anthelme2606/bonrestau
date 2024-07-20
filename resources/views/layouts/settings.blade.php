@@ -422,10 +422,10 @@
                  transition-shadow hover:shadow-lg table-dark-bg text-white">
                         <div class="card-header carte position-relative w-100">
                             <!-- <div class="position-absolute top-0 right-0 shadow-lg">
-                        <button type="button" class="border-0">
-                          <i class="mdi mdi-upload">Téléchager</i>
-                        </button>
-                      </div> -->
+                                                <button type="button" class="border-0">
+                                                  <i class="mdi mdi-upload">Téléchager</i>
+                                                </button>
+                                              </div> -->
                             <div class="d-flex justify-content-between">
                                 <div>Carte d'achat</div>
                                 <div>Santé +</div>
@@ -469,8 +469,6 @@
                                 (6 Premiers de chaque niveau)</h4>
                         </div>
                         <div class="card-body w-100 d-flex d-flex justify-content-center align-content-center ">
-
-
                             <div class="relation-content">
                                 <div class="tree">
                                     @if (isset($colors))
@@ -483,7 +481,6 @@
                                             @endforeach
                                         </div>
                                     @endif
-
                                     @if (isset($users) && isset($profondeurs) && $users->count() <= 360)
                                         @php
                                             $maxLevels = $profondeurs;
@@ -509,30 +506,29 @@
                                                                 {{ $referral->id }}
                                                             </div>
                                                         @endforeach
-                                                      @endif
+                                                    @endif
                                                 </div>
-                                                @php $currentLevel++; @endphp
-                                            @else
-                                                @break
+                                                @php $currentLevel++ @endphp
+                                                @else
+                                                  @break
                                             @endif
-                                        
-    @endforeach
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
     @endif
 
-
-    </div>
-
-    </div>
-
-    </div>
-
-    </div>
-    </div>
-    </div>
-
-    </div>
-    @endif
-
+   
     <script>
         function generateQRCode() {
             var name = document.getElementById('name').value;
@@ -619,30 +615,3 @@
     </script>
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
