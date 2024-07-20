@@ -2,6 +2,7 @@
 @section('title','Home')
 @section('body-container')
 <x-hero/>
+ <link rel="stylesheet" href="{{asset('assets/css/home.css')}}?v=<?php echo time();?>">
 <div id="coaching-program" class="section">
     <div class="container">
         <div class="section-heading">
