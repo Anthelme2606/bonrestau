@@ -487,6 +487,7 @@
             
             @foreach ($users as $user)
             @if ($currentLevel < $maxLevels)
+            {{dd($user,$currentLvel,$maxLevels)}}
                 <div class="level">
                     @if ( $user && $user->referrals->count() <= 6)
                         @foreach ($user->referrals as $referral)
@@ -500,16 +501,13 @@
                                         $own = $color['color'];
                                     }
                                 }
-                                // Debugging output
-                                echo "Auth color: $auth, Own color: $own, Referral ID: {$referral->id}<br>";
                             @endphp
                             <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
                                 {{ $referral->id }}
                             </div>
                         @endforeach
                     @else
-                        {{-- Debugging output --}}
-                        echo "User {$user->id} has more than 6 referrals.<br>";
+                        
                     @endif
                 </div>
                 @php $currentLevel++; @endphp
