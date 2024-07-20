@@ -487,7 +487,7 @@
             
             @foreach ($users as $user)
             @if ($currentLevel < $maxLevels)
-            {{dd("message")}}
+            {{dd("message",Auth::user()->user_type,$user)}}
                 @if($user->user_type=='admin')
                 {{dd($user,"message")}}
                 @endif
