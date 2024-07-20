@@ -466,7 +466,7 @@
                         class="card shadow-lg table-dark-bg w-100 d-flex justify-content-center align-content-center flex-column">
                         <div class="card-header w-100 d-flex d-flex justify-content-center align-content-center ">
                             <h4 class="text-center">Mes 360 premiers invitants..
-                                (6Premiers de chaque niveau)</h4>
+                                (6 Premiers de chaque niveau)</h4>
                         </div>
                         <div class="card-body w-100 d-flex d-flex justify-content-center align-content-center ">
 
@@ -505,8 +505,7 @@
                                                                     }
                                                                 }
                                                             @endphp
-                                                            <div class="node"
-                                                                style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
+                                                            <div class="node"style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
                                                                 {{ $referral->id }}
                                                             </div>
                                                         @endforeach
@@ -516,13 +515,15 @@
                                             @else
                                                 @break
                                             @endif
-                                         @endforeach
-                                </div>
+                                        
     @endforeach
     @endif
 
+
     </div>
+
     </div>
+
     </div>
 
     </div>
