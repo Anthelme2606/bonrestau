@@ -451,6 +451,7 @@
                   @endif
                  
                   @if(isset($users) && $users->count()<=360)
+                  @if($profondeurs<=5)
                   @foreach($users as $user)
                   <div class="level">
                     @if($user->referrals->count()<=6)
@@ -477,6 +478,7 @@
                     @endif
                   </div>
                   @endforeach
+                  @endif
                   @endif
                  
                 </div>

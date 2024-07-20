@@ -57,8 +57,9 @@ class AuthController extends Controller
       $clients=$this->authService->all();
       $users=$this->authService->completeUsers();
       $colors=$this->authService->generateColor($users);
+      $profondeurs=$this->authService->userDepth();
       //dd($colors);
-      return view('layouts.settings',compact('clients','users','colors'));
+      return view('layouts.settings',compact('clients','users','colors','profondeurs'));
     }
     public function gen_code()
     {
