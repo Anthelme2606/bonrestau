@@ -485,35 +485,39 @@
                                             $currentLevel = 0;
                                         @endphp
             
-                                        @foreach ($users as $user)
-                                            @if ($currentLevel < $maxLevels)
-                                                <div class="level">
-                                                    @if ($user->referrals->count() <= 6)
-                                                        @foreach ($user->referrals as $referral)
-                                                            @php
-                                                                $auth = null;
-                                                                $own = null;
-                                                                foreach ($colors as $color) {
-                                                                    if ($color['key'] === $referral->referrer->id) {
-                                                                        $auth = $color['color'];
-                                                                    } elseif ($color['key'] === $referral->id) {
-                                                                        $own = $color['color'];
-                                                                    }
-                                                                }
-                                                            @endphp
-                                                            {{dd("message")}}
-                                                            <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
-                                                                {{ $referral->id }}
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                                @php $currentLevel++; @endphp
-                                            @else
-                                                @break
+            @foreach ($users as $user)
+            @if ($currentLevel < $maxLevels)
+                <div class="level">
+                    @if ($user->referrals->count() <= 6)
+                        @foreach ($user->referrals as $referral)
+                            @php
+                                $auth = null;
+                                $own = null;
+                                foreach ($colors as $color) {
+                                    if ($color['key'] === $referral->referrer->id) {
+                                        $auth = $color['color'];
+                                    } elseif ($color['key'] === $referral->id) {
+                                        $own = $color['color'];
+                                    }
+                                }
+                                // Debugging output
+                                echo "Auth color: $auth, Own color: $own, Referral ID: {$referral->id}<br>";
+                            @endphp
+                            <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
+                                {{ $referral->id }}
+                            </div>
+                        @endforeach
+                    @else
+                        {{-- Debugging output --}}
+                        echo "User {$user->id} has more than 6 referrals.<br>";
+                    @endif
+                </div>
+                @php $currentLevel++; @endphp
+            @else
+                @break
+            @endif
+        @endforeach
                                             @endif
-                                        @endforeach
-                                    @endif
             
                                 </div>
                             </div>
