@@ -462,30 +462,29 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div
-                        class="card shadow-lg table-dark-bg w-100 d-flex justify-content-center align-content-center flex-column">
-                        <div class="card-header w-100 d-flex d-flex justify-content-center align-content-center ">
-                            <h4 class="text-center">Mes 360 premiers invitants..
-                                (6 Premiers de chaque niveau)</h4>
+                    <div class="card shadow-lg table-dark-bg w-100 d-flex justify-content-center align-content-center flex-column">
+                        <div class="card-header w-100 d-flex justify-content-center align-content-center">
+                            <h4 class="text-center">Mes 360 premiers invitants.. (6 Premiers de chaque niveau)</h4>
                         </div>
-                        <div class="card-body w-100 d-flex d-flex justify-content-center align-content-center ">
+                        <div class="card-body w-100 d-flex justify-content-center align-content-center">
                             <div class="relation-content">
                                 <div class="tree">
                                     @if (isset($colors))
                                         <div class="level">
                                             @foreach ($colors as $color)
                                                 @if ($color['key'] === Auth::user()->id)
-                                                    <div class="node" style="background-color:{{ $color['color'] }}">A
-                                                    </div>
+                                                    <div class="node" style="background-color:{{ $color['color'] }}">A</div>
                                                 @endif
                                             @endforeach
                                         </div>
                                     @endif
+            
                                     @if (isset($users) && isset($profondeurs) && $users->count() <= 360)
                                         @php
                                             $maxLevels = $profondeurs;
                                             $currentLevel = 0;
                                         @endphp
+            
                                         @foreach ($users as $user)
                                             @if ($currentLevel < $maxLevels)
                                                 <div class="level">
@@ -502,28 +501,26 @@
                                                                     }
                                                                 }
                                                             @endphp
-                                                            <div class="node"style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
+                                                            <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
                                                                 {{ $referral->id }}
                                                             </div>
                                                         @endforeach
                                                     @endif
                                                 </div>
-                                                @php $currentLevel++ @endphp
-                                                @else
-                                                  @break
+                                                @php $currentLevel++; @endphp
+                                            @else
+                                                @break
                                             @endif
                                         @endforeach
                                     @endif
+            
                                 </div>
                             </div>
-
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
+            
 
         </div>
     @endif
