@@ -451,7 +451,6 @@
                   @endif
                  
                   @if(isset($users) && $users->count()<=360)
-               
                   @foreach($users as $user)
                   <div class="level">
                     @if($user->referrals->count()<=6)
@@ -479,7 +478,6 @@
                   </div>
                   @endforeach
                   @endif
-                  
                  
                 </div>
               </div>
