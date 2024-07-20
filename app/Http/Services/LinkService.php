@@ -41,7 +41,8 @@ class LinkService
     {
         $uniqueCode = $auth;
        // $https = 'https://greendetox.senousolutions.com/sign-up?code=' . $uniqueCode;
-        $http=  'http://localhost:8000/sign-up?code=' . $uniqueCode; 
-        return $http;   
+       // $http=  'http://localhost:8000/sign-up?code=' . $uniqueCode; 
+       $url=route('sign-up').'?code='.$uniqueCode;
+        return $url;   
     }
 }
