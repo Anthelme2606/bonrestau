@@ -501,7 +501,7 @@
                                                                     }
                                                                 }
                                                             @endphp
-                                                            {{dd($referral->id)}}
+                                                            {{dd("message")}}
                                                             <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
                                                                 {{ $referral->id }}
                                                             </div>
