@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta property="og:title" content="GREEN DETOX">
     <meta property="og:description" content="Rejoignez notre communauté.">
-    <meta property="og:image" content="{{ asset('favicon.ico') }}">
+    <meta property="og:image" content="{{ asset('images/logo-bonr.png') }}">
     <meta property="og:url" content="{{ route('home') }}">
     <meta property="og:type" content="website">
 
