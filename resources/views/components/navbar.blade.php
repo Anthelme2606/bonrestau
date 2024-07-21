@@ -2,7 +2,7 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row" style="background:rgb(208, 225, 231);">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center navbar-brand-new" style="background: rgb(208, 225, 231)">
         <a class="navbar-brand brand-logo-mini" href="{{route('home')}}">
-            <img class=" w-100 h-100 shadow-lg rounded" src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
+            <img class=" w-50 h-50 shadow-lg rounded-circle" src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
         </a>
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
