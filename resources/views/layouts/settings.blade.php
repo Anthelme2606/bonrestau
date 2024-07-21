@@ -491,6 +491,7 @@
                                                 <div class="level">
                                                     @if ($user->referrals->count() <= 6)
                                                         @foreach ($user->referrals as $referral)
+                                                        
                                                             @php
                                                                 $auth = null;
                                                                 $own = null;
