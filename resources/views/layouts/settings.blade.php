@@ -484,7 +484,6 @@
                                             $maxLevels = $profondeurs;
                                             $currentLevel = 0;
                                         @endphp
-<<<<<<< HEAD
                                         @foreach ($users as $user)
                                             @if ($currentLevel < $maxLevels)
                                                 <div class="level">
@@ -511,41 +510,6 @@
                                                 @php $currentLevel++ @endphp
                                                 @else
                                                   @break
-=======
-            
-            @foreach ($users as $user)
-            @if ($currentLevel < $maxLevels)
-                <div class="level">
-                 
-                    @if ( $user && $user->referrals->count() <= 6)
-                 
-                        @foreach ($user->referrals as $referral)
-                       
-                            @php
-                                $auth = null;
-                                $own = null;
-                                foreach ($colors as $color) {
-                                    if ($color['key'] === $referral->referrer->id) {
-                                        $auth = $color['color'];
-                                    } elseif ($color['key'] === $referral->id) {
-                                        $own = $color['color'];
-                                    }
-                                }
-                            @endphp
-                            <div class="node" style="background: linear-gradient(to right, {{ $auth }} 50%, {{ $own }} 50%);">
-                                {{ $referral->id }}
-                            </div>
-                        @endforeach
-                    @else
-                        
-                    @endif
-                </div>
-                @php $currentLevel++; @endphp
-            @else
-                @break
-            @endif
-        @endforeach
->>>>>>> main
                                             @endif
             
                                 </div>
