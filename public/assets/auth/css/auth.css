@@ -15,6 +15,11 @@
     transform: translateY(-50%);
     color: #007bff;
 }
+.btn-green{
+    background:green;
+    color:white;
+    font-size:15px;
+}
 .readonly {
     pointer-events: none;
     opacity: 0.5;

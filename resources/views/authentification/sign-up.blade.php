@@ -8,6 +8,15 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
     href="{{ asset('assets/auth/css/auth.css') }}?<?php echo time();?>">
     <script src="{{ asset('assets/auth/js/auth.js') }}?<?php echo time(); ?>"></script>
     <div class="container shadow rounded mt-2">
+        <div class="d-flex justify-content-between">
+            <div class="home">
+                <a href="{{route('home')}}" class="btn btn-green rounded shadow">Accueil</a>
+            </div>
+            <div class="login">
+                <a href="{{route('login')}}" class="btn btn-green rounded shadow">Connexion</a>
+          
+            </div>
+        </div>
         <div class="image">
             <img src="{{asset('assets/images/logo-bonr.png')}}" alt="bon">
           </div>
