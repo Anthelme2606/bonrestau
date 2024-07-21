@@ -2,7 +2,7 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row" style="background:rgb(208, 225, 231);">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center navbar-brand-new" style="background: rgb(208, 225, 231)">
         <a class="navbar-brand brand-logo-mini" href="{{route('home')}}">
-            <img class=" w-70 h-70 shadow-lg rounded-circle " src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
+            <img class=" w-50 h-50 shadow-lg rounded-circle" src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
         </a>
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -17,30 +17,31 @@
             </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
+            @if(Auth::user()->user_type==='admin')
             <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false">
                     + Creation..
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
                     <h6 class="p-3 mb-0">Administration</h6>
-                    @if(Auth::user()->user_type==='admin')
+                    
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item" href="{{route('dashboard')}}">
+                    <a class="dropdown-item preview-item" href="{{route('bon-create')}}">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-file-outline text-primary"></i>
+                                <i class="mdi mdi-cash text-primary"></i>
                             </div>
                         </div>
                         <div class="preview-item-content">
                             <p class="preview-subject ellipsis mb-1">Bon de restauration</p>
                         </div>
                     </a>
-                    @endif
+                    
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item" href="{{route('sign-up')}}">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
-                                <i class="mdi mdi-web text-info"></i>
+                                <i class="mdi mdi-account-plus text-info"></i>
                             </div>
                         </div>
                         <div class="preview-item-content">
@@ -52,6 +53,7 @@
                 
                 </div>
             </li>
+            @endif
             <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link">
                     <i class="mdi mdi-view-grid"></i>

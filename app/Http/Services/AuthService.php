@@ -69,7 +69,7 @@ class AuthService
                     $tableau->push($use);
                 }
             }
-            
+           
             return $tableau;
         }
        

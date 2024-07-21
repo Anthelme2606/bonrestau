@@ -38,7 +38,7 @@ Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 Route::get('/parrains', [AuthController::class,'all'])->name('parrains');
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
-Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up')->middleware('guest');
+Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up');
 //POST
 Route::post('/modify-password',[AuthController::class,'post_update'])->name('post_update');
 Route::post('/generate-link', [LinkController::class,'createLink'])->name('generate-link');

@@ -111,6 +111,15 @@ href="{{ asset('assets/vendor/vendors/mdi/css/materialdesignicons.min.css') }}?v
         </div>
         <div id="parrainage-error" class="error-message"></div>
     </div>
+    @else
+    <div class="form-group">
+        <label for="parrainage">ID invitant</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="mdi mdi-account"></i></span>
+            <input type="text" class="form-control" id="invitant" name="invitant">
+        </div>
+        <div id="parrainage-error" class="error-message"></div>
+    </div>
 @endif
                 <div class="form-group">
                     <label for="numwhats">Numéro WhatsApp</label>

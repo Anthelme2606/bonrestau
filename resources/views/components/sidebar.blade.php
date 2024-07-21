@@ -4,11 +4,10 @@
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
      style="background:rgb(208,225,231);">
         <a class="sidebar-brand brand-logo" href="{{route('home')}}" style="background:rgb(208, 225, 231)">
-            <img style="width:60px !important; height:60px !important; border-radius:50%;"  src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
+            <img style="width:60px !important; height:60px !important; border-radius:50%;" src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" />
         </a>
         <a class="sidebar-brand brand-logo-mini" href="{{route('home')}}">
-           <img src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" 
-           style="width:60px !important; height:60px !important; border-radius:50%;" />
+           <img src="{{asset('assets/images/logo-bonr.png')}}" alt="logo" style="width:60px !important; height:60px !important; border-radius:50%;"/>
           
         </a>
     </div>
