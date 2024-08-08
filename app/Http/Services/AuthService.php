@@ -11,16 +11,38 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+
 class AuthService
 {
     protected $userRepository;
     protected $referralRepository;
+   
     
     public function __construct(UserRepository $userRepository,ReferralRepository $referralRepository)
     {
         $this->userRepository = $userRepository;
         $this->referralRepository = $referralRepository;
+        // $Sender=new \App\Mail\SendResetCode(null);
     }
+    public function usersWithoutPassword()
+    {
+        // Récupérer les utilisateurs dont le mot de passe est nul ou vide
+        $usersWithoutPassword = User::whereNull('password')
+                                    ->orWhere('password', '')
+                                    ->get();
+
+      return $usersWithoutPassword;
+    }
+    public function usersWithPassword()
+    {
+        // Récupérer les utilisateurs qui ont un mot de passe
+        $usersWithPassword = User::whereNotNull('password')
+                                 ->where('password', '!=', '')
+                                 ->get();
+    
+        return $usersWithPassword;
+    }
+    
     public function userDepth(): int
     {
     
@@ -284,7 +306,8 @@ class AuthService
     
         // Send the reset code via email
         try {
-            Mail::to($email)->send(new \App\Mail\SendResetCode($code));
+            Mail::to($email)
+            ->send(new \App\Mail\SendResetCode($code));
         } catch (\Exception $e) {
             // Handle mail sending failure
             return redirect()->back()->with('error', 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.');

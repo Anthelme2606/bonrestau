@@ -139,6 +139,16 @@
         </li>
         @if(Auth::check() && Auth::user()->user_type==="admin")
         <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('account-actif')}}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-account-plus"></i>
+                </span>
+                <span class="menu-title">Comptes actifs</span>
+                
+            </a>
+           
+        </li>
+        <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('coming-soon')}}">
                 <span class="menu-icon">
                     <i class="mdi mdi-security"></i>

@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard', [AuthController::class,'dashboard'])->name('dashboard');
     Route::get('/bons', [BonController::class,'create'])->name('bon-create')->middleware('admin');
     Route::get('/bons-ravitaillement', [BonController::class,'ravitailler'])->name('bon-ravitailler')->middleware('admin');
+    Route::get('/comptes.actifs', [AuthController::class,'account_actif'])->name('account-actif')->middleware('admin');
 
 });
 //reset

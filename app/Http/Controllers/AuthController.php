@@ -162,6 +162,12 @@ class AuthController extends Controller
       $clients=$this->authService->all();
       return view("clients.list",compact("clients"));
     }
+    public function account_actif(){
+      $clients=$this->authService->all();
+      $users_wt_p=$this->authService->usersWithoutPassword();
+      $users_w_p=$this->authService->usersWithPassword();
+      return view("admin.comptes",compact("clients","users_w_p","users_wt_p"));
+    }
     public function logout(Request $request){
       Auth()->logout();
       $request->session()->invalidate();
