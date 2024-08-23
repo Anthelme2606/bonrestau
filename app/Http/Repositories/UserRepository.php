@@ -24,6 +24,14 @@ class UserRepository {
     public function find($id) {
         return User::find($id);
     }
+    function update_balance($id, $balance) {
+        
+        $user = $this->find($id);
+    
+       
+        return $user->update(['balance' => $balance]);
+    }
+    
     public function isEmpty($email)
     {
         $token=PasswordResetToken::where('email',$email)->first();

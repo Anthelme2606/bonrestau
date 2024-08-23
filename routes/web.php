@@ -39,7 +39,10 @@ Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 Route::get('/parrains', [AuthController::class,'all'])->name('parrains');
 Route::get('/login', [AuthController::class,'login'])->name('login')->middleware('guest');
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
+Route::get('/retrait', [TransactionController::class,'retrait'])->name('retrait')->middleware('auth');
 Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up');
+Route::get('/mes-jetons', [TransactionController::class,'jetons'])->name('jetons')->middleware('auth');
+
 //POST
 Route::post('/modify-password',[AuthController::class,'post_update'])->name('post_update');
 Route::post('/generate-link', [LinkController::class,'createLink'])->name('generate-link');
@@ -50,6 +53,7 @@ Route::post('/login', [AuthController::class,'post_login'])->name('post_login');
 Route::post('/sign-up', [AuthController::class,'post_sign_up'])->name('post_sign_up');
 Route::post('/bons', [BonController::class,'store'])->name('bon-store');
 Route::post('/trans-store', [TransactionController::class,'store'])->name('trans-store');
+Route::post('/post-jetons', [TransactionController::class,'post_jetons'])->name('post-jetons');
 Route::post('/bon-update', [BonController::class,'update'])->name('bon-update');
 Route::post('/bon-ravitaillement', [BonController::class,'ravita'])->name('bon-ravita');
 

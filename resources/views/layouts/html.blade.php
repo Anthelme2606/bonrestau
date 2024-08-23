@@ -23,15 +23,20 @@
     @endif
     <!--CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        .content-global{
+            display:none;
+        }
+    </style>
 
 </head>
 
 <body style="background:rgba(245,251,252,1)">
-
+    <x-loader />
     <div class="content-global">
         @yield('body-container')
     </div>
-    <x-spinner />
+  
 
 
     <x-toastr />

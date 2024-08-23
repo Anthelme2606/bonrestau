@@ -137,6 +137,23 @@
                 <span class="menu-title">Achat</span>
             </a>
         </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link"  href="{{route('jetons')}}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-coin"></i>
+                </span>
+                <span class="menu-title">Mes jetons</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link"  href="{{route('retrait')}}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-bank-transfer-out"></i>
+
+                </span>
+                <span class="menu-title">Demander un retrait</span>
+            </a>
+        </li>
         @if(Auth::check() && Auth::user()->user_type==="admin")
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('account-actif')}}">
