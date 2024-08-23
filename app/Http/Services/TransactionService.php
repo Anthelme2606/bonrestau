@@ -172,8 +172,11 @@ class TransactionService
     
     public function getJeton(){
         $amount= $this->trans->getJeton();
-       // dd($amount);
+       if($amount && $amount!==null){
         return $this->decompose_value($amount['valeur']);
+       }
+       return $this->decompose_value(0); 
+       
     }
     public function post_jetons(array $data)
     {
