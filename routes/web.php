@@ -6,6 +6,7 @@ use App\Http\Controllers\BonController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\OperateurController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,18 @@ Route::get('/login', [AuthController::class,'login'])->name('login')->middleware
 Route::get('/trans-create', [TransactionController::class,'index'])->name('trans-create');
 Route::get('/retrait', [TransactionController::class,'retrait'])->name('retrait')->middleware('auth');
 Route::get('/sign-up', [AuthController::class,'sign_up'])->name('sign-up');
-Route::get('/mes-jetons', [TransactionController::class,'jetons'])->name('jetons')->middleware('auth');
+Route::get('/numero-reseau', [TransactionController::class,'reseau_form'])
+->name('reseau.verify')->middleware(['auth','phone.guest']);
+
+Route::middleware(['auth','phone.verify'])->group(function(){
+    Route::get('/portefeuille', [TransactionController::class,'portefeuille'])->name('porte-f');
+});
+Route::get('/demande-operateur',[OperateurController::class,'create'])
+->name('demande.operateur')
+->middleware(['auth','operator']);
+Route::get('/info-operateur',[OperateurController::class,'info'])
+->name('info.operateur')
+->middleware(['auth']);
 
 //POST
 Route::post('/modify-password',[AuthController::class,'post_update'])->name('post_update');
@@ -56,4 +68,31 @@ Route::post('/trans-store', [TransactionController::class,'store'])->name('trans
 Route::post('/post-jetons', [TransactionController::class,'post_jetons'])->name('post-jetons');
 Route::post('/bon-update', [BonController::class,'update'])->name('bon-update');
 Route::post('/bon-ravitaillement', [BonController::class,'ravita'])->name('bon-ravita');
+Route::post('/reseau-number', [BonController::class,'reseau_number'])->name('reseau-number');
+//operateurs
+Route::middleware([
+'auth','admin'
+])->group(function(){
+    Route::get('/operateurs',[OperateurController::class,'operateurs'])
+    ->name('operateurs');
+    Route::get('/chargement',[OperateurController::class,'coin_balance'])
+    ->name('coin-create-operator');
+    
+});
+Route::get('/mes-retraits', [TransactionController::class,'historique'])->name('mes-retrait')->middleware('auth');
+Route::get('/mes-validations', [TransactionController::class,'validation'])->name('mes-validation')->middleware('auth');
+Route::post('/post-activer',[OperateurController::class,'activer'])
+->name('post-activer');
+Route::post('/post-suspendre',[OperateurController::class,'suspendre'])
+->name('post-suspendre');
+Route::post('/post-deactiver',[OperateurController::class,'deactiver'])
+->name('post-deactiver');
+Route::post('/cash',[OperateurController::class,'cash'])
+->name('cash');
+Route::post('/post-operateur',[OperateurController::class,'post_operateur'])
+->name('post-operateur');
+Route::post('/update-operateur',[OperateurController::class,'update_operateur_localite'])
+->name('post-update-localite');
+Route::post('/chargement-balance',[OperateurController::class,'chargement'])
+->name('coin-chargemnt');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 use App\Http\Repositories\CouponRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class CouponService
 {
    
@@ -28,6 +29,38 @@ class CouponService
        return redirect()->back()->with('success','Bon ravitaillé avec succes');
        
 
+    }
+    function verifieNumber($numeroVerif, $numeroEnregistre) {
+       
+        $numeroVerif = str_replace(' ', '', $numeroVerif);
+        $numeroEnregistre = str_replace(' ', '', $numeroEnregistre);
+     if (strlen($numeroVerif) === strlen($numeroEnregistre)) {
+            return $numeroVerif === $numeroEnregistre;
+        }
+    
+        if (strlen($numeroVerif) > strlen($numeroEnregistre)) {
+            $numeroVerif = substr($numeroVerif, -strlen($numeroEnregistre));
+        } elseif (strlen($numeroEnregistre) > strlen($numeroVerif)) {
+          
+            $numeroEnregistre = substr($numeroEnregistre, -strlen($numeroVerif));
+        }
+    
+      
+        return $numeroVerif === $numeroEnregistre;
+    }
+    public function reseau_number (array $data){
+        if(!empty($data['reseau'])){
+            $reseau=Auth::user()->numero_reseau;
+            if($this->verifieNumber($data['reseau'],$reseau)){
+                 Session::put('phone_verified', true);
+                 Session::put('phone_verified_timestamp', now());
+            return redirect()->route('porte-f')->with('success','Numero verifié avec success');
+
+            }else{
+                return redirect()->back()->with('error','Erreur de vérification');
+            }
+        }
+        return redirect()->back();
     }
     public function create(array $data)
     {

@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\RetraitGreen;
+use App\Models\Caisse;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionRepository {
@@ -13,6 +14,9 @@ class TransactionRepository {
     }
     public function create_retrait(array $data){
         return RetraitGreen::create($data);
+    }
+    public function caisse(array $data){
+        return Caisse::create($data);
     }
 
     public function getJeton() {

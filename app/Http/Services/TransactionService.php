@@ -228,7 +228,13 @@ class TransactionService
             // Calcul du reste et de la caisse
             $reste = 5 - $referrerCount;
             $caisse = $gain * $reste;
-
+            $caisses=[];
+            $caisses=[
+            'balance'=>$caisse,
+            'nom'=>$user->nom,
+            'description'=>'parrainage'
+            ];
+             $this->trans->caisse($caisses);
             // Distribution des gains aux référents
             foreach ($referrers as $referrer) {
                 $referrer->balance += $gain;

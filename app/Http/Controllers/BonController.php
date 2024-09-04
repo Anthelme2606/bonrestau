@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Services\CouponService;
 use App\Http\Services\TransactionService;
+
 use Illuminate\Http\Request;
 
 class BonController extends Controller
@@ -14,6 +15,12 @@ class BonController extends Controller
         $this->couponService=$couponService;
         $this->transService=$transService;
 
+    }
+    public function reseau_number(Request $request){
+        $request->validate([
+            'reseau'=>'string|required'
+        ]);
+        return $this->couponService->reseau_number($request->all());
     }
     public function create(){
         $coupons= $this->couponService->list();

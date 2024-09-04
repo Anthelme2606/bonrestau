@@ -74,6 +74,14 @@
                 <span class="menu-title">Bons de restauration</span>
                 
             </a>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{route('coin-create-operator')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-coin"></i>
+                    </span>
+                    <span class="menu-title">Charger le compte </span>
+                    
+                </a>
             {{-- <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
@@ -138,22 +146,57 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link"  href="{{route('jetons')}}">
+            <a class="nav-link"  href="{{route('reseau.verify')}}">
                 <span class="menu-icon">
                     <i class="mdi mdi-coin"></i>
                 </span>
-                <span class="menu-title">Mes jetons</span>
+                <span class="menu-title">Mon portefeuille</span>
+            </a>
+        </li>
+        @php
+        $user = Auth::user();
+    @endphp
+
+    @if(!$user->operateur)
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('demande.operateur') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-account-circle"></i>
+                </span>
+                <span class="menu-title">Demande Operateur</span>
+            </a>
+        </li>
+        @else
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('info.operateur') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-account-circle"></i>
+                </span>
+                <span class="menu-title">Etat & dashboard</span>
+            </a>
+        </li>
+
+    @endif
+    
+        <li class="nav-item menu-items">
+            <a class="nav-link"  href="{{route('mes-retrait')}}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-cash-multiple"></i>
+
+                </span>
+                <span class="menu-title">Mes transactions</span>
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link"  href="{{route('retrait')}}">
+            <a class="nav-link"  href="{{route('mes-validation')}}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-bank-transfer-out"></i>
+                    <i class="mdi mdi-check"></i>
 
                 </span>
-                <span class="menu-title">Demander un retrait</span>
+                <span class="menu-title">Mes validations</span>
             </a>
         </li>
+       
         @if(Auth::check() && Auth::user()->user_type==="admin")
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{route('account-actif')}}">
@@ -161,6 +204,16 @@
                     <i class="mdi mdi-account-plus"></i>
                 </span>
                 <span class="menu-title">Comptes actifs</span>
+                
+            </a>
+           
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('operateurs')}}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-account-plus"></i>
+                </span>
+                <span class="menu-title">Opérateurs</span>
                 
             </a>
            

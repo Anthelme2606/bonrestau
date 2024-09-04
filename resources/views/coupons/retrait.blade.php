@@ -1,232 +1,194 @@
-@extends('layouts.index')
-@include('layouts.dash-head')
-@section('title', 'retrait')
-@section('sidebar')
-    <x-sidebar />
 
-@endsection
-@section('navbar')
-    <x-navbar />
-@endsection
-
-@section('sidebar-container')
     <style>
-        .side-container-bg {
-            background: rgba(245, 251, 252, 1);
+        /* Couleurs de fond du modal */
+        .modal-card {
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            border: 2px solid #f57f17;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
         }
-
-       
-       
-        .card-header {
-            position: relative;
+        /* Boutons de choix de retrait */
+        .btn-group .btn {
+            flex-grow: 1;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .card-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #2c6db1, #6610f2);
-            opacity: 0.5;
-            z-index: 1;
-            border-top-left-radius: 0.375rem;
-            border-top-right-radius: 0.375rem;
+        .btn.active {
+            border-bottom: 3px solid #f57f17;
+            color: #fff;
         }
-        .card-header .card-title, .card-header .card-text {
-            position: relative;
-            z-index: 2;
-            color: white;
+        .btn-green {
+            background-color: #4caf50;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+        .btn-flooz {
+            background-color: #f57f17;
         }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+        .btn-tmoney {
+            background-color: #f9a825;
         }
-        .form-container {
-            min-height: 100vh;
+        .btn-card {
+            background-color: #fbc02d;
         }
-    
-
-.card{
-    position: relative;
-}
-.border-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(
-                90deg,
-                red,
-                yellow,
-                green,
-                blue,
-                red
-            );
-            background-size: 400% 400%;
-            animation: borderRotate 4s linear infinite;
-            z-index: -1;
+        .btn-group .btn:hover {
+            background-color: #ffeb3b;
+            color: #000;
         }
-
-        @keyframes borderRotate {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
+        /* Masquer les sections */
+        .withdraw-section {
+            display: none;
         }
-
-.btn-primary {
-    max-width: 180px !important;
-}
- #green-button{
-    background:rgb(70, 172, 70) !important;
-}
- #cahs-button{
-    background:rgb(142, 183, 60) !important;
-}
-
-.form-toggle {
-    display: none;
-}
-
-.form-toggle.show {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
+        /* Transition de l'affichage des sections */
+        .withdraw-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 
-      
-
-      
-
-       
-
-     
 
 
-   
-
-    <div class="w-100 side-container-bg">
-        <div class="w-100 d-flex justify-content-center align-items-center flex-column ">
-            <div class="card max-w-md w-100 p-4 p-sm-5">
-                <div class="border-animation"></div>
-                <div class="card-header bg-gradient rounded-top">
-                    <h5 class="card-title text-2xl font-bold">Demande de retrait</h5>
-                    <p class="card-text">Remplissez ce formulaire pour effectuer une demande de retrait.</p>
+    <!-- Modal -->
+    <div class="modal fade" id="retraitModal" tabindex="-1" aria-labelledby="retraitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-card">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="retraitModalLabel">Retrait d'Argent</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="card-body d-flex flex-column ">
-                    <div class="d-flex justify-content-between w-100">
-                        <div class="">
-                            <button id="green-button" class="btn btn-primary">Retrait par Green</button>
-                        </div>
-                        <div class="">
-                            <button id="cash-button" class="btn btn-primary">Retrait Cash</button>
-                        </div>
+                <div class="modal-body">
+                    <!-- Boutons de sélection -->
+                    <div class="btn-group mb-4 d-flex" role="group" aria-label="Mode de retrait">
+                        <button type="button" class="btn btn-green active" onclick="showSection('green')">Cash</button>
+                        <button type="button" class="btn btn-flooz" onclick="showSection('flooz')">Flooz</button>
+                        <button type="button" class="btn btn-tmoney" onclick="showSection('tmoney')">Tmoney</button>
+                        <button type="button" class="btn btn-card" onclick="showSection('card')">Compte Bancaire</button>
                     </div>
-                    <div class="form-toggle" id="green-form">
-                    <form class="grid gap-4" method="POST" action="{{route('post-jetons')}}">
-                      @method('post')
-                      @csrf
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="firstName" class="form-label text-white">Prénom</label>
-                                <input type="text" class="form-control" value="{{Auth::user()->nom}}" readonly id="firstName" placeholder="Entrez votre prénom">
-                            </div>
-                            <div class="col">
-                                <label for="lastName" class="form-label text-white">Nom</label>
-                                <input type="text" class="form-control" value="{{Auth::user()->prenom}}" id="lastName" readonly placeholder="Entrez votre nom">
-                            </div>
-                        </div>
-                        <div class="row row-cols-1 row-cols-md-2 mb-3">
-                            <div class="col">
-                                <input type="text"hidden name="user_id" class="form-control text-truncate" value="{{Auth::user()->id}}" readonly id="firstName" placeholder="identifiant">
-                           
-                                <label for="firstName" class="form-label text-white">Email</label>
-                                <input type="text" class="form-control text-truncate" value="{{Auth::user()->email}}" readonly id="firstName" placeholder="Entrez votre prénom">
-                            </div>
-                            <div class="col">
-                                <label for="lastName" class="form-label text-white">Numero Transaction</label>
-                                <input type="number" name="valeur" class="form-control" value="{{Auth::user()->numero_reseau}}" id="lastName" min="0" readonly  placeholder="Entrez votre numero de transaction">
-                            </div>
-                        </div>
-                        {{-- <div class="row  mb-3">
-                            <div class="col">
-                                    <label for="email" class="form-label text-white">Email</label>
-                                    <input type="email" class="form-control" id="email" value="{{Auth::user()->email}}" readonly placeholder="Entrez votre email"> 
-                            </div>
-                            <div class="col">
-                                    <label for="email" class="form-label text-white">Numero de transaction</label>
-                                    <input type="email" class="form-control" id="numer_tran" value="{{Auth::user()->numero_reseau}}"   placeholder="numéro">
-                            </div>
-                        </div>
-                     --}}
+
+                    <!-- Section Green -->
+                    <form class="green-form" action="{{route('cash')}}" method="POST">
+                        @method('POST')
+                        @csrf
+                    <div id="green-section" class="withdraw-section show">
                         <div class="mb-3">
-                            <label for="amount" class="form-label text-white">Montant du retrait</label>
-                            <input type="number" name="valeur" class="form-control" id="amount" placeholder="Entrez le montant" min="0" required>
+                            <label for="transactionNumber" class="form-label">Numéro de Transaction</label>
+                            <input type="text" value="{{Auth::user()->numero_reseau}}" readonly class="form-control" id="transactionNumber" placeholder="Entrez le numéro" required>
                         </div>
                         <div class="mb-3">
-                            <label for="reason" class="form-label text-white">Raison du retrait</label>
-                            <textarea name="description" class="form-control" id="reason" rows="3" required placeholder="Expliquez la raison de votre demande"></textarea>
+                            <label for="withdrawAmountGreen" class="form-label">Montant à retirer</label>
+                            <input type="number" class="form-control" name="sommes" id="withdrawAmountGreen" min="1" placeholder="Entrez le montant" required>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-success w-100">Soumettre la demande</button>
+                        <div class="mb-3">
+                            <label for="operatorId" class="form-label">Identifiant de l'opérateur</label>
+                            <input type="text" class="form-control" id="operatorId" name="identifiant" placeholder="Entrez l'identifiant" required>
                         </div>
-                    </form>
-                </div>
-                <div id="cash-form" class="form-toggle d-none">
-                    
-                    <form>
-                        <div class="form-group">
-                            <label for="cash-amount">Montant Cash</label>
-                            <input type="number" id="cash-amount" class="form-control" placeholder="Entrez le montant Cash">
+                        <button type="submit" class="btn btn-success w-100">Valider</button>
+                    </div>
+                </form>
+
+                    <!-- Section Flooz -->
+                    <div id="flooz-section" class="withdraw-section">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <span class="flag-icon flag-icon-tg"></span>
+                            </span>
+                            <input type="tel" class="form-control" id="floozPhone" placeholder="Numéro de Flooz" value="+228 ">
                         </div>
-                        <button type="submit" class="btn btn-success">Valider Retrait Cash</button>
-                    </form>
-                </div>
-                    
+                        <div class="mb-3">
+                            <label for="withdrawAmountFlooz" class="form-label">Montant à retirer</label>
+                            <input type="number" class="form-control" id="withdrawAmountFlooz" placeholder="Entrez le montant">
+                        </div>
+                        <button type="button" class="btn btn-success w-100" id="validateFlooz">Valider</button>
+                    </div>
+
+                    <!-- Section Tmoney -->
+                    <div id="tmoney-section" class="withdraw-section">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <span class="flag-icon flag-icon-tg"></span>
+                            </span>
+                            <input type="tel" class="form-control" id="tmoneyPhone" placeholder="Numéro de Tmoney" value="+228 ">
+                        </div>
+                        <div class="mb-3">
+                            <label for="withdrawAmountTmoney" class="form-label">Montant à retirer</label>
+                            <input type="number" class="form-control" id="withdrawAmountTmoney" placeholder="Entrez le montant">
+                        </div>
+                        <button type="button" class="btn btn-success w-100" id="validateTmoney">Valider</button>
+                    </div>
+
+                    <!-- Section Carte Bancaire -->
+                    <div id="card-section" class="withdraw-section">
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Numéro de carte</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardCode" class="form-label">Code</label>
+                            <input type="text" class="form-control" id="cardCode" placeholder="Code secret">
+                        </div>
+                        <div class="mb-3">
+                            <label for="withdrawAmountCard" class="form-label">Montant à retirer</label>
+                            <input type="number" class="form-control" id="withdrawAmountCard" placeholder="Entrez le montant">
+                        </div>
+                        <button type="button" class="btn btn-success w-100">Valider</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
-    const greenButton = document.getElementById('green-button');
-    const cashButton = document.getElementById('cash-button');
-    const greenForm = document.getElementById('green-form');
-    const cashForm = document.getElementById('cash-form');
+        function showSection(section) {
+            // Réinitialiser toutes les sections
+            const sections = document.querySelectorAll('.withdraw-section');
+            sections.forEach(s => s.classList.remove('show'));
 
-    greenButton.addEventListener('click', function() {
-        greenForm.classList.add('show');
-        cashForm.classList.remove('show');
-    });
+            // Effacer le contenu des champs
+            const inputs = document.querySelectorAll('.withdraw-section input');
+            inputs.forEach(input => input.value = '');
 
-    cashButton.addEventListener('click', function() {
-        cashForm.classList.add('show');
-        greenForm.classList.remove('show');
-    });
+            // Afficher la section sélectionnée
+            document.getElementById(`${section}-section`).classList.add('show');
 
+            // Gérer les boutons actifs
+            const buttons = document.querySelectorAll('.btn-group .btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            document.querySelector(`.btn-${section}`).classList.add('active');
+        }
+
+        function validatePhoneNumber(phoneNumber, prefixes) {
+            const prefix = phoneNumber.substring(0, 2); 
+           
+            return prefixes.includes(parseInt(prefix));
+        }
+
+        // Contrôle du numéro Flooz
+        document.getElementById('floozPhone').addEventListener('input', function() {
+            const floozPrefixes = [96, 97, 98, 99, 78, 79];
+            const validateButton = document.getElementById('validateFlooz');
+          //  console.log(this.value);
+            if (validatePhoneNumber(this.value, floozPrefixes)) {
+                validateButton.style.display = 'block';
+               // console.log('find');
+            } else {
+                validateButton.style.display = 'none';
+                //console.log('no-find');
+            }
+        });
+
+        // Contrôle du numéro Tmoney
+        document.getElementById('tmoneyPhone').addEventListener('input', function() {
+            const tmoneyPrefixes = [70, 71, 72, 90, 91, 92, 93];
+            const validateButton = document.getElementById('validateTmoney');
+            if (validatePhoneNumber(this.value, tmoneyPrefixes)) {
+                validateButton.style.display = 'block';
+            } else {
+                validateButton.style.display = 'none';
+            }
+        });
     </script>
 
-
-@endsection

@@ -25,10 +25,13 @@ class TransactionController extends Controller
        
         return view('coupons.retrait');
     }
-    public function jetons()
+    public function reseau_form()
     {
-        $jeton= $this->trans->getJeton();
-        return view('layouts.jetons',compact('jeton'));
+       // $jeton= $this->trans->getJeton();
+        return view('layouts.reseau_form');
+    }
+    public function portefeuille(){
+        return view('layouts.portefeuille');  
     }
     public function post_jetons(Request $request)
     {
@@ -50,5 +53,11 @@ class TransactionController extends Controller
         ]);
         
         return $this->trans->create($request->all());
+    }
+    public function historique(){
+        return view('retraits.list');
+    }
+    public function validation(){
+        return view('retraits.validation');
     }
 }
